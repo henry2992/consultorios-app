@@ -9,5 +9,4 @@ class User < ApplicationRecord
     patient: 'patient',
     admin: 'admin'
   }
-
 end

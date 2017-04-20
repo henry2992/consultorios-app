@@ -1,0 +1,29 @@
+AllCops:
+  TargetRubyVersion: 2.4
+  Include:
+    - Rakefile
+    - config.ru
+    - lib/**/*.rake
+  Excludes:
+    - config/*/*
+    - config/*
+    - bin/*
+    - spec/rails_helper.rb
+    - db/schema.rb
+    - db/migrate/*
+    - Gemfile
+Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Metrics/LineLength:
+  # Change the default 80 chars limit value
+  Max: 125
+Metrics/ClassLength:
+  Max: 200
+Metrics/BlockLength:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/EmptyMethod :
+  Enabled: false

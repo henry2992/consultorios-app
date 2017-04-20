@@ -6,5 +6,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   ActiveAdmin.routes(self)
 
+  namespace :docs do
+    resources :users, :comments
+  end
+
+  get '/no_clinic', to: 'pages#no_clinic'
 
 end

@@ -1,12 +1,12 @@
 <div class="showcase">
     
   <div class="container">
-    <nav class="main-navbar navbar navbar-toggleable-md navbar-light bg-faded">
+    <nav class="main-navbar navbar navbar-toggleable-md navbar-light">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       </button>
       
-      <a id="nav-logo" class="navbar-brand" href="#"><img src="images/logo.png"></a>
+      <a id="nav-logo" class="navbar-brand" href="#"><%= image_tag("logo.png", alt: "logo") %></a>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="main-nav navbar-nav ml-auto">
@@ -45,9 +45,9 @@
 
     <p>Weave combines all your communication streams from your PMS to your mobile device and business phone, into a single simple tool. One that creates more productive and meaningful conversations by serving up relevant patient details during every patient interaction.</p>
     <div id="platform-img">
-      <img src="images/monitor.png">
+      <%= image_tag("monitor.png", alt: "monitor") %>
       <span id="lineSource">
-        <img src="images/logo.png" />
+        <%= image_tag("logo.png", alt: "logo") %>
       </span>
     </div>
   </div>
@@ -66,79 +66,54 @@
       <!-- Remainders -->
       <div class="remainders content col-sm-4"> 
         
-        <img src="images/feature4.png" />
+        <%= image_tag("feature4.png") %>
         
         <h2>Recordatorio de Citas</h2>
         
-        
         <p>Your dental practice is built on relationships and efficiency—and Weave helps you strengthen both by helping you understand more about your patients and how your practice is run.</p>
-
       </div>
       
       <!-- Clinic HIstory -->
       <div class="clinic content col-sm-4">
         
-        <img src="images/feature5.png" />
+        <%= image_tag("feature5.png") %>
         <h2>Historiales Clinicos</h2>
         
         <p>Your dental practice is built on relationships and efficiency—and Weave helps you strengthen both by helping you understand more about your patients and how your practice is run.</p>
-        
-        
       </div>
       
       <!-- Accounting -->
       <div class="accounting content col-sm-4">
-        
-        <img src="images/feature2.png" />
-
+        <%= image_tag("feature2.png") %>
         <h2>Contabilidad Integrada</h2>
 
         <p>Your dental practice is built on relationships and efficiency—and Weave helps you strengthen both by helping you understand more about your patients and how your practice is run.</p>
-
       </div>
-  
-
     </div>
 
     <div class="row">
       
       <!-- Data Import -->
       <div class="import content col-sm-4">
-        
-        
-        <img src="images/feature3.png" />
-
+        <%= image_tag("feature3.png") %>
         <h2>Importacion de Datos</h2>
-
         <p>Your dental practice is built on relationships and efficiency—and Weave helps you strengthen both by helping you understand more about your patients and how your practice is run.</p>
       </div>
       
       <!-- Consult Reports -->
       <div class="reports content col-sm-4">
-        
-        
-        <img src="images/feature1.png" />
-
+        <%= image_tag("feature1.png") %>
         <h2>Manejo de Productos</h2>
-
         <p>Your dental practice is built on relationships and efficiency—and Weave helps you strengthen both by helping you understand more about your patients and how your practice is run.</p>
       </div>
       
       <!-- Product Management -->
       <div class="products content col-sm-4">
-        
-        
-        <img src="images/feature6.png" />
-
+        <%= image_tag("feature6.png") %>
         <h2>Creación de Reportes</h2>
-
         <p>Your dental practice is built on relationships and efficiency—and Weave helps you strengthen both by helping you understand more about your patients and how your practice is run.</p>
-
       </div>
-
-
     </div>
-
   </div>
 </div>
 

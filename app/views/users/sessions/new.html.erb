@@ -1,26 +1,64 @@
-<h2>Log in</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+
+<div class="showcaseform">
+
+   <div class="container">
+    <nav class="main-navbar navbar navbar-toggleable-md navbar-light">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <a id="nav-logo" class="navbar-brand" href="#"><%= image_tag("logo.png", alt: "logo") %></a>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="main-nav navbar-nav ml-auto">
+           <button class="btn btn-outline-info" type="button"><%=  link_to 'Registrarse', new_user_session_path  %></button>
+        </ul>
+      </div>
+    </nav> 
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+
+  <div class="container">
+    <div class="card card-container">
+       <span id="lineSourceForm">
+          <%= image_tag("logo.png", alt: "logo") %>
+        </span>
+
+      <%= form_for(resource, as: resource_name, :html => {:class => "form-signin"},  url: session_path(resource_name),) do |f| %>
+        <span id="reauth-email" class="reauth-email"></span>
+
+        <%= f.email_field :email, :label => 'Email', required: true, autofocus: true ,  placeholder: 'Email'  %>
+        <%= f.password_field :password, autocomplete: "off", placeholder: 'Password' %>
+
+        <% if devise_mapping.rememberable? -%>
+
+          <div id="remember" class="checkbox">
+              <label>
+                  <%= f.check_box :remember_me %> Remember me
+              </label>
+          </div>
+        <% end -%>
+
+        <div class="actions">
+          <%= f.submit "Log in", :class => 'btn btn-lg btn-primary btn-block btn-signin' %>
+        </div>
+      <% end %>
+
+
+    <%= render "users/shared/links" %>
+
+    </div><!-- /card-container -->
+  </div><!-- /container -->
+
+</div>
+    
+
+
+<!-- Footer -->
+<div id="footer">
+  <div class="container">
+    <p class="copyright">Copyright © 2017 OdontoMonitor. Todos los derechos reservados.</p>
   </div>
+</div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>

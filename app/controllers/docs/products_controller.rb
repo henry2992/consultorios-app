@@ -17,7 +17,7 @@ class Docs::ProductsController < Docs::DoctorsController
 
   def create
     @product = Product.new(product_params)
-
+    byebug
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'El producto fue creado exitosamente.' }

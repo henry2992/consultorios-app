@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="main-nav navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#">Mi Clínica</a>
+              <%= link_to 'Mi Clínica', docs_clinic_path(current_user.clinic ), class: 'nav-link' %> 
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -34,7 +34,7 @@
                 <div class="navbar-login">
                     <p ><strong><%= current_user.first_name%><%= current_user.last_name%></strong></p>
                     <p ><%= current_user.email%></p>
-                    <a href="#" class="btn btn-primary btn-block">Actualizar Datos</a>
+                    <%= link_to 'Actualizar Datos', edit_user_registration_path, class: 'btn btn-primary btn-block'%>
                 </div>
                 <div class="navbar-login navbar-login-session">
                   <%= link_to('Cerrar Sesion', destroy_user_session_path, :class => "btn btn-danger btn-block",  :method => :delete) %>  
@@ -60,13 +60,13 @@
                   <% end %>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html"><i class="icon-people icons"></i> Pacientes </a>
+                    <a class="nav-link" href="#"><i class="icon-people icons"></i> Pacientes </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html"><i class="icon-calendar icons"></i> Agenda </a>
+                    <a class="nav-link" href="#"><i class="icon-calendar icons"></i> Agenda </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html"><i class="icon-wallet icons"></i> Cuentas </a>
+                    <a class="nav-link" href="#"><i class="icon-wallet icons"></i> Cuentas </a>
                 </li>
                 <li class="nav-item">
                   <%= link_to new_docs_product_path, :class => 'nav-link' do %>
@@ -78,8 +78,10 @@
         </div>
         <!-- Main content -->
         <main class="main">
-            <div class="container-fluid">
-               <%= yield %>
+            <div class="container-fluid main-wrapper">
+              <div class=" main-content">
+                <%= yield %>
+              </div> 
             </div>
         </main>
       </div>

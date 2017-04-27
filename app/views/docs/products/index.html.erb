@@ -18,12 +18,12 @@
   <tbody>
     <% @products.each do |product| %>
       <tr>
-        <td><%= product.name %></td>
-        <td><%= product.code %></td>
-        <td><%= product.price %></td>
-        <td><%= product.expiration_date %></td>
-        <td><%= product.characteristics %></td>
-        <td><%= product.status %></td>
+        <td><%= product&.name %></td>
+        <td><%= product&.code %></td>
+        <td><%= product&.price %></td>
+        <td><%= product&.expiration_date %></td>
+        <td><%= product&.characteristics %></td>
+        <td><%= product&.status %></td>
         <td><%= link_to 'Show', docs_product_path(product) %></td>
         <td><%= link_to 'Edit', edit_docs_product_path(product) %></td>
         <td><%= link_to 'Destroy', docs_product_path(product), method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -20,7 +20,7 @@ class Docs::ProductsController < Docs::DoctorsController
     byebug
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'El producto fue creado exitosamente.' }
+        format.html { redirect_to docs_product_path(@product), notice: 'El producto fue creado exitosamente.' }
       else
         format.html { render :new }
       end

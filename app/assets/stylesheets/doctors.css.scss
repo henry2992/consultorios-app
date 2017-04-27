@@ -25,6 +25,10 @@ html {
   font-size: 18px;
 }
 
+body{
+	background-color: #e4e5e6 !important;
+}
+
 /* General Styles */
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
@@ -123,8 +127,9 @@ a:hover{
 }
 
 
-/*******/
-
+/**************************************************************************************************************/
+/****************************************** APLICATION CONTENT ***********************************************/
+/************************************************************************************************************/
 
 
 .app{
@@ -136,25 +141,21 @@ a:hover{
 	color: #263238;
 	background-color: #e4e5e6;
 	-webkit-font-smoothing: antialiased;
-}
-
-.app{
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
 }
 
 .app-header {
-  flex: 0 0 55px; }
+  flex: 0 0 55px; 
+}
 
 
 .header-fixed .app-header {
   position: fixed;
   z-index: 1020;
-  width: 100%; }
-
-
-
+  width: 100%; 
+}
 
 .app-body {
 	display: flex;
@@ -162,7 +163,6 @@ a:hover{
 	flex-grow: 1;
 	overflow-x: hidden;
 }
-
 
 .app-body .sidebar{
 	flex: 0 0 200px;
@@ -190,24 +190,24 @@ a:hover{
 
 .sidebar .sidebar-nav {
 	position: relative;
-overflow-x: hidden;
-overflow-y: auto;
--ms-overflow-style: -ms-autohiding-scrollbar;
-width: 200px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+	width: 200px;
 }
 
 
 .sidebar .nav{
 	width: 200px;
-flex-direction: column !important;
+	flex-direction: column !important;
 }
 
 .nav {
 	display: flex;
-flex-wrap: wrap;
-padding-left: 0;
-margin-bottom: 0;
-list-style: none;
+	flex-wrap: wrap;
+	padding-left: 0;
+	margin-bottom: 0;
+	list-style: none;
 }
 
 .sidebar .nav .nav-item{
@@ -225,6 +225,22 @@ list-style: none;
 	background: transparent;
 }
 
+.main {
+	width: 100%;
+}
+
+.main-wrapper{
+	padding:  30px 15px;
+}
+
+.main-content{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	border: 1px solid #cfd8dc;
+	padding: 25px 15px;
+}
 
 
 /******************************************************************************/

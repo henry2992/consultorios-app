@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   	get '/', to: 'doctors#index'
     resources :users
     resources :products
+    resources :clinics, only: [:show]
   end
 
   get '/no_clinic', to: 'pages#no_clinic'

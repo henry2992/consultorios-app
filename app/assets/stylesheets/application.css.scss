@@ -10,23 +10,21 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require formtastic
  *= require_tree .
  *= require_self
+
  */
  @import "bootstrap";
-
-
 /* Fonts */
 @font-face {
     font-family: 'proxima-nova';
     src: url(../fonts/proxima-nova.otf);
 }
 
-
 html {
-  font-size: 18px;
+  font-size: 20px;
 }
-
 
 /* General Styles */
 h1, h2, h3, h4, h5, h6 {
@@ -53,11 +51,28 @@ p {
   -webkit-font-smoothing: antialiased;
 }
 
+a, a:link, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+  background-color: transparent;
+}
+
+button:not(.disabled):hover {
+  background-color: none; 
+  background-image: none; 
+  background-image: none;
+}
+
+.center {
+  text-align: center;
+}
 
 /******************************************************************************/
 /******************************** Media Queries ******************************/
 /****************************************************************************/
-
 
 /* Smartphones  ----------- */
 @media only screen and (min-width : 321px) {

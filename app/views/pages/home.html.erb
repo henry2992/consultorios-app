@@ -11,13 +11,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="main-nav navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Caracteristicas  </a>
+            <a class="nav-link" href="#platform">Como Funciona </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Como Funciona </a>
+            <a class="nav-link" href="#features">Caracteristicas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contacto</a>
+            <a class="nav-link" href="#contact-section">Contacto</a>
           </li>
            <button class="btn btn-outline-info" type="button"><%=  link_to 'Ingresar', new_user_session_path  %></button>
         </ul>
@@ -28,12 +28,10 @@
 
   <!-- Content -->
   <div class="showcase-content">
-      <h1>Keep Your Patients Happy and Your Chairs Full</h1>
-
-      <p>Weave. The beautifully simple way to strengthen patient communication, streamline daily tasks, and grow your practice's revenue.</p>
-
-      <button class="btn btn-outline-info" type="button">Ingresar</button>
-      <button class="btn btn-outline-info" type="button">Ingresar</button>
+    <h1>Mantén a tus clientes felices y a tu negocio creciendo</h1>
+    <p>La manera maravillosamente simple de fortalecer la comunicación con tus clientes, agilizar las tareas diarias y aumentar los ingresos de tu negocio.</p>
+    <button class="btn btn-outline-info" type="button"><a href="#contact-section" >Programa una visita</a></button>
+    <button class="btn btn-outline-info" type="button"><%=  link_to 'Ingresar', new_user_session_path  %></button>
     </div>
   </div>
 </div>
@@ -41,9 +39,9 @@
 
 <div id="platform">
   <div class="container">
-    <h2>All Your Communication.<br>One Platform. Any Device.</h2>
+    <h2>Todo lo que tu consultorio necesita<br>En una plataforma. En cualquier dispositivo.</h2>
 
-    <p>Weave combines all your communication streams from your PMS to your mobile device and business phone, into a single simple tool. One that creates more productive and meaningful conversations by serving up relevant patient details during every patient interaction.</p>
+    <p>OdontoMonitor combina todas las herramientas que necesitas para tu negocio en una sola herramienta simple. Creamos mayor productividad y mejoramos la comunicación e interacción con tus clientes.</p>
     <div id="platform-img">
       <%= image_tag("monitor.png", alt: "monitor") %>
       <span id="lineSource">
@@ -191,9 +189,9 @@
 <div id='contact-section'>
   <div class="container">
 
-    <h2 class="twoline"><span>Ready to see more?</span> Schedule a Live Demo</h2>
+    <h2 class="twoline"><span>¿Listo para ver mas?</span>Programa una visita</h2>
 
-    <p>A Weave representative will contact you shortly to schedule the demo at a time convenient for you.</p>
+    <p>Uno de nuestros representantes se contactara contigo para programar una demostración de nuestro sistema.</p>
 
     <form class="contact-form">
       <div class="form-group row">
@@ -226,3 +224,43 @@
     <p class="copyright">Copyright © 2017 OdontoMonitor. Todos los derechos reservados.</p>
   </div>
 </div>
+
+<script type="text/javascript">
+  // Select all links with hashes
+$('a[href*="#"]')
+  // Remove links that don't actually link to anything
+  .not('[href="#"]')
+  .not('[href="#0"]')
+  .click(function(event) {
+    // On-page links
+    if (
+      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
+      && 
+      location.hostname == this.hostname
+    ) {
+      // Figure out element to scroll to
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+      // Does a scroll target exist?
+      if (target.length) {
+        // Only prevent default if animation is actually gonna happen
+        event.preventDefault();
+        $('html, body').animate({
+          scrollTop: target.offset().top
+        }, 1000, function() {
+          // Callback after animation
+          // Must change focus!
+          var $target = $(target);
+          $target.focus();
+          if ($target.is(":focus")) { // Checking if the target was focused
+            return false;
+          } else {
+            $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
+            $target.focus(); // Set focus again
+          };
+        });
+      }
+    }
+  });
+</script>
+

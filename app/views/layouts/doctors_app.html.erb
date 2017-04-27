@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Consultorios</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'doctors', media: 'all' %>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.3.2/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body>
+    <div class="app">
+      <nav class="main-navbar navbar navbar-toggleable-md navbar-light bg-faded  app-navbar">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a class="app-navbar-brand" href="/docs">
+          <%= image_tag("logo.png", alt: "logo") %>
+          <span>Odonto</span>Monitor
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="main-nav navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Mi Clínica</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <strong>Mi Cuenta</strong>
+                <span class="glyphicon glyphicon-chevron-down"></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                <div class="navbar-login">
+                    <p ><strong><%= current_user.first_name%><%= current_user.last_name%></strong></p>
+                    <p ><%= current_user.email%></p>
+                    <a href="#" class="btn btn-primary btn-block">Actualizar Datos</a>
+                </div>
+                <div class="navbar-login navbar-login-session">
+                  <%= link_to('Cerrar Sesion', destroy_user_session_path, :class => "btn btn-danger btn-block",  :method => :delete) %>  
+                </div>
+              </div>
+            </li>
+            <li class="dropdown">
+              <ul class="dropdown-menu">
+                
+                
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="app-body">
+        <div class="sidebar">
+          <nav class="sidebar-nav">
+              <ul class="nav">
+                <li class="nav-item">
+                  <%= link_to docs_path, :class => 'nav-link' do %>
+                    <i class="icon-speedometer icons"></i> Dashboard
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html"><i class="icon-people icons"></i> Pacientes </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html"><i class="icon-calendar icons"></i> Agenda </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html"><i class="icon-wallet icons"></i> Cuentas </a>
+                </li>
+                <li class="nav-item">
+                  <%= link_to new_docs_product_path, :class => 'nav-link' do %>
+                    <i class="icon-briefcase icons"></i> Productos
+                  <% end %>
+                </li>
+              </ul>
+          </nav>
+        </div>
+        <!-- Main content -->
+        <main class="main">
+            <div class="container-fluid">
+               <%= yield %>
+            </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  code: MyString
+  price: 1
+  expiration_date: 2017-04-23
+  characteristics: MyString
+  status: MyString
+
+two:
+  name: MyString
+  code: MyString
+  price: 1
+  expiration_date: 2017-04-23
+  characteristics: MyString
+  status: MyString

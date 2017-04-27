@@ -1,16 +1,5 @@
-class Docs::UsersController < ApplicationController
-
-  before_action :authenticate_user!
-  before_action :authenticate_clinic!
+class Docs::UsersController < Docs::DoctorsController
 
   def index
   end
-
-  def authenticate_clinic!
-    clinic = current_user.clinic
-    if clinic&.status == false || !clinic
-      redirect_to no_clinic_path 
-    end
-  end
-
 end

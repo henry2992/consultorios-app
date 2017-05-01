@@ -1,0 +1,45 @@
+.section-title {
+	font-family: inherit;
+	font-weight: 500;
+	line-height: 1.1;
+	color: inherit;
+	font-size: 1.5em;
+	margin-bottom: 15px !important;
+}
+
+.section-paragraph{
+
+}
+
+.doctors-section {
+	text-align: center;
+}
+
+.doctors-section img {
+	border-radius: 50%;
+	width: 125px;
+	height: 125px;
+}
+
+.new-button {
+  cursor: pointer;
+  display: inline-block;
+  width: 275px;
+  text-align: center;
+  border: .5px solid rgb(98,185,127);
+  margin-bottom: 15px;
+  background-color: rgb(98,185,127);
+  letter-spacing: 1px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+
+.new-button a {
+	color: rgb(255, 255, 255) !important;
+}
+
+.thead-products tr th{
+	background-color: #63c2de !important;
+	color: #fff !important;
+}

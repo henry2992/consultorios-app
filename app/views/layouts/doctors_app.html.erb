@@ -6,6 +6,9 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'doctors', media: 'all' %>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.3.2/css/simple-line-icons.css" rel="stylesheet" type="text/css">
 
   </head>
@@ -69,7 +72,7 @@
                     <a class="nav-link" href="#"><i class="icon-wallet icons"></i> Cuentas </a>
                 </li>
                 <li class="nav-item">
-                  <%= link_to new_docs_product_path, :class => 'nav-link' do %>
+                  <%= link_to docs_products_path, :class => 'nav-link' do %>
                     <i class="icon-briefcase icons"></i> Productos
                   <% end %>
                 </li>
@@ -79,7 +82,7 @@
         <!-- Main content -->
         <main class="main">
             <div class="container-fluid main-wrapper">
-              <div class=" main-content">
+              <div class="main-content">
                 <%= yield %>
               </div> 
             </div>

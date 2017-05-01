@@ -31,8 +31,8 @@ body{
 
 /* General Styles */
 h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
   display: block;
   font-size: 1.17em;
   -webkit-margin-before: 1em;
@@ -61,6 +61,11 @@ a {
 a:hover{
   text-decoration: none;
   background-color: transparent;
+}
+
+.row-fix {
+	margin-right: 0px !important;
+	margin-left: 0px !important;
 }
 
 
@@ -239,7 +244,7 @@ a:hover{
 	flex-direction: column;
 	background-color: #fff;
 	border: 1px solid #cfd8dc;
-	padding: 25px 15px;
+	padding: 25px;
 }
 
 

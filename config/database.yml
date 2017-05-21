@@ -1,25 +1,24 @@
-# SQLite version 3.x
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
-#
 default: &default
   adapter: postgresql
   pool: 5
   timeout: 5000
+  host: <%= ENV['POSTGRES_PORT_5432_TCP_ADDR'] %>
+  port: <%= ENV['POSTGRES_PORT_5432_TCP_PORT'] %>
 
 development:
   <<: *default
-  database: odonto_development
+  database: consultorios_development
+  user: postgres
+  password: <%= ENV['POSTGRES_ENV_POSTGRES_PASSWORD'] %>
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: odonto_test
+  database: consultorios_test
+  user: postgres
+  password: <%= ENV['POSTGRES_ENV_POSTGRES_PASSWORD'] %>
 
 production:
   <<: *default
-  database: odonto_production
+  database: consultorios_production
+  user: postgres
+  password: <%= ENV['POSTGRES_ENV_POSTGRES_PASSWORD'] %>

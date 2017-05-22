@@ -1,6 +1,14 @@
 
 <%= semantic_form_for ([:docs, @product]) do |f| %>
+	<div class="form-products">
+		<%= f.inputs do %>
+			<%= f.input :name, label: false, placeholder: 'Nombre' %> 	
+			<%= f.input :code, label: false, placeholder: 'Codigo' %> 
+			<%= f.input :price, label: false, placeholder: 'Precio' %>
+			<%= f.input :characteristics, label: false, placeholder: 'Descripción' %>
+			<%= f.input :expiration_date, as: :datetime_select, label: false, placeholder: 'Fecha de Expiración' %>		
+	  <% end %>
+  </div>
 
-  <%= f.inputs %>
   <%= f.actions %>
 <% end %>

@@ -17,7 +17,6 @@ class Docs::ProductsController < Docs::DoctorsController
 
   def create
     @product = Product.new(product_params)
-    byebug
     respond_to do |format|
       if @product.save
         format.html { redirect_to docs_product_path(@product), notice: 'El producto fue creado exitosamente.' }
@@ -30,7 +29,7 @@ class Docs::ProductsController < Docs::DoctorsController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'El producto fue actualizado exitosamente.' }
+        format.html { redirect_to docs_product_path(@product), notice: 'El producto fue actualizado exitosamente.' }
       else
         format.html { render :edit }
       end
@@ -40,7 +39,7 @@ class Docs::ProductsController < Docs::DoctorsController
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to products_url, notice: 'El producto fue eliminado exitosamente' }
+      format.html { redirect_to docs_products_path, notice: 'El producto fue eliminado exitosamente' }
     end
   end
 

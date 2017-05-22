@@ -7,10 +7,11 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   namespace :docs do
-  	get '/', to: 'doctors#index'
+    get '/', to: 'doctors#index'
     resources :users
     resources :products
     resources :clinics, only: [:show]
+    resources :patients
   end
 
   get '/no_clinic', to: 'pages#no_clinic'

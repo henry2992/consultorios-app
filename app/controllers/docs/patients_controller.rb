@@ -44,6 +44,14 @@ class Docs::PatientsController < Docs::DoctorsController
     end
   end
 
+  def destroy
+    user = @patient.user
+    user.destroy
+    respond_to do |format|
+      format.html { redirect_to docs_patient_path, notice: 'El paciente fue eliminado exitosamente' }
+    end
+  end
+
   private
     def ptnt_params params, user
       [

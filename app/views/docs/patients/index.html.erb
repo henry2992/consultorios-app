@@ -33,7 +33,6 @@
 
   $("#search_form input").on('keyup', function(event) {
     event.preventDefault();
-    // console.log('entra;')
     $.get($("#search_form").attr("action"), $("#search_form").serialize(), function(json){
       $("#data").html(json.data);
     }, "json");

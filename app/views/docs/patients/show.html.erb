@@ -13,7 +13,9 @@
 <p>
   <strong>User:</strong>
   <%= @patient.user.first_name %>&nbsp;
-  <%= @patient.user.last_name %>
+  <%= @patient.user.last_name %> | 
+  <%= @patient.user.email %>
+
 </p>
 
 <p>
@@ -22,5 +24,5 @@
   <%= @patient.doctor.last_name %>
 </p>
 
-<%= link_to 'Edit', edit_patient_path(@patient) %> |
-<%= link_to 'Back', patients_path %>
+<%= link_to 'Edit', edit_docs_patient_path(@patient) %> |
+<%= link_to 'Back', docs_patients_path %>

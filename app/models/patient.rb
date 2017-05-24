@@ -4,4 +4,7 @@ class Patient < ApplicationRecord
 
   # Validations
   validates :phone, presence: true, numericality: { only_integer: true }
+
+  scope :by, ->(search) { includes(:user).select("users.*, 1 as users").where('users.first_name LIKE ?', "%#{search}%").references(:user) }
+
 end

@@ -1,0 +1,22 @@
+<table>
+  <thead>
+    <tr>
+      <th><%= sortable "Name", ["users.first_name"] %></th>
+      <th><%= sortable "Phone", ["phone"] %></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @patients.each do |patient| %>
+      <tr>
+        <td><%= patient.user.first_name %>&nbsp;<%= patient.user.last_name %></td>
+        <td><%= patient.phone %></td>
+        <td><%= link_to 'Show', docs_patient_path(patient) %></td>
+        <td><%= link_to 'Edit', edit_docs_patient_path(patient) %></td>
+        <td><%= link_to 'Destroy', docs_patient_path(patient), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @patients, :renderer => WillPaginate::ActionView::LinkRenderer %>

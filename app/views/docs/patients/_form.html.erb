@@ -1,0 +1,29 @@
+<%= semantic_form_for ([:docs, @patient]) do |f| %>
+  <%= f.inputs do %>
+    <li class="name input required stringish" id="patient_name_input">
+      <%= label(:patient, :first_name, class: "label") do %>
+        First name<abbr title="required">*</abbr>
+      <% end %>
+      <% fn, ln, em = @user.blank? ? nil : @user.first_name, @user.last_name, @user.email if @user%>
+      <%= text_field_tag("patient[first_name]", fn ) %>
+    </li>
+    <li class="name input required stringish" id="patient_name_input">
+      <%= label(:patient, :last_name, class: "label") do %>
+        Last name<abbr title="required">*</abbr>
+      <% end %>
+      <%= text_field_tag("patient[last_name]", ln) %>
+    </li>
+    <li class="name input required stringish" id="patient_name_input">
+      <%= label(:patient, :email, class: "label") do %>
+        Email<abbr title="required">*</abbr>
+      <% end %>
+      <%= text_field_tag("patient[email]", em, type: :email) %>
+    </li>
+    <%= f.input :address %>
+    <%= f.input :phone %>
+  <% end %>
+
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :input %>
+  <% end %>
+<% end %>

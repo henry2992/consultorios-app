@@ -1,5 +1,5 @@
 <table>
-  <thead>
+  <thead class="thead-products">
     <tr>
       <th><%= sortable "Name", ["users.first_name"] %></th>
       <th><%= sortable "Phone", ["phone"] %></th>
@@ -10,7 +10,7 @@
   <tbody>
     <% @patients.each do |patient| %>
       <tr>
-        <td><%= patient.user.first_name %>&nbsp;<%= patient.user.last_name %></td>
+        <td><%= patient.first_name %>&nbsp;<%= patient.last_name %></td>
         <td><%= patient.phone %></td>
         <td><%= link_to 'Show', docs_patient_path(patient) %></td>
         <td><%= link_to 'Edit', edit_docs_patient_path(patient) %></td>

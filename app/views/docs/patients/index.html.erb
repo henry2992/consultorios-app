@@ -1,36 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Patients</h1>
+<h1 class="section-title">Pacientes</h1>
 
-<%= form_tag docs_patients_path, :method => 'get', id: "search_form" do %>
-  <%= hidden_field_tag :direction, params[:direction] %>
-  <%= hidden_field_tag :sort, params[:sort] %>
-  <p>
+<div class='new-button' >
+  <%= link_to 'Agrega un Nuevo Paciente', new_docs_patient_path %>
+</div>
+
+<div class="row row-fix">
+  <%= form_tag docs_patients_path, :method => 'get', id: "search_form" do %>
+    <%= hidden_field_tag :direction, params[:direction] %>
+    <%= hidden_field_tag :sort, params[:sort] %>
     <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
-<% end %>
+    <%= submit_tag "Search", :name => nil, class: "btn btn-success" %>
+  <% end %>
+  <br>
+  <br>
+  <br>
+</div>
 
-<div id="data"><%= render "patients" %></div>
-<br>
-<%= link_to 'New Patient', new_docs_patient_path %>
+<div class="row row-fix" id="data">
+  <%= render "patients" %>
+</div>
 <script>
-  // $(document).ready(function() {
-  //   $("#by_name").on('click', function(event) {
-  //     $.get(this.href,null,null,"json")
-  //     .done(function( json, textStatus ) {
-  //       console.log( json.data );
-  //       $("#data").html(json.data);
-  //       return false;
-  //     }).fail(function( jqxhr, settings, exception ) {
-  //         console.log( exception );
-  //         return false;
-  //     });
-  //     event.preventDefault();
-  //     return false;
-  //   });
-  // });
-
   $("#search_form input").on('keyup', function(event) {
     event.preventDefault();
     $.get($("#search_form").attr("action"), $("#search_form").serialize(), function(json){

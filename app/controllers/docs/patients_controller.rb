@@ -1,10 +1,10 @@
 class Docs::PatientsController < Docs::DoctorsController
   helper_method :sort_column, :sort_direction
-
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
   
   def index
-    @patients = Patient.by(params[:search]).order("#{sort_column} #{sort_direction}").paginate(:page => params[:page], :per_page => 1)
+    @patients = current_user.patients.order("#{sort_column} #{sort_direction}").paginate(:page => params[:page], :per_page => 25)
+    @patients = @patients.by(params[:search]) unless params[:search].blank?
   end
 
   def show
@@ -12,20 +12,16 @@ class Docs::PatientsController < Docs::DoctorsController
 
   def new
     @patient = Patient.new
-    @user = nil
   end
 
   def edit
-    @user = nil
-    @user ||= @patient.user
   end
 
   def create
-    user = User.create! user_params(patient_params)
-    @patient = current_user.patients.create! ptnt_params(patient_params, user[0])
+    @patient = current_user.patients.invite!(patient_params)
     respond_to do |format|
       if @patient
-        format.html { redirect_to docs_patient_path(@patient), notice: 'El paciente fue creado exitosamente.' }
+        format.html { redirect_to docs_patients_path, notice: 'El paciente fue creado exitosamente.' }
       else
         format.html { render :new }
       end
@@ -33,11 +29,9 @@ class Docs::PatientsController < Docs::DoctorsController
   end
 
   def update
-    user = @patient.user.update(user_params(patient_params)[0].except(:password, :password_confirmation, :clinic))
-    patient = @patient.update(ptnt_params(patient_params, @patient.user)[0].except(:user_id))
     respond_to do |format|
-      if user && patient
-        format.html { redirect_to edit_docs_patient_path(@patient), notice: 'El paciente fue actualizado exitosamente.' }
+      if @patient.update(patient_params)
+        format.html { redirect_to docs_patients_url, notice: 'El paciente fue actualizado exitosamente.' }
       else
         format.html { render :edit }
       end
@@ -45,31 +39,13 @@ class Docs::PatientsController < Docs::DoctorsController
   end
 
   def destroy
-    user = @patient.user
-    user.destroy
+    @patient.destroy
     respond_to do |format|
-      format.html { redirect_to docs_patient_path, notice: 'El paciente fue eliminado exitosamente' }
+      format.html { redirect_to doct_patients_url, notice: 'El paciente fue eliminado exitosamente' }
     end
   end
 
   private
-    def ptnt_params params, user
-      [
-        address: params[:address],
-        phone: params[:phone],
-        user_id: user.id
-      ]
-    end
-    def user_params params
-      [ 
-        first_name: params[:first_name], 
-        last_name: params[:last_name], 
-        email: params[:email],
-        password: "12345678",
-        password_confirmation: "12345678",
-        clinic: current_user.clinic
-      ]
-    end
 
     def set_patient
       @patient = current_user.patients.find(params[:id])

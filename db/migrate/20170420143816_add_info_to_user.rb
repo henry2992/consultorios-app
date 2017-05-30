@@ -2,6 +2,6 @@ class AddInfoToUser < ActiveRecord::Migration[5.0]
   def change
     add_column :users, :first_name, :string
     add_column :users, :last_name, :string
-    add_column :users, :role, :string, default: "patient"
+    add_column :users, :role, :string, default: "Patient"
   end
 end

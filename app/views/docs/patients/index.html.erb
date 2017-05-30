@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="section-title">Pacientes</h1>
+
+<div class='new-button' >
+  <%= link_to 'Agrega un Nuevo Paciente', new_docs_patient_path %>
+</div>
+
+<div class="row row-fix">
+  <%= form_tag docs_patients_path, :method => 'get', id: "search_form" do %>
+    <%= hidden_field_tag :direction, params[:direction] %>
+    <%= hidden_field_tag :sort, params[:sort] %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil, class: "btn btn-success" %>
+  <% end %>
+  <br>
+  <br>
+  <br>
+</div>
+
+<div class="row row-fix" id="data">
+  <%= render "patients" %>
+</div>
+<script>
+  $("#search_form input").on('keyup', function(event) {
+    event.preventDefault();
+    $.get($("#search_form").attr("action"), $("#search_form").serialize(), function(json){
+      $("#data").html(json.data);
+    }, "json");
+  });
+  $("#search_form").on('submit', function(event) {
+    event.preventDefault();
+    // console.log('entra;')
+    $.get($(this).attr("action"), $(this).serialize(), function(json){
+      $("#data").html(json.data);
+    }, "json");
+  });
+
+// });
+</script>

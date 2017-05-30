@@ -16,6 +16,8 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+/public/assets
+/public/assets/*
 
 # Ignore Byebug command history file.
 .byebug_history
@@ -23,3 +25,4 @@
 
 # Ignore application configuration
 /config/application.yml
+/config/database.yml

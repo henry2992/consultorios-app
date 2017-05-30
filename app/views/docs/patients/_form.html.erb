@@ -1,0 +1,13 @@
+<%= semantic_form_for ([:docs, @patient]) do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :email %>
+    <%= f.input :address %>
+    <%= f.input :phone %>
+  <% end %>
+
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :input %>
+  <% end %>
+<% end %>

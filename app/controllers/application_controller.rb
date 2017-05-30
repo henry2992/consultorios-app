@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   def after_sign_in_path_for(resource)
-    if resource.admin? || resource.doctor?
+    if resource.Admin? || resource.Doctor?
       return docs_path
     else
       return root_path
@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   private
 	# Layout per resource_name AND action
 	def layout_by_resource
-	  if devise_controller? && resource.doctor? && action_name == "edit" || action_name == "update" 
+	  if devise_controller? && resource.Doctor? && action_name == "edit" || action_name == "update" 
 	    "doctors_app"
 	  else
 	    "application"

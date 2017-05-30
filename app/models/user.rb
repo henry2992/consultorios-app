@@ -1,12 +1,23 @@
 class User < ApplicationRecord
-  belongs_to :clinic
+  include PgSearch
+  
+  pg_search_scope :by,
+    :against => [:email, :first_name, :last_name, :address, :phone],
+    :using => {
+      :tsearch => {:prefix => true, :any_word => true}
+    }
+    
+  self.inheritance_column = :role
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  
   enum role: {
-    doctor: 'doctor',
-    patient: 'patient',
-    admin: 'admin'
+    Doctor: 'Doctor',
+    Patient: 'Patient',
+    Admin: 'Admin'
   }
+
 end

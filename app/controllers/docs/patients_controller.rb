@@ -41,7 +41,7 @@ class Docs::PatientsController < Docs::DoctorsController
   def destroy
     @patient.destroy
     respond_to do |format|
-      format.html { redirect_to doct_patients_url, notice: 'El paciente fue eliminado exitosamente' }
+      format.html { redirect_to docs_patients_url, notice: 'El paciente fue eliminado exitosamente' }
     end
   end
 

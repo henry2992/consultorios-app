@@ -34,12 +34,32 @@
   border-radius: 5px;
 }
 
-
 .new-button a {
 	color: rgb(255, 255, 255) !important;
 }
 
-.thead-products tr th{
+.thead-general tr th{
 	background-color: #63c2de !important;
 	color: #fff !important;
 }
+.thead-general tr th a{
+	background-color: #63c2de !important;
+	color: #fff !important;
+}
+
+
+/* General Products */
+
+.general-form .inputs {
+	background-color: transparent !important;
+	box-shadow: none !important;
+}
+
+.general-form .inputs li {
+	margin: 0px;
+}
+
+
+
+
+

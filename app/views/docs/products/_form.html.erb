@@ -1,6 +1,5 @@
-
 <%= semantic_form_for ([:docs, @product]) do |f| %>
-	<div class="form-products">
+	<div class="general-form">
 		<%= f.inputs do %>
 			<%= f.input :name, label: false, placeholder: 'Nombre' %> 	
 			<%= f.input :code, label: false, placeholder: 'Codigo' %> 
@@ -9,6 +8,7 @@
 			<%= f.input :expiration_date, as: :datetime_select, label: false, placeholder: 'Fecha de Expiración' %>		
 	  <% end %>
   </div>
-
-  <%= f.actions %>
+  <%= f.actions do %>
+    <%= f.action :submit, :label => "Crear Producto", :button_html => { :class => "submit-button" } %>
+  <% end %>
 <% end %>

@@ -85,6 +85,9 @@
         <main class="main">
             <div class="container-fluid main-wrapper">
               <div class="main-content">
+                <% if notice %>
+                  <p id="notice"><%= notice %></p>
+                <% end %>
                 <%= yield %>
               </div> 
             </div>

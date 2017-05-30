@@ -1,5 +1,5 @@
 <table>
-  <thead class="thead-products">
+  <thead class="thead-general">
     <tr>
       <th><%= sortable "Name", ["users.first_name"] %></th>
       <th><%= sortable "Phone", ["phone"] %></th>
@@ -19,4 +19,4 @@
     <% end %>
   </tbody>
 </table>
-<%= will_paginate @patients, :renderer => WillPaginate::ActionView::LinkRenderer %>
+<%= will_paginate @patients, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>

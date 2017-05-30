@@ -1,13 +1,14 @@
 <%= semantic_form_for ([:docs, @patient]) do |f| %>
-  <%= f.inputs do %>
-    <%= f.input :first_name %>
-    <%= f.input :last_name %>
-    <%= f.input :email %>
-    <%= f.input :address %>
-    <%= f.input :phone %>
-  <% end %>
-
-  <%= f.actions do %>
-    <%= f.action :submit, :as => :input %>
+  <div class="general-form">
+    <%= f.inputs do %>
+      <%= f.input :first_name, label: false, placeholder: 'Nombre' %>
+      <%= f.input :last_name, label: false, placeholder: 'Apellido' %>
+      <%= f.input :email, label: false, placeholder: 'Email' %>
+      <%= f.input :address, label: false, placeholder: 'Direccion' %>
+      <%= f.input :phone, label: false, placeholder: 'Telefono' %>
+    <% end %>
+  </div>
+   <%= f.actions do %>
+    <%= f.action :submit, :label => "Crear Paciente", :button_html => { :class => "submit-button" } %>
   <% end %>
 <% end %>

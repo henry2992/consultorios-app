@@ -69,6 +69,7 @@ GEM
     bootstrap (4.0.0.alpha6)
       autoprefixer-rails (>= 6.0.3)
       sass (>= 3.4.19)
+    bootstrap-select-rails (1.12.1)
     bootstrap-will_paginate (1.0.0)
       will_paginate
     bourbon (4.3.4)
@@ -101,6 +102,10 @@ GEM
     formtastic (3.1.5)
       actionpack (>= 3.2.13)
     formtastic_i18n (0.6.0)
+    fullcalendar-rails (3.2.0.0)
+      jquery-rails (>= 4.0.5, < 5.0.0)
+      jquery-ui-rails (>= 5.0.2)
+      momentjs-rails (>= 2.9.0)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     has_scope (0.7.0)
@@ -146,6 +151,8 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
+    momentjs-rails (2.17.1)
+      railties (>= 3.1)
     multi_json (1.12.1)
     nested_scaffold (1.0.0)
     nio4r (2.0.0)
@@ -256,6 +263,7 @@ DEPENDENCIES
   activeadmin!
   arel
   bootstrap (~> 4.0.0.alpha6)
+  bootstrap-select-rails
   bootstrap-will_paginate
   byebug
   coffee-rails (~> 4.2)
@@ -263,10 +271,12 @@ DEPENDENCIES
   devise_invitable
   figaro
   formtastic (~> 3.0)
+  fullcalendar-rails
   inherited_resources (~> 1.7)
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
+  momentjs-rails
   nested_scaffold
   pg
   pg_search

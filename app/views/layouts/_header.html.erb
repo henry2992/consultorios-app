@@ -1,0 +1,39 @@
+<nav class="main-navbar navbar navbar-toggleable-md navbar-light bg-faded  app-navbar">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <a class="app-navbar-brand" href="/docs">
+    <%= image_tag("logo.png", alt: "logo") %>
+    <span>Odonto</span>Monitor
+  </a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="main-nav navbar-nav ml-auto">
+      <li class="nav-item">
+        <%= link_to 'Mi Clínica', docs_clinic_path(current_user.clinic ), class: 'nav-link' %> 
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <strong>Mi Cuenta</strong>
+          <span class="glyphicon glyphicon-chevron-down"></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+          <div class="navbar-login">
+              <p ><strong><%= current_user.first_name%><%= current_user.last_name%></strong></p>
+              <p ><%= current_user.email%></p>
+              <%= link_to 'Actualizar Datos', edit_user_registration_path, class: 'btn btn-primary btn-block'%>
+          </div>
+          <div class="navbar-login navbar-login-session">
+            <%= link_to('Cerrar Sesion', destroy_user_session_path, :class => "btn btn-danger btn-block",  :method => :delete) %>  
+          </div>
+        </div>
+      </li>
+      <li class="dropdown">
+        <ul class="dropdown-menu">
+          
+          
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>

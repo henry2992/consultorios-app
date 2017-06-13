@@ -1,0 +1,29 @@
+<div class="sidebar">
+  <nav class="sidebar-nav">
+    <ul class="nav">
+      <li class="nav-item">
+        <%= link_to docs_path, :class => 'nav-link' do %>
+          <i class="icon-speedometer icons"></i> Dashboard
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to docs_patients_path, :class => 'nav-link' do %>
+          <i class="icon-people icons"></i> Pacientes
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to docs_agenda_index_path, :class => 'nav-link' do %>
+          <i class="icon-calendar icons"></i> Agenda
+        <% end %>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="#"><i class="icon-wallet icons"></i> Cuentas </a>
+      </li>
+      <li class="nav-item">
+        <%= link_to docs_products_path, :class => 'nav-link' do %>
+          <i class="icon-briefcase icons"></i> Productos
+        <% end %>
+      </li>
+    </ul>
+  </nav>
+</div>

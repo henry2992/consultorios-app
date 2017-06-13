@@ -68,7 +68,9 @@
                   <% end %>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="icon-calendar icons"></i> Agenda </a>
+                  <%= link_to docs_agenda_index_path, :class => 'nav-link' do %>
+                    <i class="icon-calendar icons"></i> Agenda
+                  <% end %>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="icon-wallet icons"></i> Cuentas </a>

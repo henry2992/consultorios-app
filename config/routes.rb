@@ -8,7 +8,9 @@ Rails.application.routes.draw do
 
   namespace :docs do
     get '/', to: 'doctors#index'
+    resources :appointments
     resources :users
+    resources :agenda, only: [:index, :create]
     resources :products
     resources :clinics, only: [:show]
     resources :patients

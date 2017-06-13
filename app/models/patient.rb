@@ -6,6 +6,7 @@ class Patient < User
   
   belongs_to :doctor, class_name: User, foreign_key: :doctor_id
 
-  # scope :by, ->(search) { where('first_name LIKE ?', "%#{search}%") }
+  has_many :appointments, class_name: Appointment,
+                        foreign_key: :patient_id
 
 end

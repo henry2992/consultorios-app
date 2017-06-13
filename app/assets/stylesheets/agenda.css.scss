@@ -1,0 +1,52 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require ./bootstrap/css/bootstrap-theme.min
+ *= require ./bootstrap/css/bootstrap.min
+ *= require ./bootstrap/css/bootstrap.min
+ *= require ./bootstrap/bootstrap-select/bootstrap-select.min
+ *= require_self
+ *= require fullcalendar
+ */
+ @import "bootstrap";
+
+.app-navbar {
+  margin-bottom: 0 !important;
+}
+.big {
+  font-size: 3em;
+}
+.dropdown-toggle::after {
+  display: none !important;
+}
+.modal {
+  background-color: rgba(0,0,0,.6);
+}
+.modal-dialog {
+  margin: 10em auto !important;
+}
+.modal-header {
+  display: initial !important;
+}
+.selected {
+  background-color: #3F51B5;
+  color: #FFFFFF;
+}
+
+#time ul {
+  padding: 0;
+  list-style: none;
+  font-size: .6em;
+}
+#time ul li {
+  margin: .3em 0;
+}

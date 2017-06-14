@@ -121,16 +121,21 @@ $(document).ready(function() {
       // console.log(date.format("HH:mm:00"));
       $("[data-time='"+date.format("HH:mm:00")+"']").toggleClass('selected');
       index = selected.indexOf(date.format("HH:mm:00"));
-      index >= 0 ? selected.splice(index, 1) : selected.push(date.format("HH:mm:00"));
+      index >= 0 ? selected.splice(index, 1) : selected.push(date.format("YYYY-MM-DD HH:mm:00"));
       selected.length > 0 ? $("#nueva_cita").prop('disabled', false) : $("#nueva_cita").prop('disabled', true);
       selected.sort().reverse();
       console.log(selected);
       $('#time').html(function(){
-        var html = "<ul>";
+        var html = '';
+          
         for (var i = selected.length - 1; i >= 0; i--) {
-          html += "<li>" + selected[i] + "</li>";
+          html += `
+            <label class="btn btn-primary active">
+              <input name="appointment[timespan][]" type="checkbox" autocomplete="off" value="${selected[i]}" checked> ${selected[i]}
+            </label>
+          `;
         }
-        html += "</ul>";
+        html += "";
           
         return html;
       });

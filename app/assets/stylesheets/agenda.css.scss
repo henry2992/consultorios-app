@@ -41,12 +41,14 @@
   background-color: #3F51B5;
   color: #FFFFFF;
 }
-
+.btn-group-vertical {
+  display: inline !important;
+}
 #time ul {
   padding: 0;
   list-style: none;
   font-size: .6em;
-}
-#time ul li {
-  margin: .3em 0;
+  li {
+    margin: .3em 0;
+  }
 }

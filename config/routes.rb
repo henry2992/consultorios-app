@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :create_appointment_schedules
   root 'pages#home'
   # devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Create Appointment Schedules</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Appointment</th>
+      <th>Start</th>
+      <th>End</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @create_appointment_schedules.each do |create_appointment_schedule| %>
+      <tr>
+        <td><%= create_appointment_schedule.appointment %></td>
+        <td><%= create_appointment_schedule.start %></td>
+        <td><%= create_appointment_schedule.end %></td>
+        <td><%= link_to 'Show', create_appointment_schedule %></td>
+        <td><%= link_to 'Edit', edit_create_appointment_schedule_path(create_appointment_schedule) %></td>
+        <td><%= link_to 'Destroy', create_appointment_schedule, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Create Appointment Schedule', new_create_appointment_schedule_path %>

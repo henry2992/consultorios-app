@@ -5,70 +5,16 @@ class Docs::AgendaController < Docs::DoctorsController
     @patients = current_user.patients
   end
 
-  def search_end val1, total_values, i
-    if !total_values[i + 1].blank?
-      i += 1
-      if (val1.to_time + 30.minutes == total_values[i].to_time)
-        search_end(total_values[i], total_values, i)
-      else
-        return_data = val1.to_time + 30.minutes
-      end
-      return [ return_data, i ]
-    end 
-  end
-
   def create
-    data = []
-    position = 0
-    # puts appointment_params[:timespan]
-    appointment_params[:timespan].size.times do |i|
-      if position < appointment_params[:timespan].size
-        # raise final.to_yaml
-        puts position
-        final = search_end(appointment_params[:timespan][position], appointment_params[:timespan], position)
-        prepare = {
-          patient_id: appointment_params[:patient_id],
-          description: appointment_params[:description],
-          price: appointment_params[:price],
-          start:  appointment_params[:timespan][position],
-          end: final[0][0].blank? ? final[0] : final[0][0]
-        }
-        data << prepare
-      end
-      break if final.blank?
-      position = ( final[0][1].blank? ? final[1] : final[0][1] ) + 1
-    end
-
-
-    # appointment_params[:timespan].each do |r|
-    #   # if !appointment_params[:timespan][i].blank?
-    #     if i + 1 < appointment_params[:timespan].size
-    #       final = search_end(r, appointment_params[:timespan], i)
-    #       prepare = {
-    #         patient_id: appointment_params[:patient_id],
-    #         description: appointment_params[:description],
-    #         price: appointment_params[:price],
-    #         start:  appointment_params[:timespan][i],
-    #         end: final[0]
-    #       }
-    #       data << prepare
-    #       puts "\n\n"
-    #       puts final[1]
-    #       i = final[1] + 1
-    #     end
-
-        # puts "\n\n"
-        # puts data
-      # end
-    # end
-    raise data.to_yaml
-
-    @appointment = current_user.appointments.new(appointment_params)
+    shedules = search_end(appointment_params[:timespan])
+    @appointment = current_user.appointments.new(appointment_params.except(:timespan))
     respond_to do |format|
       if @appointment.save
-        format.html { redirect_to docs_agenda_path, notice: 'La cita fue programada exitosamente.' }
+        @appointment.appointment_schedules.create! shedules
+        format.html { redirect_to docs_agenda_index_path, notice: 'La cita fue programada exitosamente.' }
       else
-        format.html { render :index }
+        format.html { redirect_to docs_agenda_index_path, notice: 'La cita no pudo ser programada.' }
+        format.json { render json: @appointment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -76,5 +22,39 @@ class Docs::AgendaController < Docs::DoctorsController
   private
     def appointment_params
       params.require(:appointment).permit(:patient_id, :description, :price, timespan: [])
+    end
+    
+    # This function helps to separate modules selected in calendar
+    # in order to store each one into table apointment_modules as a single record
+    # params:
+    #   total_values type array <-- appointment_params[:timespan]
+    def search_end total_values = []
+      # declare return variable as an array
+      data = []
+      # check total_values is an array
+      case total_values
+        when Array then
+          # with a :start = first time selected in calendar and an empty :end
+          data.push({start: total_values[0].to_time, end:""})
+
+          # iterates total_values
+          total_values.each_with_index do |time, i|
+            # if next value is not empty is because current item is not the last one
+            if !total_values[i + 1].blank?
+              # if current value + 30 minutes is not equal to next value is because 
+              # the module is complete then
+              if !(total_values[i].to_time + 30.minutes == total_values[i + 1].to_time)
+                # store in :end current value + 30 minutes to close module
+                data[data.size - 1][:end] = total_values[i].to_time + 30.minutes
+                # and initialize the next one with :start next value and an empty :end
+                data.push({start:total_values[i + 1], end:""})
+              end
+            end
+          end
+          # when total_value's iteration is done fill in :end with last item + 30 minutes
+          data[data.size - 1][:end] = total_values[total_values.size - 1].to_time + 30.minutes
+      end
+      # returns the data array of modules
+      return data
     end
 end

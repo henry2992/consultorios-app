@@ -1,15 +1,18 @@
 <h1 class="section-title">Pacientes</h1>
 
-<div class='new-button' >
-  <%= link_to 'Agrega un Nuevo Paciente', new_docs_patient_path %>
-</div>
-
 <div class="row row-fix">
-  <%= form_tag docs_patients_path, :method => 'get', id: "search_form" do %>
+  <%= form_tag docs_patients_path, :method => 'get', id: "search_form", class: "form-inline" do %>
     <%= hidden_field_tag :direction, params[:direction] %>
     <%= hidden_field_tag :sort, params[:sort] %>
-    <%= text_field_tag :search, params[:search] %>
+    <div class="form-group">
+      <%= text_field_tag :search, params[:search], class: "form-control",  placeholder: "Buscar Paciente" %>
+    </div>
+    <div class="form-group">&nbsp;&nbsp;
     <%= submit_tag "Search", :name => nil, class: "btn btn-success" %>
+    </div>
+    <div class="form-group">&nbsp;&nbsp;
+    <%= link_to 'Agrega un Nuevo Paciente', new_docs_patient_path, class: "btn btn-success" %>
+    </div>
   <% end %>
 </div>
 

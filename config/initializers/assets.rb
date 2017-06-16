@@ -9,6 +9,6 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
-Rails.application.config.assets.precompile += %w( agenda.js )
+Rails.application.config.assets.precompile += %w( appointments.js )
 Rails.application.config.assets.precompile += %w( doctors.css.scss )
-Rails.application.config.assets.precompile += %w( agenda.css.scss )
+Rails.application.config.assets.precompile += %w( appointments.css.scss )

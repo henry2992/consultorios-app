@@ -12,4 +12,9 @@ class Docs::DoctorsController < ApplicationController
       redirect_to no_clinic_path 
     end
   end
+
+  def ensure_json_request  
+    return if request.format == :json
+    render :nothing => true, :status => 406  
+  end
 end

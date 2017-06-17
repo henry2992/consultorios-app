@@ -10,6 +10,8 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery
+//= require jquery_ujs
 //= require ./bootstrap/jquery-3.2.1.min
 //= require ./bootstrap/js/bootstrap.min
 //= require ./bootstrap/bootstrap-select/bootstrap-select.min
@@ -57,74 +59,37 @@ $(document).ready(function() {
     eventLimit: true,
     eventSources: [
       {
-        events: [
-          {
-            title: 'All Day Event',
-            start: '2017-05-01'
-          },
-          {
-            title: 'Long Event',
-            start: '2017-05-07',
-            end: '2017-05-10'
-          },
-          {
-            id: 999,
-            title: 'Repeating Event',
-            start: '2017-05-09T16:00:00'
-          },
-          {
-            id: 999,
-            title: 'Repeating Event',
-            start: '2017-05-16T16:00:00'
-          },
-          {
-            title: 'Conference',
-            start: '2017-05-11',
-            end: '2017-05-13'
-          },
-          {
-            title: 'Meeting',
-            start: '2017-05-12T10:30:00',
-            end: '2017-05-12T12:30:00'
-          },
-          {
-            title: 'Lunch',
-            start: '2017-05-12T12:00:00'
-          },
-          {
-            title: 'Meeting',
-            start: '2017-05-12T14:30:00'
-          },
-          {
-            title: 'Happy Hour',
-            start: '2017-05-12T17:30:00'
-          },
-          {
-            title: 'Dinner',
-            start: '2017-05-12T20:00:00'
-          },
-          {
-            title: 'Birthday Party',
-            start: '2017-05-13T07:00:00'
-          },
-          {
-            title: 'Click for Google',
-            url: 'http://google.com/',
-            start: '2017-05-28'
-          }
-        ],
+        events: function(start, end, timezone, callback) {
+          $.ajax({
+              url: '/docs/dates',
+              dataType: 'json',
+              success: function(doc) {
+                  var events = [];
+                  $.each(doc, function(index, val) {
+                    $.each(val, function(index, val) {
+                      events.push({
+                          id: val.id,
+                          title: val.title,
+                          start: val.start,
+                          end: val.end,
+                          url: val.url
+                      });
+                    });
+                  });
+                  callback(events);
+              }
+          });
+        },
         color: 'black',
         textColor: 'yellow'
       }
     ],
     dayClick: function(date, jsEvent, view, resourceObj) {
-      // console.log(date.format("HH:mm:00"));
       $("[data-time='"+date.format("HH:mm:00")+"']").toggleClass('selected');
       index = selected.indexOf(date.format("HH:mm:00"));
       index >= 0 ? selected.splice(index, 1) : selected.push(date.format("YYYY-MM-DD HH:mm:00"));
       selected.length > 0 ? $("#nueva_cita").prop('disabled', false) : $("#nueva_cita").prop('disabled', true);
       selected.sort().reverse();
-      console.log(selected);
       $('#time').html(function(){
         var html = '';
           
@@ -139,7 +104,14 @@ $(document).ready(function() {
           
         return html;
       });
-
+    },
+    eventClick: function(calEvent, jsEvent, view) {
+      $("#deleteEvent").attr('href', calEvent.url);
+      $('#EditDeleteEvent').modal({
+        backdrop: 'static',
+        keyboard: false
+      });
+      return false;
     }
   });
 });

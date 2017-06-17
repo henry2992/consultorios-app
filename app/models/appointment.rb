@@ -5,4 +5,6 @@ class Appointment < ApplicationRecord
                       foreign_key: :patient_id
 
   has_many :appointment_schedules, dependent: :destroy
+
+  validates :doctor_id, :patient_id, :description, :price, presence: true
 end

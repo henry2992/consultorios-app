@@ -23,7 +23,7 @@
             <label>Paciente</label>
             <%= select_tag "appointment[patient_id]", 
                             options_from_collection_for_select(
-                              @patients, :id, :full_name, 1), 
+                              current_user.patients, :id, :full_name, 1), 
                             class: "form-control selectpicker", 
                             "data-live-search" => "true" %>
           </div> 
@@ -45,6 +45,28 @@
           <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
         <% end %>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal Edit/Delete Event-->
+  <div class="modal fade" id="EditDeleteEvent" tabindex="-1" role="dialog" aria-labelledby="EditDeleteEventLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="EditDeleteEventLabel">Evento</h4>
+        </div>
+
+        <div class="modal-body">
+          <h1>¿Desea eliminar <!-- o modificar --> este evento?</h1>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <!-- <a href="" class="btn btn-warning">Modificar</a> -->
+          <%= link_to('Eliminar', "", :class => "btn btn-danger",  :method => 'delete', id: "deleteEvent") %>
+        </div>
       </div>
     </div>
   </div>

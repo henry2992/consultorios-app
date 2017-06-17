@@ -45,7 +45,8 @@ gem "will_paginate"
 gem "bootstrap-will_paginate"
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
-gem 'bootstrap-select-rails'
+gem 'validates_timeliness'
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
 end

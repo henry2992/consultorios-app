@@ -1,8 +1,15 @@
 class Docs::AppointmentsController < Docs::DoctorsController
+  before_action :ensure_json_request, only: [:show]
+  before_action :set_appointment_schedule, only: [:destroy]
+
   layout "appointments"
 
   def index
-    @patients = current_user.patients
+    @appointment = Appointment.new
+  end
+
+  def get_appointments
+    @appointments = current_user.appointment_schedules
   end
 
   def create
@@ -13,15 +20,26 @@ class Docs::AppointmentsController < Docs::DoctorsController
         @appointment.appointment_schedules.create! shedules
         format.html { redirect_to docs_appointments_path, notice: 'La cita fue programada exitosamente.' }
       else
-        format.html { redirect_to docs_appointments_path, notice: 'La cita no pudo ser programada.' }
+        format.html { render :index, notice: 'La cita no pudo ser programada.' }
         format.json { render json: @appointment.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def destroy
+    @appointment_schedule.destroy
+    respond_to do |format|
+      format.html { redirect_to docs_appointments_path, notice: 'La cita fue eliminada exitosamente.' }
     end
   end
 
   private
     def appointment_params
       params.require(:appointment).permit(:patient_id, :description, :price, timespan: [])
+    end
+
+    def set_appointment_schedule
+      @appointment_schedule = AppointmentSchedule.find(params[:id])
     end
     
     # This function helps to separate modules selected in calendar

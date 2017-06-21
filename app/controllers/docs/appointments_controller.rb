@@ -17,7 +17,13 @@ class Docs::AppointmentsController < Docs::DoctorsController
     @appointment = current_user.appointments.new(appointment_params.except(:timespan))
     respond_to do |format|
       if @appointment.save
-        @appointment.appointment_schedules.create! shedules
+        begin
+          @appointment.appointment_schedules.create! shedules
+        rescue ActiveRecord::RecordInvalid => invalid
+          @appointment.destroy
+          format.html { redirect_to docs_appointments_path, notice: { msg: 'Error en la fecha de programación de la cita', class: "danger"} }
+          format.json { render json: @appointment.appointment_schedules.errors, status: :unprocessable_entity }
+        end
         format.html { redirect_to docs_appointments_path, notice: 'La cita fue programada exitosamente.' }
       else
         format.html { render :index, notice: 'La cita no pudo ser programada.' }

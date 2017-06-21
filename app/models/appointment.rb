@@ -6,5 +6,6 @@ class Appointment < ApplicationRecord
 
   has_many :appointment_schedules, dependent: :destroy
 
-  validates :doctor_id, :patient_id, :description, :price, presence: true
+  validates :doctor_id, :patient_id, :description, presence: true
+  validates :price, numericality: true
 end

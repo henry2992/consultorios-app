@@ -18,7 +18,13 @@
           <div class="container-fluid main-wrapper">
             <div class="main-content">
               <% if notice %>
-              <div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= notice %></div>
+              <div class="alert alert-<%= c = notice["class"].blank? ? "success": notice["class"] %>  " role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <ul>
+                  <li>
+                    <%= n = notice["msg"].blank? ? notice : notice["msg"] %>
+                  </li>
+                </ul>
+              </div>
               <% end %>
               <% if !@appointment.blank? %>
               <% if @appointment.errors.any? 

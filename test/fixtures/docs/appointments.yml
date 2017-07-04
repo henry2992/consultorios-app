@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  doctor: one
+  patient: one
+  description: MyText
+  start: 2017-06-11 16:03:32
+  end: 2017-06-11 16:03:32
+  price: 9.99
+
+two:
+  doctor: two
+  patient: two
+  description: MyText
+  start: 2017-06-11 16:03:32
+  end: 2017-06-11 16:03:32
+  price: 9.99

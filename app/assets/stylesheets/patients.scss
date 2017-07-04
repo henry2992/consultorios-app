@@ -1,6 +1,20 @@
-// Place all the styles related to the patients controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree ./docs/
+ *= require_self
+ */
+ @import "bootstrap";
+
 th 
 {
   .desc:after {
@@ -11,4 +25,83 @@ th
   {
     // content: "\25b2"
   }
+}
+
+/* Fonts */
+@font-face {
+    font-family: 'proxima-nova';
+    src: url(../fonts/proxima-nova.otf);
+}
+
+html {
+  font-size: 20px;
+}
+
+/* General Styles */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  display: block;
+  font-size: 1.17em;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  font-weight: bold;
+  font-family: "proxima-nova", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+p {
+  display: block;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  font-family: "proxima-nova", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a, a:link, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+  background-color: transparent;
+}
+
+button:not(.disabled):hover {
+  background-color: none; 
+  background-image: none; 
+  background-image: none;
+}
+
+.center {
+  text-align: center;
+}
+
+/******************************************************************************/
+/******************************** Media Queries ******************************/
+/****************************************************************************/
+
+/* Smartphones  ----------- */
+@media only screen and (min-width : 321px) {
+/* Styles */
+}
+
+
+/* Medium size screens  ----------- */
+@media only screen and (min-width : 600px)  {
+
+}
+
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+
+}
+
+/* Large screens ----------- */
+@media only screen  and (min-width : 1824px) {
+/* Styles */
 }

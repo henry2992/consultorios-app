@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   namespace :docs do
     get '/', to: 'doctors#index'
+    resources :appointments, only: [:index, :create, :edit, :destroy]
+    get '/dates', to: 'appointments#get_appointments'
     resources :users
     resources :products
     resources :clinics, only: [:show]

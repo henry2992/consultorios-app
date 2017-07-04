@@ -11,7 +11,8 @@
  * It is generally better to create a new file per style scope.
  *
  *= require formtastic
- *= require_tree .
+ *= require_tree ./docs/
+ *= require patients
  *= require_self
  */
 @import "bootstrap";

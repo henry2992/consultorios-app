@@ -1,0 +1,81 @@
+<h1>Citas</h1>
+<div class="row">
+  <div class="col-sm-12">
+    <button id="nueva_cita" type="button" class="btn btn-primary">Programar Cita</button>
+  </div>
+</div>
+<p>
+  <div id="calendar"></div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="NuevaCita" tabindex="-1" role="dialog" aria-labelledby="NuevaCitaLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="NuevaCitaLabel">Programar Cita</h4>
+        </div>
+
+        <%= form_tag docs_appointments_path, method: "post", class:"form" do %>
+        <div class="modal-body">
+          <div id="time" class="btn-group-vertical" data-toggle="buttons"></div>
+          <div class="form-group"> 
+            <label>Paciente</label>
+            <%= select_tag "appointment[patient_id]", 
+                            options_from_collection_for_select(
+                              current_user.patients, :id, :full_name, 1), 
+                            class: "form-control selectpicker", 
+                            "data-live-search" => "true" %>
+          </div> 
+          <div class="form-group">
+            <label for="description">Description de la Visita:</label>
+            <textarea name="appointment[description]" id="description" class="form-control" placeholder="Descripción"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="tiempo">Tiempo:</label>
+            <h3 id="tiempo"></h3>
+          </div>
+
+          <div class="form-group">
+            <label for="costo">Costo:</label>
+            <div class="input-group costo">
+              <span class="input-group-addon">$</span>
+              <input type="text" name="appointment[price]" id="costo" placeholder="Costo" class="form-control" >
+              <span class="input-group-addon">.00</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal Edit/Delete Event-->
+  <div class="modal fade" id="EditDeleteEvent" tabindex="-1" role="dialog" aria-labelledby="EditDeleteEventLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="EditDeleteEventLabel">Evento</h4>
+        </div>
+
+        <div class="modal-body">
+          <h1>¿Desea eliminar <!-- o modificar --> este evento?</h1>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <!-- <a href="" class="btn btn-warning">Modificar</a> -->
+          <%= link_to('Eliminar', "", :class => "btn btn-danger",  :method => 'delete', id: "deleteEvent") %>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+</p>

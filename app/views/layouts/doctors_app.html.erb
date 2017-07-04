@@ -2,12 +2,11 @@
 <html>
   <head>
     <title>Consultorios</title>
-    <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-    <%= stylesheet_link_tag 'doctors', media: 'all' %>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'doctors', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.3.2/css/simple-line-icons.css" rel="stylesheet" type="text/css">
 
@@ -68,7 +67,9 @@
                   <% end %>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="icon-calendar icons"></i> Agenda </a>
+                  <%= link_to docs_appointments_path, :class => 'nav-link' do %>
+                    <i class="icon-calendar icons"></i> Citas
+                  <% end %>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="icon-wallet icons"></i> Cuentas </a>

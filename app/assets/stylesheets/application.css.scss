@@ -11,9 +11,8 @@
  * It is generally better to create a new file per style scope.
  *
  *= require formtastic
- *= require_tree .
  *= require_self
-
+ *= require pages
  */
  @import "bootstrap";
 /* Fonts */

@@ -94,11 +94,7 @@ $(document).ready(function() {
         var html = '';
           
         for (var i = selected.length - 1; i >= 0; i--) {
-          html += `
-            <label class="btn btn-primary active">
-              <input name="appointment[timespan][]" type="checkbox" autocomplete="off" value="${selected[i]}" checked> ${selected[i]}
-            </label>
-          `;
+          html += '<label class="btn btn-primary active"><input name="appointment[timespan][]" type="checkbox" autocomplete="off" value="'+ selected[i] +'" checked> '+ selected[i] + ' </label>';
         }
         html += "";
           

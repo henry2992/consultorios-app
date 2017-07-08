@@ -17,7 +17,7 @@ class User < ApplicationRecord
   enum role: {
     Doctor: 'Doctor',
     Patient: 'Patient',
-    Admin: 'Admin'
+    Administrator: 'Administrator'
   }
 
   def full_name

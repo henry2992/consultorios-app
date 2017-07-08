@@ -7,9 +7,11 @@ class Docs::DoctorsController < ApplicationController
   end
 
   def authenticate_clinic!
-    clinic = current_user.clinic
-    if clinic&.status == false || !clinic
-      redirect_to no_clinic_path 
+    unless current_user.Administrator?
+      clinic = current_user.clinic
+      if clinic&.status == false || !clinic
+        redirect_to no_clinic_path 
+      end
     end
   end
 

@@ -3,8 +3,10 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   def after_sign_in_path_for(resource)
-    if resource.Admin? || resource.Doctor?
+    if resource.Doctor?
       return docs_path
+    elsif resource.Administrator?
+      return admin_root_path
     else
       return root_path
     end

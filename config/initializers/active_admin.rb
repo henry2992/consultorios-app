@@ -119,7 +119,7 @@ ActiveAdmin.setup do |config|
   # This allows your users to comment on any resource registered with Active Admin.
   #
   # You can completely disable comments:
-  # config.comments = false
+  config.comments = false
   #
   # You can change the name under which comments are registered:
   # config.comments_registration_name = 'AdminComment'
@@ -291,12 +291,8 @@ ActiveAdmin.setup do |config|
   #
   # config.order_clause = MyOrderClause
   def authenticate_admin!
-    if !!current_user
-      unless current_user.admin?
-        sign_out
-        redirect_to 'http://pad.onwarddev.com/'
-      end
-    else
+    if !current_user || !current_user.Administrator?
+      sign_out
       redirect_to new_user_session_path
     end
   end

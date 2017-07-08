@@ -52,7 +52,7 @@ class Docs::PatientsController < Docs::DoctorsController
     end
 
     def patient_params
-      params.require(:patient).permit(:first_name, :last_name, :email, :address, :phone)
+      params.require(:patient).permit(:first_name, :last_name, :email, :address, :phone, :national_id, :pob, :dob, :cellphone, :office_phone, :gender )
     end
 
     def sort_column

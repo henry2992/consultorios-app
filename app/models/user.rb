@@ -19,6 +19,8 @@ class User < ApplicationRecord
     Patient: 'Patient',
     Administrator: 'Administrator'
   }
+  
+  enum gender: [ :masculino, :femenino ]
 
   def full_name
     "#{first_name} #{last_name}"

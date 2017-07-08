@@ -1,1 +1,0 @@
-json.partial! "create_appointment_schedules/create_appointment_schedule", create_appointment_schedule: @create_appointment_schedule

@@ -6,9 +6,15 @@
       <%= f.input :email, label: false, placeholder: 'Email' %>
       <%= f.input :address, label: false, placeholder: 'Direccion' %>
       <%= f.input :phone, label: false, placeholder: 'Telefono' %>
+      <%= f.input :national_id, label: false, placeholder: "Cédula" %>
+      <%= f.input :pob, label: false, placeholder: "Lugar de Nacimiento" %>
+      <%= f.input :dob, label: "Fecha de Nacimiento", start_year: 1900, placeholder: "Fecha de Nacimiento" %>
+      <%= f.input :cellphone, label: false, placeholder: "Celular" %>
+      <%= f.input :office_phone, label: false, placeholder: "Teléfono de Oficina" %>
+      <%= f.input :gender, label: "Sexo", placeholder: "Sexo" %>
     <% end %>
   </div>
-   <%= f.actions do %>
-    <%= f.action :submit, :label => "Crear Paciente", :button_html => { :class => "submit-button" } %>
+  <%= f.actions do %>
+    <%= f.action :submit, :label => " Guardar ", :button_html => { :class => "submit-button" } %>
   <% end %>
 <% end %>

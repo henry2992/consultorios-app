@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170613044038) do
+ActiveRecord::Schema.define(version: 20170708161820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,12 @@ ActiveRecord::Schema.define(version: 20170613044038) do
     t.string   "invited_by_type"
     t.integer  "invited_by_id"
     t.integer  "invitations_count",      default: 0
+    t.string   "national_id"
+    t.string   "pob"
+    t.date     "dob"
+    t.string   "cellphone"
+    t.string   "office_phone"
+    t.integer  "gender",                 default: 0
     t.index ["clinic_id"], name: "index_users_on_clinic_id", using: :btree
     t.index ["doctor_id"], name: "index_users_on_doctor_id", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree

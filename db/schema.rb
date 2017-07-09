@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170708175911) do
+ActiveRecord::Schema.define(version: 20170708213036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,33 @@ ActiveRecord::Schema.define(version: 20170708175911) do
     t.datetime "updated_at",                          null: false
   end
 
+  create_table "balance_sheet_entries", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "doctor_id"
+    t.integer  "patient_id"
+    t.decimal  "amount",              precision: 10, scale: 2
+    t.integer  "transaction_type_id"
+    t.date     "transaction_date"
+    t.integer  "payment_status",                               default: 0
+    t.integer  "balance_sheet_id"
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
+    t.index ["balance_sheet_id"], name: "index_balance_sheet_entries_on_balance_sheet_id", using: :btree
+    t.index ["transaction_type_id"], name: "index_balance_sheet_entries_on_transaction_type_id", using: :btree
+  end
+
+  create_table "balance_sheets", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "start_at"
+    t.datetime "ends_at"
+    t.integer  "clinic_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["clinic_id"], name: "index_balance_sheets_on_clinic_id", using: :btree
+  end
+
   create_table "clinics", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -72,6 +99,7 @@ ActiveRecord::Schema.define(version: 20170708175911) do
     t.integer  "accounting_flow", default: 0
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.integer  "deferred",        default: 0
   end
 
   create_table "users", force: :cascade do |t|
@@ -118,4 +146,7 @@ ActiveRecord::Schema.define(version: 20170708175911) do
   end
 
   add_foreign_key "appointment_schedules", "appointments"
+  add_foreign_key "balance_sheet_entries", "balance_sheets"
+  add_foreign_key "balance_sheet_entries", "transaction_types"
+  add_foreign_key "balance_sheets", "clinics"
 end

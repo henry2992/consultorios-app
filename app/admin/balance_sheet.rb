@@ -1,19 +1,21 @@
-ActiveAdmin.register TransactionType do
-    permit_params :title, :description, :accounting_flow
+ActiveAdmin.register BalanceSheet do
+    permit_params :title, :description, :start_at, :ends_at, :clinic_id
 
     index do
       column :id
       column :title
-      column :accounting_flow
+      column :start_at
+      column :ends_at
       actions
     end
 
     form do |f|
-      f.inputs 'TransactionType' do
+      f.inputs 'BalanceSheet' do
+        f.input :clinic_id, :label => 'Clinic', :as => :select, :collection => Clinic.all.map{|c| ["#{c.name}", c.id]}
         f.input :title
         f.input :description
-        f.input :accounting_flow
-        f.input :deferred
+        f.input :start_at
+        f.input :ends_at
       end
       f.actions
     end

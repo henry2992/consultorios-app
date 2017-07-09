@@ -9,4 +9,5 @@ class Patient < User
   has_many :appointments, class_name: Appointment,
                         foreign_key: :patient_id
 
+  has_many :balance_sheet_entries
 end

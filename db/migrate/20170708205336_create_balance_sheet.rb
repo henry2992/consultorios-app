@@ -6,6 +6,7 @@ class CreateBalanceSheet < ActiveRecord::Migration[5.0]
       t.datetime :start_at
       t.datetime :ends_at
       t.belongs_to :clinic, foreign_key: true
+      t.timestamps
     end
   end
 end

@@ -8,4 +8,7 @@ class Doctor < User
                         foreign_key: :doctor_id
 
   has_many :appointment_schedules, through: :appointments
+
+  has_many :balance_sheet_entries
+
 end

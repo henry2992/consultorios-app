@@ -14,6 +14,8 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   
+  # has_many :attachments # TODO
+
   enum role: {
     Doctor: 'Doctor',
     Patient: 'Patient',

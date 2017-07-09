@@ -10,4 +10,8 @@ class Patient < User
                         foreign_key: :patient_id
 
   has_many :balance_sheet_entries
+  has_many :balance_sheets, through: :balance_sheet_entries
+
+  # has_one :history # TODO
+
 end

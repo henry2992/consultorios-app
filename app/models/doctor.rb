@@ -10,5 +10,6 @@ class Doctor < User
   has_many :appointment_schedules, through: :appointments
 
   has_many :balance_sheet_entries
+  has_many :balance_sheets, through: :balance_sheet_entries
 
 end

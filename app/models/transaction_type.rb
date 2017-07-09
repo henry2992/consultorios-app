@@ -4,5 +4,7 @@ class TransactionType < ApplicationRecord
   validates :title presence: true
 
   enum accounting_flow: [ :incoming, :outgoing ]
+  
+  enum deferred: [ :no, :yes ]
 
 end

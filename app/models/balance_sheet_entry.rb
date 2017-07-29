@@ -10,6 +10,6 @@ class BalanceSheetEntry < ApplicationRecord
 
   validates :title, :doctor_id, :patient_id, :amount, :transaction_type_id, :transaction_date, :payment_status, :balance_sheet_id, presence: true
   
-  enum payment_status: [ :not_payed, :payed ]
+  enum payment_status: [ :no_pagado, :pagado ]
   
 end

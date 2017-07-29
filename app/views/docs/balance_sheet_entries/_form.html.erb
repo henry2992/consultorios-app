@@ -1,0 +1,17 @@
+<%= semantic_form_for ([:docs, @balance_sheet, @balance_sheet_entry]) do |f| %>
+  <div class="general-form">
+    <%= f.inputs do %>
+      <%= f.input :title, label: false, placeholder: "Título" %>
+      <%= f.input :description, label: false, placeholder: "Descripción", :rows => 5 %>
+      <%= f.input :doctor_id, label: "Doctor", :as => :select, :collection => Doctor.all.map{|d| ["#{d.first_name} #{d.last_name}", d.id]} %>
+      <%= f.input :patient_id, label: "Paciente", :as => :select, :collection => Patient.all.map{|p| ["#{p.first_name} #{p.last_name}", p.id]} %>
+      <%= f.input :amount, label: "Monto", placeholder: "Monto" %>
+      <%= f.input :transaction_type_id, label: "Transacción", :as => :select, :collection => TransactionType.all.map{|t| [t.title, t.id]} %>
+      <%= f.input :transaction_date, label: "Fecha de Transacción", start_year: 2000 %>
+      <%= f.input :payment_status, label: "¿Pagado?", :as => :select, :include_blank => false %>
+    <% end %>
+  </div>
+  <%= f.actions do %>
+    <%= f.action :submit, :label => " Guardar ", :button_html => { :class => "submit-button" } %>
+  <% end %>
+<% end %>

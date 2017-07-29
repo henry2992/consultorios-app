@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-sm-8">
+    <h1>
+      <%= @balance_sheet_entry.title %>
+    </h1>
+    <p>
+      <strong>Descripción:</strong>
+      <%= @balance_sheet_entry.description %>
+    </p>
+    <p>
+      <strong>Doctor:</strong>
+      <%= @balance_sheet_entry.doctor.full_name %>
+    </p>
+    <p>
+      <strong>Paciente:</strong>
+      <%= @balance_sheet_entry.patient.full_name %>
+    </p>
+    <p>
+      <strong>Monto:</strong>
+      <%= @balance_sheet_entry.amount %>
+    </p>
+    <p>
+      <strong>Transacción:</strong>
+      <%= @balance_sheet_entry.transaction_type.title %> - <%= @balance_sheet_entry.transaction_type.incoming? ? "Ingreso" : "Egreso" %>
+    </p>
+    <p>
+      <strong>Fecha de transacción:</strong>
+      <%= @balance_sheet_entry.transaction_date %>
+    </p>
+    <p>
+      <strong>Estado del pago:</strong>
+      <%= @balance_sheet_entry.pagado? ? "Pagado" : "Pendiente"  %>
+    </p>
+  </div>
+  <div class="col-sm-4">
+    <%= link_to 'Editar', edit_docs_balance_sheet_balance_sheet_entry_path(@balance_sheet_entry.balance_sheet, @balance_sheet_entry), class: "btn btn-success" %>
+    <%= link_to 'Atrás', docs_balance_sheet_path(@balance_sheet_entry.balance_sheet), class: "btn btn-info" %>  
+  </div>
+</div>

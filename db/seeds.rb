@@ -9,7 +9,7 @@ u = Doctor.create!(email:'henry2992@hotmail.com', password:'test1234', password_
 end
 
 
-TransactionType.create!(title:'Ingreso', descrption:'Activos', accounting_flow: 0, deferred: 0)
-TransactionType.create!(title:'Gasto', descrption:'Pasivos', accounting_flow: 1, deferred: 0)
-TransactionType.create!(title:'Cuentas por Cobrar', descrption:'Activos Diferidos', accounting_flow: 0, deferred: 1)
-TransactionType.create!(title:'Cuentas por Pagar', descrption:'Pasivos Diferidos', accounting_flow: 0, deferred: 1)
+TransactionType.create!(title:'Ingreso', description:'Activos', accounting_flow: 0, deferred: 0)
+TransactionType.create!(title:'Gasto', description:'Pasivos', accounting_flow: 1, deferred: 0)
+TransactionType.create!(title:'Cuentas por Cobrar', description:'Activos Diferidos', accounting_flow: 0, deferred: 1)
+TransactionType.create!(title:'Cuentas por Pagar', description:'Pasivos Diferidos', accounting_flow: 1, deferred: 1)

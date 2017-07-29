@@ -1,8 +1,8 @@
 <table class="table">
   <thead class="thead-products">
     <tr>
-      <th><%= sortable "Name", ["users.first_name"] %></th>
-      <th><%= sortable "Phone", ["phone"] %></th>
+      <th><%= sortable "Nombre", ["users.first_name"] %></th>
+      <th><%= sortable "Teléfono", ["phone"] %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,9 +12,9 @@
       <tr>
         <td><%= patient.first_name %>&nbsp;<%= patient.last_name %></td>
         <td><%= patient.phone %></td>
-        <td><%= link_to 'Show', docs_patient_path(patient) %></td>
-        <td><%= link_to 'Edit', edit_docs_patient_path(patient) %></td>
-        <td><%= link_to 'Destroy', docs_patient_path(patient), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', docs_patient_path(patient) %></td>
+        <td><%= link_to 'Editar', edit_docs_patient_path(patient) %></td>
+        <td><%= link_to 'Eliminar', docs_patient_path(patient), method: :delete, data: { confirm: '¿Estás seguro de eliminar?' } %></td>
       </tr>
     <% end %>
   </tbody>

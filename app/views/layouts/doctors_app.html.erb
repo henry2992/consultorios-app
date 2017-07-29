@@ -13,7 +13,7 @@
   </head>
   <body>
     <div class="app">
-      <nav class="main-navbar navbar navbar-toggleable-md navbar-light bg-faded  app-navbar">
+      <!-- <nav class="main-navbar navbar navbar-toggleable-md navbar-light bg-faded  app-navbar">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -25,7 +25,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="main-nav navbar-nav ml-auto">
             <li class="nav-item">
-              <%= link_to 'Mi Clínica', docs_clinic_path(current_user.clinic ), class: 'nav-link' %> 
+              <%= link_to 'Mi Clínica', docs_myclinic_path, class: 'nav-link' %> 
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -51,7 +51,8 @@
             </li>
           </ul>
         </div>
-      </nav>
+      </nav> -->
+      <%= render 'layouts/header' %>
       <div class="app-body">
         <div class="sidebar">
           <nav class="sidebar-nav">
@@ -87,7 +88,7 @@
             <div class="container-fluid main-wrapper">
               <div class="main-content">
                 <% if notice %>
-                  <p id="notice"><%= notice %></p>
+                  <%= notice %>
                 <% end %>
                 <%= yield %>
               </div> 

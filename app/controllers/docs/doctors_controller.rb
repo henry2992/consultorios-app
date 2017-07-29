@@ -6,6 +6,10 @@ class Docs::DoctorsController < ApplicationController
   def index
   end
 
+  def my_clinic
+    @clinic = current_user.clinic
+  end
+
   def authenticate_clinic!
     unless current_user.Administrator?
       clinic = current_user.clinic

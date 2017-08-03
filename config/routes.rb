@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resources :balance_sheets do
       resources :balance_sheet_entries #, except: :index
     end
+    # resources :balance_sheet_entries, :path => "cuentas", :as => :cuentas
+    
     resources :patients
   end
 

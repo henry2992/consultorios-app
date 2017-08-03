@@ -2,8 +2,6 @@ class Docs::AppointmentsController < Docs::DoctorsController
   before_action :ensure_json_request, only: [:show]
   before_action :set_appointment_schedule, only: [:destroy]
 
-  layout "appointments"
-
   def index
     @appointment = Appointment.new
   end

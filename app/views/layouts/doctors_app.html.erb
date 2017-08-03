@@ -5,53 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'doctors', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
 
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.3.2/css/simple-line-icons.css" rel="stylesheet" type="text/css">
-
+    <%= stylesheet_link_tag 'appointments', media: 'all' %>
+    
   </head>
   <body>
     <div class="app">
-      <!-- <nav class="main-navbar navbar navbar-toggleable-md navbar-light bg-faded  app-navbar">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <a class="app-navbar-brand" href="/docs">
-          <%= image_tag("logo.png", alt: "logo") %>
-          <span>Odonto</span>Monitor
-        </a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="main-nav navbar-nav ml-auto">
-            <li class="nav-item">
-              <%= link_to 'Mi Clínica', docs_myclinic_path, class: 'nav-link' %> 
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <strong>Mi Cuenta</strong>
-                <span class="glyphicon glyphicon-chevron-down"></span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <div class="navbar-login">
-                    <p ><strong><%= current_user.first_name%><%= current_user.last_name%></strong></p>
-                    <p ><%= current_user.email%></p>
-                    <%= link_to 'Actualizar Datos', edit_user_registration_path, class: 'btn btn-primary btn-block'%>
-                </div>
-                <div class="navbar-login navbar-login-session">
-                  <%= link_to('Cerrar Sesion', destroy_user_session_path, :class => "btn btn-danger btn-block",  :method => :delete) %>  
-                </div>
-              </div>
-            </li>
-            <li class="dropdown">
-              <ul class="dropdown-menu">
-                
-                
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav> -->
       <%= render 'layouts/header' %>
       <div class="app-body">
         <div class="sidebar">
@@ -85,16 +46,36 @@
         </div>
         <!-- Main content -->
         <main class="main">
-            <div class="container-fluid main-wrapper">
-              <div class="main-content">
-                <% if notice %>
-                  <%= notice %>
-                <% end %>
-                <%= yield %>
-              </div> 
-            </div>
+          <div class="container-fluid main-wrapper">
+            <div class="main-content">
+              <% if notice %>
+              <div class="alert alert-<%= c = notice["class"].blank? ? "success": notice["class"] %>  " role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <ul>
+                  <li>
+                    <%= n = notice["msg"].blank? ? notice : notice["msg"] %>
+                  </li>
+                </ul>
+              </div>
+              <% end %>
+              <% if !@appointment.blank? %>
+              <% if @appointment.errors.any? 
+                  pluralize(@appointment.errors.count, "error") + " No se pudo programar:" %>
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <ul>
+                    <% @appointment.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              <% end %>
+              <%= yield %>
+            </div> 
+          </div>
         </main>
       </div>
     </div>
+    <%= javascript_include_tag 'application' %>
   </body>
 </html>

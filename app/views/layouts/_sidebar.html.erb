@@ -17,7 +17,9 @@
         <% end %>
       </li>
       <li class="nav-item">
-          <a class="nav-link" href="#"><i class="icon-wallet icons"></i> Cuentas </a>
+        <%= link_to docs_balance_sheet_entries_path, :class => 'nav-link' do %>
+          <i class="icon-wallet icons"></i> Cuentas
+        <% end %>
       </li>
       <li class="nav-item">
         <%= link_to docs_products_path, :class => 'nav-link' do %>

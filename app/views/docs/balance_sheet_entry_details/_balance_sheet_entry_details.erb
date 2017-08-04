@@ -1,0 +1,65 @@
+<table class="table">
+  <thead> 
+    <tr> 
+      <th><%= sortable "#", ["id"] %></th>
+      <th><%= sortable "Título", ["title"] %></th> 
+      <th class="right"><%= sortable "Ingreso", ["incoming"] %></th>
+      <th class="right"><%= sortable "Egreso", ["outgoing"] %></th>
+      <th colspan="3" class="no-print">&nbsp;</th>
+    </tr>
+  </thead> 
+  <tbody class="smaller">
+    <% out = inc = 0 %>
+    <% @balance_sheet_entry_details.each do |entry| %>
+    <tr> 
+      <td><%= entry.id %></td> 
+      <td><%= entry.title.truncate(25) %></td>
+      <% inc += entry.amount if entry.transaction_type.incoming? %>
+      <% out += entry.amount if entry.transaction_type.outgoing? %>
+      <td class="right"><%= entry.amount if entry.transaction_type.incoming? %></td> 
+      <td class="right"><%= entry.amount if entry.transaction_type.outgoing? %></td> 
+      <td colspan="3" class="no-print right">
+        <%= link_to '<i class="icon-eye icons"></i>'.html_safe, docs_balance_sheet_entry_balance_sheet_entry_detail_path(@balance_sheet_entry, entry), title: "Ver", alt: "Ver" %>&nbsp;&nbsp;
+        <%= link_to '<i class="icon-pencil icons"></i>'.html_safe, edit_docs_balance_sheet_entry_balance_sheet_entry_detail_path(@balance_sheet_entry, entry), title: "Editar", alt: "Editar" %>&nbsp;&nbsp;
+        <%= link_to '<i class="icon-trash icons"></i>'.html_safe, docs_balance_sheet_entry_balance_sheet_entry_detail_path(@balance_sheet_entry, entry), method: :delete, data: { confirm: '¿Estás seguro de eliminar?' } %>
+      </td> 
+    </tr> 
+    <% end %>
+    <% if @balance_sheet_entry_details.blank? %>
+      <tr>
+        <td colspan="10">No hay detalle para esta entrada, <%= link_to 'agregue un nuevo detalle', new_docs_balance_sheet_entry_balance_sheet_entry_detail_path(@balance_sheet_entry) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot class="right">
+    <tr>
+      <td colspan="2">
+        <h4>Sub-total</h4>
+      </td>
+      <td>
+        <h4><%= inc %></h4>
+      </td>
+      <td>
+        <h4><%= out %></h4>
+      </td>
+      <td colspan="3">
+        &nbsp;
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <h4>Total</h4>
+      </td>
+      <td>
+        &nbsp;
+      </td>
+      <td>
+        <h4><%= inc - out %></h4>
+      </td>
+      <td colspan="3">
+        &nbsp;
+      </td>
+    </tr>
+  </tfoot>
+</table>
+<%= will_paginate @balance_sheet_entry_details, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>

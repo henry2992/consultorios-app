@@ -13,8 +13,8 @@ Rails.application.routes.draw do
     get '/dates', to: 'appointments#get_appointments'
     resources :users
     resources :products
-    resources :balance_sheets do
-      resources :balance_sheet_entries #, except: :index
+    resources :balance_sheet_entries, :path => "cuentas" do
+      resources :balance_sheet_entry_details, :path => "detalles"
     end
     # resources :balance_sheet_entries, :path => "cuentas", :as => :cuentas
     

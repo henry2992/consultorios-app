@@ -1,24 +1,29 @@
-<h1 class="section-title">Balances</h1>
+<h1 class="section-title">Cuentas</h1>
 
 <div class="row row-fix">
   <div class="col-sm-12">
-    <%= form_tag docs_balance_sheets_path, :method => 'get', id: "search_form", class: "form-inline" do %>
+    <%= form_tag docs_balance_sheet_entries_path, :method => 'get', id: "search_form", class: "form-inline" do %>
       <%= hidden_field_tag :direction, params[:direction] %>
       <%= hidden_field_tag :sort, params[:sort] %>
       <div class="form-group">
-        <%= text_field_tag :search, params[:search], class: "form-control",  placeholder: "Buscar Balance" %>
+        <%= text_field_tag :search, params[:search], class: "form-control",  placeholder: "Buscar Entrada" %>
+      </div>
+      <div class="form-group">
+        <%= text_field_tag :from, params[:from], class: "form-control",  placeholder: "Desde" %>
+      </div>
+      <div class="form-group">
+        <%= text_field_tag :to, params[:to], class: "form-control",  placeholder: "hasta" %>
       </div>
       <div class="form-group">&nbsp;&nbsp;
       <%= submit_tag "Buscar", :name => nil, class: "btn btn-success" %>
       </div>
       <div class="form-group">&nbsp;&nbsp;
-      <%= link_to 'Nuevo Balance', new_docs_balance_sheet_path, class: "btn btn-success" %>
+      <%= link_to 'Nueva Entrada', new_docs_balance_sheet_entry_path, class: "btn btn-success" %>
       </div>
     <% end %>
   </div>
 </div>
 
 <div class="row row-fix" id="data">
-  <%= render "balance_sheets" %>
+  <%= render "balance_sheet_entries" %>
 </div>
-<%= render "docs/partials/search" %>

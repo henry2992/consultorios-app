@@ -1,5 +1,5 @@
 class TransactionType < ApplicationRecord
-  has_many :balance_sheet_entries
+  has_many :balance_sheet_entry_details
 
   validates :title, presence: true
 

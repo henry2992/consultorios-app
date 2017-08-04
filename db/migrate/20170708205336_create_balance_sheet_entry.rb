@@ -5,11 +5,9 @@ class CreateBalanceSheetEntry < ActiveRecord::Migration[5.0]
       t.text :description
       t.integer :doctor_id, references: :users, foreign_key: true
       t.integer :patient_id, references: :users, foreign_key: true
-      t.decimal :amount, precision: 10, scale: 2
-      t.belongs_to :transaction_type, foreign_key: true
       t.date :transaction_date
       t.integer :payment_status, default: 0
-      t.belongs_to :balance_sheet, foreign_key: true
+      t.belongs_to :clinic, foreign_key: true
       t.timestamps
     end
   end

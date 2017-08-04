@@ -22,6 +22,14 @@
     src: url(../fonts/proxima-nova.otf);
 }
 
+.formtastic .input .label {
+  color: #333;
+}
+
+legend {
+  border: 0;
+}
+
 html {
   font-size: 18px;
 }
@@ -71,6 +79,14 @@ a:hover{
 
 .label {
   font-size: .9em;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
 }
 /********************************************************************************************/
 /********************************** APLICATION NAV BAR *************************************/
@@ -283,7 +299,10 @@ a:hover{
 
 
 @media print {
+  a[href]:after {
+    content: none !important;
+  }
   .no-print {
-    display: none;
+    display: none !important;
   }
 }

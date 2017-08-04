@@ -1,6 +1,6 @@
 <h1>Editar Balance</h1>
 
-<%= render 'form', balance_sheet: @balance_sheet %>
+<%= render 'form' %>
 
-<%= link_to 'Mostrar', docs_balance_sheet_balance_sheet_entry_path(@balance_sheet_entry.balance_sheet, @balance_sheet_entry) %>&nbsp;&nbsp;
-<%= link_to 'Atrás', docs_balance_sheet_path(@balance_sheet_entry.balance_sheet) %> 
+<%= link_to 'Show', docs_balance_sheet_entry_path(@balance_sheet_entry) %> |
+<%= link_to 'Back', docs_balance_sheet_entries_path %>

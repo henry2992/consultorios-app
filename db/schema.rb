@@ -52,26 +52,24 @@ ActiveRecord::Schema.define(version: 20170708213036) do
     t.text     "description"
     t.integer  "doctor_id"
     t.integer  "patient_id"
-    t.decimal  "amount",              precision: 10, scale: 2
-    t.integer  "transaction_type_id"
     t.date     "transaction_date"
-    t.integer  "payment_status",                               default: 0
-    t.integer  "balance_sheet_id"
-    t.datetime "created_at",                                               null: false
-    t.datetime "updated_at",                                               null: false
-    t.index ["balance_sheet_id"], name: "index_balance_sheet_entries_on_balance_sheet_id", using: :btree
-    t.index ["transaction_type_id"], name: "index_balance_sheet_entries_on_transaction_type_id", using: :btree
+    t.integer  "payment_status",   default: 0
+    t.integer  "clinic_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["clinic_id"], name: "index_balance_sheet_entries_on_clinic_id", using: :btree
   end
 
-  create_table "balance_sheets", force: :cascade do |t|
+  create_table "balance_sheet_entry_details", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.datetime "start_at"
-    t.datetime "ends_at"
-    t.integer  "clinic_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["clinic_id"], name: "index_balance_sheets_on_clinic_id", using: :btree
+    t.decimal  "amount",                 precision: 10, scale: 2
+    t.integer  "transaction_type_id"
+    t.integer  "balance_sheet_entry_id"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.index ["balance_sheet_entry_id"], name: "index_balance_sheet_entry_details_on_balance_sheet_entry_id", using: :btree
+    t.index ["transaction_type_id"], name: "index_balance_sheet_entry_details_on_transaction_type_id", using: :btree
   end
 
   create_table "clinics", force: :cascade do |t|
@@ -146,7 +144,7 @@ ActiveRecord::Schema.define(version: 20170708213036) do
   end
 
   add_foreign_key "appointment_schedules", "appointments"
-  add_foreign_key "balance_sheet_entries", "balance_sheets"
-  add_foreign_key "balance_sheet_entries", "transaction_types"
-  add_foreign_key "balance_sheets", "clinics"
+  add_foreign_key "balance_sheet_entries", "clinics"
+  add_foreign_key "balance_sheet_entry_details", "balance_sheet_entries"
+  add_foreign_key "balance_sheet_entry_details", "transaction_types"
 end

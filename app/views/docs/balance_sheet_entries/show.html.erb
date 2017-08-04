@@ -1,39 +1,50 @@
 <div class="row">
   <div class="col-sm-8">
-    <h1>
+    <strong>
       <%= @balance_sheet_entry.title %>
-    </h1>
+    </strong>
+  </div>
+  <div class="col-sm-4 no-print">
+    <%= link_to 'Editar', edit_docs_balance_sheet_entry_path(@balance_sheet_entry), class: "btn btn-success" %>
+    <%= link_to "#", class: "btn btn-danger", onclick: "window.print(); return false;", alt: "imprimir", title: "imprimir" do%>
+      <i class="icon-printer icons"></i>
+    <% end %>
+    <%= link_to 'Atrás', docs_balance_sheet_entries_path, class: "btn btn-info" %>  
+  <br class="no-print">
+  <br class="no-print">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
     <p>
       <strong>Descripción:</strong>
       <%= @balance_sheet_entry.description %>
     </p>
+   
     <p>
       <strong>Doctor:</strong>
-      <%= @balance_sheet_entry.doctor.full_name %>
-    </p>
-    <p>
+      <%= @balance_sheet_entry.doctor.full_name %>&nbsp;&nbsp;
+    
       <strong>Paciente:</strong>
-      <%= @balance_sheet_entry.patient.full_name %>
-    </p>
-    <p>
-      <strong>Monto:</strong>
-      <%= @balance_sheet_entry.amount %>
-    </p>
-    <p>
-      <strong>Transacción:</strong>
-      <%= @balance_sheet_entry.transaction_type.title %> - <%= @balance_sheet_entry.transaction_type.incoming? ? "Ingreso" : "Egreso" %>
-    </p>
-    <p>
+      <%= @balance_sheet_entry.patient.full_name %>&nbsp;&nbsp;
+    
       <strong>Fecha de transacción:</strong>
-      <%= @balance_sheet_entry.transaction_date %>
-    </p>
-    <p>
+      <%= @balance_sheet_entry.transaction_date %>&nbsp;&nbsp;
+    
       <strong>Estado del pago:</strong>
       <%= @balance_sheet_entry.pagado? ? "Pagado" : "Pendiente"  %>
     </p>
   </div>
-  <div class="col-sm-4">
-    <%= link_to 'Editar', edit_docs_balance_sheet_balance_sheet_entry_path(@balance_sheet_entry.balance_sheet, @balance_sheet_entry), class: "btn btn-success" %>
-    <%= link_to 'Atrás', docs_balance_sheet_path(@balance_sheet_entry.balance_sheet), class: "btn btn-info" %>  
+</div>
+<div class="row no-print">
+  <div class="col-sm-12 no-print">
+    <div class="btn-group no-print">
+    <%= link_to 'Agregar Detalle', new_docs_balance_sheet_entry_balance_sheet_entry_detail_path(@balance_sheet_entry), class: "btn btn-success" %>
+    </div>
+  </div>
+</div><br>
+<div class="row">
+  <div class="col-sm-12">
+    <%= render 'docs/balance_sheet_entry_details/balance_sheet_entry_details' %>
   </div>
 </div>

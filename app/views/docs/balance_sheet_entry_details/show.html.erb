@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-sm-8">
+    <h1>
+      <%= @balance_sheet_entry_detail.title %>
+    </h1>
+    <p>
+      <strong>Descripción:</strong>
+      <%= @balance_sheet_entry_detail.description %>
+    </p>
+    <p>
+      <strong>Monto:</strong>
+      <%= @balance_sheet_entry_detail.amount %>
+    </p>
+    <p>
+      <strong>Transacción:</strong>
+      <%= @balance_sheet_entry_detail.transaction_type.title %> - <%= @balance_sheet_entry_detail.transaction_type.incoming? ? "Ingreso" : "Egreso" %>
+    </p>
+    </div>
+  <div class="col-sm-4">
+    <%= link_to 'Editar', edit_docs_balance_sheet_entry_balance_sheet_entry_detail_path(@balance_sheet_entry_detail.balance_sheet_entry, @balance_sheet_entry_detail), class: "btn btn-success" %>
+    <%= link_to 'Atrás', docs_balance_sheet_entry_path(@balance_sheet_entry_detail.balance_sheet_entry), class: "btn btn-info" %>  
+  </div>
+</div>

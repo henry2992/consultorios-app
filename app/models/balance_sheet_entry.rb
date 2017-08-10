@@ -13,6 +13,7 @@ class BalanceSheetEntry < ApplicationRecord
   validates :title, :doctor_id, :patient_id, :transaction_date, :payment_status, :clinic_id, presence: true
   
   scope :by_range, ->(from, to) { where("transaction_date BETWEEN ? AND ?", from, to) } 
+  scope :by_month, ->(month) { where("date_part('month',transaction_date) = ?", month) } 
 
   enum payment_status: [ :no_pagado, :pagado ]
 

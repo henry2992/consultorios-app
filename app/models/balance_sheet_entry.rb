@@ -1,7 +1,7 @@
 class BalanceSheetEntry < ApplicationRecord
-  include PgSearch
-  
-  has_many :balance_sheet_entry_details
+  has_many :balance_sheet_entry_details, dependent: :destroy
+  accepts_nested_attributes_for :balance_sheet_entry_details, allow_destroy: true, reject_if: :all_blank
+
   belongs_to :patient
   belongs_to :doctor
   belongs_to :clinic
@@ -12,12 +12,12 @@ class BalanceSheetEntry < ApplicationRecord
 
   validates :title, :doctor_id, :patient_id, :transaction_date, :payment_status, :clinic_id, presence: true
   
-  pg_search_scope :by,
-    :against => [:title, :description, :doctor_id, :patient_id, :transaction_date, :payment_status],
-    :using => {
-      :tsearch => {:prefix => true, :any_word => true}
-    }
+  scope :by_range, ->(from, to) { where("transaction_date BETWEEN ? AND ?", from, to) } 
 
   enum payment_status: [ :no_pagado, :pagado ]
 
+  def details_for_form
+    collection = balance_sheet_entry_details.where(balance_sheet_entry_id: id)
+    collection.any? ? collection : balance_sheet_entry_details.build
+  end
 end

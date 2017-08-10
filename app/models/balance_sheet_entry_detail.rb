@@ -1,6 +1,6 @@
 class BalanceSheetEntryDetail < ApplicationRecord
   
-  belongs_to :balance_sheet_entry
+  belongs_to :balance_sheet_entry, optional: true
 
   belongs_to :transaction_type
 

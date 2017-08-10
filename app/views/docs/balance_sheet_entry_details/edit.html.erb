@@ -1,6 +1,12 @@
-<h1>Editar Balance</h1>
+<h1>Editar Detalle</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Mostrar', docs_balance_sheet_entry_balance_sheet_entry_detail_path(@balance_sheet_entry_detail.balance_sheet_entry, @balance_sheet_entry_detail) %>&nbsp;&nbsp;
-<%= link_to 'Atrás', docs_balance_sheet_entry_path(@balance_sheet_entry_detail.balance_sheet_entry) %> 
+<br>
+<div class="row">
+  <div class="col-sm-12">
+  <%= link_to 'Mostrar', docs_balance_sheet_entry_balance_sheet_entry_detail_path(@balance_sheet_entry_detail.balance_sheet_entry, @balance_sheet_entry_detail), class: "btn btn-primary" %>
+  
+  <%= link_to 'Regresar', docs_balance_sheet_entry_path(@balance_sheet_entry_detail.balance_sheet_entry), class: "btn btn-info" %>
+  </div>
+</div>

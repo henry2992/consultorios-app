@@ -20,7 +20,7 @@
         <td><%= balance.title %></td>
         <td><%= balance.doctor.full_name %></td>
         <td><%= balance.patient.full_name %></td>
-        <td><%= a = balance.balance_sheet_entry_details.where("id IN (?)",TransactionType.incoming.map(&:id)).map(&:amount).sum - balance.balance_sheet_entry_details.where("id IN (?)",TransactionType.outgoing.map(&:id)).map(&:amount).sum %></td>
+        <td><%= a = balance.balance_sheet_entry_details.where("transaction_type_id IN (?)",TransactionType.incoming.map(&:id)).map(&:amount).sum - balance.balance_sheet_entry_details.where("transaction_type_id IN (?)",TransactionType.outgoing.map(&:id)).map(&:amount).sum %></td>
         <td><%= link_to 'Ver', docs_balance_sheet_entry_path(balance) %></td>
         <td><%= link_to 'Editar', edit_docs_balance_sheet_entry_path(balance) %></td>
         <td><%= link_to 'Eliminar', docs_balance_sheet_entry_path(balance), method: :delete, data: { confirm: '¿Estás seguro de eliminar?' } %></td>

@@ -1,10 +1,12 @@
 class Docs::BalanceSheetEntriesController < Docs::DoctorsController
   helper_method :sort_column, :sort_direction
+  before_action :set_details, only: [:edit, :update]
+  before_action :set_detail, only: [:edit, :update]
   before_action :set_entry, only: [:show, :edit, :update, :destroy]
   
   def index
     @balances = current_user.clinic.balance_sheet_entries.pagado.order("#{sort_column} #{sort_direction}").paginate(:page => params[:page], :per_page => 25)
-    @balances = @balances.by(params[:search]) unless params[:search].blank?
+    @balances = @balances.by_range(params[:from],params[:to]) unless ( params[:from].blank? || params[:to].blank? )
   end
 
   def show
@@ -15,6 +17,7 @@ class Docs::BalanceSheetEntriesController < Docs::DoctorsController
 
   def new
     @balance_sheet_entry = current_user.clinic.balance_sheet_entries.new
+    @detail = @balance_sheet_entry.balance_sheet_entry_details.build
   end
 
   def edit
@@ -24,7 +27,7 @@ class Docs::BalanceSheetEntriesController < Docs::DoctorsController
     @balance_sheet_entry = current_user.clinic.balance_sheet_entries.new(entry_params)
     respond_to do |format|
       if @balance_sheet_entry.save
-        format.html { redirect_to docs_balance_sheet_entry_path(@balance_sheet_entry), notice: 'La entrada fue creada exitosamente.' }
+        format.html { redirect_to edit_docs_balance_sheet_entry_path(@balance_sheet_entry), notice: 'La entrada fue creada exitosamente.' }
       else
         format.html { render :new }
       end
@@ -34,7 +37,7 @@ class Docs::BalanceSheetEntriesController < Docs::DoctorsController
   def update
     respond_to do |format|
       if @balance_sheet_entry.update(entry_params)
-        format.html { redirect_to docs_balance_sheet_entry_path(@balance_sheet_entry), notice: 'La entrada fue actualizada exitosamente.' }
+        format.html { redirect_to edit_docs_balance_sheet_entry_path(@balance_sheet_entry), notice: 'La entrada fue actualizada exitosamente.' }
       else
         format.html { render :edit }
       end
@@ -54,8 +57,18 @@ class Docs::BalanceSheetEntriesController < Docs::DoctorsController
       @balance_sheet_entry = current_user.clinic.balance_sheet_entries.find(params[:id])
     end
 
+    def set_detail
+      set_entry
+      @detail = @balance_sheet_entry.balance_sheet_entry_details.build
+    end
+
+    def set_details
+      set_entry
+      @details = @balance_sheet_entry.balance_sheet_entry_details
+    end
+
     def entry_params
-      params.require(:balance_sheet_entry).permit(:title, :description, :doctor_id, :patient_id, :transaction_date, :payment_status)
+      params.require(:balance_sheet_entry).permit(:title, :description, :doctor_id, :patient_id, :transaction_date, :payment_status, balance_sheet_entry_details_attributes: [:title, :description, :amount, :transaction_type_id])
     end
 
     def sort_column

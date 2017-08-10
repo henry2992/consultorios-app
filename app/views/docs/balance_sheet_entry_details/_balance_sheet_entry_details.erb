@@ -1,19 +1,20 @@
 <table class="table">
   <thead> 
     <tr> 
-      <th><%= sortable "#", ["id"] %></th>
-      <th><%= sortable "Título", ["title"] %></th> 
-      <th class="right"><%= sortable "Ingreso", ["incoming"] %></th>
-      <th class="right"><%= sortable "Egreso", ["outgoing"] %></th>
+      <th>#</th>
+      <th>Título</th> 
+      <th class="right">Ingreso</th>
+      <th class="right">Egreso</th>
       <th colspan="3" class="no-print">&nbsp;</th>
     </tr>
   </thead> 
   <tbody class="smaller">
     <% out = inc = 0 %>
+    <% if !@balance_sheet_entry_details[0][:id].blank? %>
     <% @balance_sheet_entry_details.each do |entry| %>
     <tr> 
       <td><%= entry.id %></td> 
-      <td><%= entry.title.truncate(25) %></td>
+      <td><%= entry.title.truncate(25) if !entry.title.blank? %></td>
       <% inc += entry.amount if entry.transaction_type.incoming? %>
       <% out += entry.amount if entry.transaction_type.outgoing? %>
       <td class="right"><%= entry.amount if entry.transaction_type.incoming? %></td> 
@@ -25,9 +26,9 @@
       </td> 
     </tr> 
     <% end %>
-    <% if @balance_sheet_entry_details.blank? %>
+    <% else %>
       <tr>
-        <td colspan="10">No hay detalle para esta entrada, <%= link_to 'agregue un nuevo detalle', new_docs_balance_sheet_entry_balance_sheet_entry_detail_path(@balance_sheet_entry) %></td>
+        <td colspan="10">No hay detalle para esta entrada</td>
       </tr>
     <% end %>
   </tbody>

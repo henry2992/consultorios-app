@@ -1,13 +1,24 @@
 <%= semantic_form_for ([:docs, @balance_sheet_entry, @balance_sheet_entry_detail]) do |f| %>
-  <div class="general-form">
-    <%= f.inputs do %>
-      <%= f.input :title, label: false, placeholder: "Título" %>
-      <%= f.input :description, label: false, placeholder: "Descripción", :rows => 5 %>
-      <%= f.input :amount, label: "Monto", placeholder: "Monto" %>
-      <%= f.input :transaction_type_id, label: "Transacción", :as => :select, :collection => TransactionType.all.map{|t| [t.title, t.id]} %>
-    <% end %>
+  <%= f.inputs do %>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="col-sm-6">
+        <%= f.input :title, label: false, placeholder: "Título" %>
+        <br>
+        <%= f.input :description, label: false, placeholder: "Descripción",:input_html => { :rows => 5 } %>
+      </div>
+      <div class="col-sm-6">
+        <%= f.input :amount, label: false, placeholder: "Monto" %>
+        <br>
+        <%= f.input :transaction_type_id, label: "Transacción", :as => :select, :collection => TransactionType.all.map{|t| [t.title, t.id]} %>
+      </div>
   </div>
+  <% end %>
   <%= f.actions do %>
-    <%= f.action :submit, :label => " Guardar ", :button_html => { :class => "submit-button" } %>
+    <div class="row">
+      <div class="col-sm-12">
+        <%= f.action :submit, :label => " Guardar ", :button_html => { :class => "btn btn-success" } %>
+      </div>
+    </div>
   <% end %>
 <% end %>

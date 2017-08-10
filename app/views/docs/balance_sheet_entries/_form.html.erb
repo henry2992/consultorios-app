@@ -1,15 +1,131 @@
 <%= semantic_form_for ([:docs, @balance_sheet_entry]) do |f| %>
-  <div class="general-form">
-    <%= f.inputs do %>
-      <%= f.input :title, label: false, placeholder: 'Título' %>
-      <%= f.input :description, label: false, placeholder: 'Descripción', :rows => 5 %>
-      <%= f.input :doctor_id, label: "Doctor", :as => :select, :collection => Doctor.all.map{|d| ["#{d.first_name} #{d.last_name}", d.id]} %>
-      <%= f.input :patient_id, label: "Paciente", :as => :select, :collection => Patient.all.map{|p| ["#{p.first_name} #{p.last_name}", p.id]} %>
-      <%= f.input :transaction_date, label: "Fecha de Transacción", start_year: 2000 %>
-      <%= f.input :payment_status, label: "¿Pagado?", :as => :select, :include_blank => false %>
-    <% end %>
-  </div>
-  <%= f.actions do %>
-    <%= f.action :submit, :label => " Guardar ", :button_html => { :class => "submit-button" } %>
+  <% if @balance_sheet_entry.errors.any? %>
+    <div class="alert alert-danger" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <ul>
+      <% @balance_sheet_entry.errors.full_messages.each do |m| %>
+        <li>
+          <%= m %>
+        </li>
+      <% end %>
+      </ul>
+    </div>
   <% end %>
+  <div class="row">
+    <div class="col-sm-6">
+      <%= f.inputs do %>
+        <%= f.input :transaction_date, label: "Fecha de Transacción", start_year: 2000 %>
+        <%= f.input :title, label: false, placeholder: 'Título' %>
+        <%= f.input :description, label: false, placeholder: 'Descripción', :input_html => { :rows => 5} %>
+      <% end %>
+    </div>
+    <div class="col-sm-6">
+      <%= f.inputs do %>
+        <%= f.input :doctor_id, label: "Doctor", :as => :select, :collection => Doctor.all.map{|d| ["#{d.first_name} #{d.last_name}", d.id]} %>
+        <%= f.input :patient_id, label: "Paciente", :as => :select, :collection => Patient.all.map{|p| ["#{p.first_name} #{p.last_name}", p.id]} %>
+        <%= f.input :payment_status, label: "¿Pagado?", :as => :select, :include_blank => false %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">&nbsp;</div>
+    <div class="col-sm-12">
+      <h6>Detalle</h6>
+    </div>
+    <div class="col-sm-12">&nbsp;</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+        <div class="col-sm-6">
+            <%= text_field_tag :title, nil, name: "balance_sheet_entry[balance_sheet_entry_details_attributes][0][title]",placeholder: "Título", class: "form-control" %>
+            <br>
+            <%= text_area_tag :description, nil, placeholder: "Descripción", :rows => 5, name: "balance_sheet_entry[balance_sheet_entry_details_attributes][0][description]", class: "form-control" %>
+        </div>
+        <div class="col-sm-6">
+            <%= text_field_tag :amount, nil, placeholder: "Monto", name: "balance_sheet_entry[balance_sheet_entry_details_attributes][0][amount]", class: "form-control" %>
+            <br>
+            <label for="transaction_type_id">Tipo de Transacción</label>
+            <%= select_tag "balance_sheet_entry[balance_sheet_entry_details_attributes][0][transaction_type_id]", options_from_collection_for_select(TransactionType.all, :id, :title), class: "form-control", :include_blank => 'Seleccione un Tipo de Transacción' %>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">&nbsp;</div>
+    <div class="col-sm-12">
+      <table class="table">
+        <thead> 
+          <tr> 
+            <th>#</th>
+            <th>Título</th> 
+            <th class="right">Ingreso</th>
+            <th class="right">Egreso</th>
+            <th colspan="3" class="no-print">&nbsp;</th>
+          </tr>
+        </thead> 
+        <tbody class="smaller">
+          <% out = inc = 0 %>
+          <% if !@details.blank? %>
+            <% @details.each do |entry| %>
+              <% unless entry.id.blank? %>
+                <tr> 
+                  <td><%= entry.id %></td> 
+                  <td><%= entry.title.truncate(45) if !entry.title.blank? %></td>
+                  <% inc += entry.amount if entry.transaction_type.incoming? %>
+                  <% out += entry.amount if entry.transaction_type.outgoing? %>
+                  <td class="right"><%= entry.amount if entry.transaction_type.incoming? %></td> 
+                  <td class="right"><%= entry.amount if entry.transaction_type.outgoing? %></td> 
+                  <td colspan="3" class="no-print right">
+                    <%= link_to '<i class="icon-eye icons"></i>'.html_safe, docs_balance_sheet_entry_balance_sheet_entry_detail_path(@balance_sheet_entry, entry), title: "Ver", alt: "Ver" %>&nbsp;&nbsp;
+                    <%= link_to '<i class="icon-pencil icons"></i>'.html_safe, edit_docs_balance_sheet_entry_balance_sheet_entry_detail_path(@balance_sheet_entry, entry), title: "Editar", alt: "Editar" %>&nbsp;&nbsp;
+                    <%= link_to '<i class="icon-trash icons"></i>'.html_safe, docs_balance_sheet_entry_balance_sheet_entry_detail_path(@balance_sheet_entry, entry), method: :delete, data: { confirm: '¿Estás seguro de eliminar?' } %>
+                  </td> 
+                </tr> 
+              <% end %>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="10">No hay detalle para esta entrada</td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tfoot class="right">
+          <tr>
+            <td colspan="2">
+              <h4>Sub-total</h4>
+            </td>
+            <td>
+              <h4><%= inc %></h4>
+            </td>
+            <td>
+              <h4><%= out %></h4>
+            </td>
+            <td colspan="3">
+              &nbsp;
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <h4>Total</h4>
+            </td>
+            <td>
+              &nbsp;
+            </td>
+            <td>
+              <h4><%= inc - out %></h4>
+            </td>
+            <td colspan="3">
+              &nbsp;
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <div class="col-sm-12">&nbsp;</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+    <%= f.actions do %>
+      <%= f.action :submit, :label => " Guardar ", :button_html => { :class => "btn btn-success" } %>
+    <% end %>
+    </div>
+  </div>
 <% end %>

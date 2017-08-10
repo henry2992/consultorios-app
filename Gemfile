@@ -41,6 +41,9 @@ gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'inherited_resources', '~> 1.7'
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'formtastic', '~> 3.0'
+gem 'formtastic-bootstrap', '~> 3.1', '>= 3.1.1'
+gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
+                                  :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
 gem 'arel'
 gem "will_paginate"
 gem "bootstrap-will_paginate"

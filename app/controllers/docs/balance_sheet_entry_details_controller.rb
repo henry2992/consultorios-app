@@ -12,16 +12,14 @@ class Docs::BalanceSheetEntryDetailsController < Docs::DoctorsController
   def show
   end
 
-  def new
-    @balance_sheet_entry_detail = @balance_sheet_entry.balance_sheet_entry_details.new
-  end
+  # def new
+  #   @balance_sheet_entry_detail = @balance_sheet_entry.balance_sheet_entry_details.new
+  # end
 
   def edit
   end
 
   def create
-    # params[:balance_sheet_entry][:payment_status] = entry_params[:payment_status].to_i
-    # params[:balance_sheet_entry][:payment_status] = entry_params[:payment_status].to_i
     @balance_sheet_entry_detail = @balance_sheet_entry.balance_sheet_entry_details.new(entry_params)
     respond_to do |format|
       if @balance_sheet_entry_detail.save
@@ -35,7 +33,7 @@ class Docs::BalanceSheetEntryDetailsController < Docs::DoctorsController
   def update
     respond_to do |format|
       if @balance_sheet_entry_detail.update(entry_params)
-        format.html { redirect_to docs_balance_sheet_entry_path(@balance_sheet_entry), notice: 'El detalle fue actualizado exitosamente.' }
+        format.html { redirect_to edit_docs_balance_sheet_entry_path(@balance_sheet_entry), notice: 'El detalle fue actualizado exitosamente.' }
       else
         format.html { render :edit }
       end
@@ -45,7 +43,7 @@ class Docs::BalanceSheetEntryDetailsController < Docs::DoctorsController
   def destroy
     @balance_sheet_entry_detail.destroy
     respond_to do |format|
-      format.html { redirect_to docs_balance_sheet_entry_path(@balance_sheet_entry), notice: 'El detalle fue eliminado exitosamente' }
+      format.html { redirect_to edit_docs_balance_sheet_entry_path(@balance_sheet_entry), notice: 'El detalle fue eliminado exitosamente' }
     end
   end
 

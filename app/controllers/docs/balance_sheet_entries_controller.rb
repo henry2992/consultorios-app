@@ -18,14 +18,16 @@ class Docs::BalanceSheetEntriesController < Docs::DoctorsController
 
   def new
     @balance_sheet_entry = current_user.clinic.balance_sheet_entries.new
-    @detail = @balance_sheet_entry.balance_sheet_entry_details.build
+    @balance_sheet_entry.balance_sheet_entry_details.build
   end
 
   def edit
   end
 
   def create
-    @balance_sheet_entry = current_user.clinic.balance_sheet_entries.new(entry_params)
+    @balance_sheet_entry = current_user.clinic.balance_sheet_entries.build(entry_params)
+    # @balance_sheet_entry.balance_sheet_entry_details.build(entry_params[:balance_sheet_entry_details_attributes])
+    # raise entry_params.to_yaml
     respond_to do |format|
       if @balance_sheet_entry.save
         format.html { redirect_to edit_docs_balance_sheet_entry_path(@balance_sheet_entry), notice: 'La entrada fue creada exitosamente.' }

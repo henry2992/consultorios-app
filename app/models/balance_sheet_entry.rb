@@ -1,5 +1,5 @@
 class BalanceSheetEntry < ApplicationRecord
-  has_many :balance_sheet_entry_details, dependent: :destroy
+  has_many :balance_sheet_entry_details, dependent: :destroy, :inverse_of => :balance_sheet_entry
   accepts_nested_attributes_for :balance_sheet_entry_details, allow_destroy: true, reject_if: :all_blank
 
   belongs_to :patient

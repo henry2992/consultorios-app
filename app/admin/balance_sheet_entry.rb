@@ -1,24 +1,28 @@
 ActiveAdmin.register BalanceSheetEntry do
-    # permit_params :title, :description, :start_at, :ends_at, :clinic_id
+    permit_params :title, :description, :doctor_id, :patient_id, :transaction_date, :payment_status, :clinic_id
+    
+    index do
+      column :id
+      column :transaction_date
+      column :title
+      column :doctor
+      column :patient
+      column :payment_status
+      actions
+    end
 
-    # index do
-    #   column :id
-    #   column :title
-    #   column :start_at
-    #   column :ends_at
-    #   actions
-    # end
-
-    # form do |f|
-    #   f.inputs 'BalanceSheet' do
-    #     f.input :clinic_id, :label => 'Clinic', :as => :select, :collection => Clinic.all.map{|c| ["#{c.name}", c.id]}
-    #     f.input :title
-    #     f.input :description
-    #     f.input :start_at
-    #     f.input :ends_at
-    #   end
-    #   f.actions
-    # end
+    form do |f|
+      f.inputs 'BalanceSheetEntry' do
+        f.input :clinic_id, :label => 'Clínica', :as => :select, :collection => Clinic.all.map{|c| ["#{c.name}", c.id]}
+        f.input :transaction_date
+        f.input :title
+        f.input :description
+        f.input :doctor_id, :label => 'Doctor', :as => :select, :collection => Doctor.all.map{|c| ["#{c.full_name}", c.id]}
+        f.input :patient_id, :label => 'Paciente', :as => :select, :collection => Patient.all.map{|c| ["#{c.full_name}", c.id]}
+        f.input :payment_status
+      end
+      f.actions
+    end
 
 
 

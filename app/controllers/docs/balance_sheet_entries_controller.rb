@@ -5,7 +5,7 @@ class Docs::BalanceSheetEntriesController < Docs::DoctorsController
   before_action :set_entry, only: [:show, :edit, :update, :destroy]
   
   def index
-    @balances = current_user.clinic.balance_sheet_entries.pagado.order("#{sort_column} #{sort_direction}").paginate(:page => params[:page], :per_page => 25)
+    @balances = current_user.clinic.balance_sheet_entries.order("#{sort_column} #{sort_direction}").paginate(:page => params[:page], :per_page => 25)
     @balances = @balances.by_range(params[:from],params[:to]) unless ( params[:from].blank? || params[:to].blank? )
     @balances = @balances.by_month(Date.today.month) if ( params[:from].blank? || params[:to].blank? )
   end

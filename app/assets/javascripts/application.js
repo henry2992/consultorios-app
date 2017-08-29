@@ -33,4 +33,61 @@ $(document).ready(function() {
       $("#data").html(json.data);
     }, "json");
   });
+
+
+  $('.multi-item-carousel .item').each(function(){
+    var next = $(this).next();
+    if (!next.length) {
+      next = $(this).siblings(':first');
+    }
+    next.children(':first-child').clone().appendTo($(this));
+    
+    if (next.next().length>0) {
+      next.next().children(':first-child').clone().appendTo($(this));
+    } else {
+      $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+    }
+  });
+  
+  $('#addImg').modal('hide');
+  $('#addEntrada').modal('hide');
+  $('#descImg').modal('hide');
+  $('#updImg').modal('hide');
+
+  $('#addImg').on('hidden.bs.modal', function () {
+    $('#accion').text("Agregar");
+  })
+
+  $('#btnSaveUpd').click(function(){
+    
+    alert(msg);
+  });
+
+  $('.imgCarousel').click(function(){
+    $('#img').attr("src",$(this).find("img").eq(0).attr("src"));
+    $('#descripcion').text($(this).attr("data-description"));
+    $('#btnDelete').attr('data-id',$(this).attr('data-id'));
+    $('#btnDelete').attr('data-eq',$(this).attr('data-eq'));
+  });
+
+  $('#descImg #btnDelete').click(function(){
+    window.location.reload();
+    alert("Se supone q despues de eliminar la imagen se debe recargar la pagina...");
+  });
+  $('#descImg #btnUpd').click(function(){
+    $('#descImg').modal('hide');
+    $('#addDesc').val($('#descripcion').text());
+    $('#img2').attr("src",$('#img').attr("src"));
+    $('#updImg').modal('show');
+    
+  });
+
+  $('.delSec').click(function(){
+    $('#elem'+$(this).attr("data-eq")).remove();
+  });
+
+  $('.updSec').click(function(){
+    $('#addEntrada').modal('show');
+  });
+
 });

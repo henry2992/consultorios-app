@@ -1,28 +1,686 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @patient.address %>
-</p>
+<div class="container-fluid" #historia id="historia">
+    <div class="row">
+        <div class="col-sm-12 center">
+          <h2>Historia Clinica</h2>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-6 col-sm-4 col-md-4 col-lg-3 left ">
+        <b>Fecha:</b> 12-12-2012
+      </div>
+      <div class="col-6 col-sm-4 col-md-4 col-lg-3  col-sm-offset-4 col-md-offset-4 col-lg-offset-5  left">
+        <b>Codigo:</b> WRYTW65R
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8 col-sm-8 col-md-8 left">
+        <b>Nombre y Apellido:</b> Junior Jose Moreno Toledo
+      </div>
+      <div class="col-8 col-sm-8 col-md-4 left">
+        <b>Edad:</b> 21
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-xs-12 col-sm-4 col-md-4 left">
+            <b>Sexo:</b> Masculino
+        </div>
+        <div class="col-12 col-xs-12 col-sm-4 col-md-4 left">
+            <b>C.I.:</b> V-12.345.678
+        </div>
+        <div class="col-12 col-xs-12 col-sm-4 col-md-4 left">
+            <b>Fecha de Nacimiento:</b> 06-05-1996
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-12 left">
+            <b>Lugar de Nacimiento:</b> Instituto medico, Valera Estado Trujillo
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-6 left">
+            <b>Telefono Hab:</b> 0271-1234567
+        </div>
+        <div class="col-12 col-sm-6 col-md-6 left">
+            <b>Telefono Cel:</b> 0271-1234567
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-6 left">
+            <b>Telefono Ofic:</b> 0271-1234567
+        </div>
+        <div class="col-12 col-sm-6 col-md-6 left">
+            <b>Odont. Tratante:</b> Dr Junior Jose Moreno Toledo
+        </div>
+    </div>
+    <div class="row">
+         <div class="col-12 col-md-12 left">
+            <b>Antecedentes Familiares:</b> Antecedente, Antecedente, Antecedente, Antecedente, Antecedente, Antecedente, Antecedente, Antecedente
+        </div>
+    </div>
+    <form class="row">
+        <div class="col-12 col-sm-12">
+            <table class="table table-bordered">
+                <tr>
+                    <td width=""><b>Pregunta</b></td>
+                    <td width="2%"><b>Si</b></td>
+                    <td width="2%"><b>No</b></td>
+                    <td width=""><b>Pregunta</b></td>
+                    <td width="2%"><b>Si</b></td>
+                    <td width="2%"><b>No</b></td>
+                </tr>
+                <tr>
+                    <td width="">Esta usted bajo Tratamiento Medico?</td>
+                    <td width="2%"><input type="radio" name="pregunta1" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta1" value="N"></td>
+                    <td width="">Sufre de:</td>
+                    <td width="2%"><input type="radio" disabled></td>
+                    <td width="2%"><input type="radio" disabled></td>
+                </tr>
+                <tr>
+                    <td width="">Toma actualmente algún medicamento?</td>
+                    <td width="2%"><input type="radio" name="pregunta2" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta2" value="N"></td>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Enfermedades venéreas</td>
+                    <td width="2%"><input type="radio" name="pregunta3" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta3" value="N"></td>
+                </tr>
+                <tr>
+                    <td width="">Le han practicado alguna invervencion quirurgica?</td>
+                    <td width="2%"><input type="radio" name="pregunta4" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta4" value="N"></td>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Problemas del corazon</td>
+                    <td width="2%"><input type="radio" name="pregunta5" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta5" value="N"></td>
+                </tr>
+                <tr>
+                    <td width="">Ha recibido alguna transfusion sanguinea?</td>
+                    <td width="2%"><input type="radio" name="pregunta6" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta6" value="N"></td>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Hepatitis</td>
+                    <td width="2%"><input type="radio" name="pregunta7" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta7" value="N"></td>
+                </tr>
+                <tr>
+                    <td width="">Ha consumido o consume drogas?</td>
+                    <td width="2%"><input type="radio" name="pregunta8" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta8" value="N"></td>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Fiebre Reumatica</td>
+                    <td width="2%"><input type="radio" name="pregunta9" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta9" value="N"></td>
+                </tr>
+                <tr>
+                    <td width="">Ha presentado reaccion alergica a:</td>
+                    <td width="2%"><input type="radio" name="pregunta" disabled></td>
+                    <td width="2%"><input type="radio" name="pregunta" disabled></td>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Asma</td>
+                    <td width="2%"><input type="radio" name="pregunta10" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta10" value="N"></td>
+                </tr>
+                <tr>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Penicilina</td>
+                    <td width="2%"><input type="radio" name="pregunta11" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta11" value="N"></td>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Diabetes</td>
+                    <td width="2%"><input type="radio" name="pregunta12" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta12" value="N"></td>
+                </tr>
+                <tr>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Anestesia</td>
+                    <td width="2%"><input type="radio" name="pregunta13" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta13" value="N"></td>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Ulcera gastrica</td>
+                    <td width="2%"><input type="radio" name="pregunta14" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta14" value="N"></td>
+                </tr>
+                <tr>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Aspirina, yodo</td>
+                    <td width="2%"><input type="radio" name="pregunta15" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta15" value="N"></td>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Tiroides</td>
+                    <td width="2%"><input type="radio" name="pregunta16" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta16" value="N"></td>
+                </tr>
+                <tr>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Merthiolate, otros</td>
+                    <td width="2%"><input type="radio" name="pregunta17" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta17" value="N"></td>
+                    <td width="">Ha tenido limitacion al abrir o cerrar la boca?</td>
+                    <td width="2%"><input type="radio" name="pregunta18" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta18" value="N"></td>
+                </tr>
+                <tr>
+                    <td width="">Sufre de temsopm arterial: </td>
+                    <td width="2%"><input type="radio" name="pregunta19" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta19" value="N"></td>
+                    <td width="">Siente Ruidos en la mandibula al abrir o cerrar la boca?</td>
+                    <td width="2%"><input type="radio" name="pregunta20" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta20" value="N"></td>
+                </tr>
+                <tr>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Alta</td>
+                    <td width="2%"><input type="radio" name="pregunta21" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta21" value="N"></td>
+                    <td width="">Sufre de herpes o aftas recurrentes?</td>
+                    <td width="2%"><input type="radio" name="pregunta22" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta22" value="N"></td>
+                </tr>
+                <tr>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Baja</td>
+                    <td width="2%"><input type="radio" name="pregunta23" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta23" value="N"></td>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Presenta alguno de los siguientes habitos</td>
+                    <td width="2%"><input type="radio" name="pregunta" disabled></td>
+                    <td width="2%"><input type="radio" name="pregunta" disabled></td>
+                </tr>
+                <tr>
+                    <td width="">Sangre excesivamente al cortarse?</td>
+                    <td width="2%"><input type="radio" name="pregunta24" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta24" value="N"></td>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Fuma?</td>
+                    <td width="2%"><input type="radio" name="pregunta25" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta25" value="N"></td>
+                </tr>
+                <tr>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Anemia, leucemia, hemofilia, deficit Vit. K</td>
+                    <td width="2%"><input type="radio" name="pregunta25" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta25" value="N"></td>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Consume alimentos citricos?</td>
+                    <td width="2%"><input type="radio" name="pregunta26" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta26" value="N"></td>
+                </tr>
+                <tr>
+                    <td width="">Es usted V.I.H.+?</td>
+                    <td width="2%"><input type="radio" name="pregunta27" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta27" value="N"></td>
+                    <td width="">Muerde objetos con los dientes?</td>
+                    <td width="2%"><input type="radio" name="pregunta28" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta28" value="N"></td>
+                </tr>
+                <tr>
+                    <td width="">Toma usted algun medicamento retroviral?</td>
+                    <td width="2%"><input type="radio" name="pregunta29" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta29" value="N"></td>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Apretamiento Dentario</td>
+                    <td width="2%"><input type="radio" name="pregunta30" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta30" value="N"></td>
+                </tr>
+                <tr>
+                    <td width="">Esta usted embarazada?</td>
+                    <td width="2%"><input type="radio" name="pregunta31" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta31" value="N"></td>
+                    <td width="">&nbsp;&nbsp;&nbsp; - Respiracion bucal</td>
+                    <td width="2%"><input type="radio" name="pregunta32" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta32" value="N"></td>
+                </tr>
+                <tr>
+                    <td width="">Esta tomndo actualmente pastillas anticonceptivas?</td>
+                    <td width="2%"><input type="radio" name="pregunta2" value="S"></td>
+                    <td width="2%"><input type="radio" name="pregunta2" value="N"></td>
+                    <td width="">&nbsp;</td>
+                    <td width="2%">&nbsp;</td>
+                    <td width="2%">&nbsp;</td>
+                </tr>
+            </table>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Guardar">
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-12 tira-images">
+            <a href="" data-toggle="modal" data-target="#addImg"><span class="glyphicon glyphicon-plus"></span>Agregar Imagen</a>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-md-12">
+          <div class="carousel slide multi-item-carousel" id="theCarousel">
+            <div class="carousel-inner">
+              <div class="item active ">
+                <div class="col-xs-4">
+                    <!-- <a href="#1" data-toggle="modal" data-target="#descImg" class="imgCarousel" data-id="142" data-eq="0" data-description="descripcion x" ><img src="http://placehold.it/300/f44336/000000" class="img-responsive"></a> -->
+                    <a href="#1" data-toggle="modal" data-target="#descImg" class="imgCarousel" data-id="142" data-eq="0" data-description="descripcion x" >
+                        <%= image_tag("1024x500.png", alt: "logo", class: "img-responsive") %>
+                        <!-- <img src="C:/Users/junio/Documents/1024x500" class="img-responsive"> -->
+                    </a>
+                </div>
+              </div>
+            </div>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @patient.phone %>
-</p>
+            <a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+            <a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
 
-<p>
-  <strong>User:</strong>
-  <%= @patient.first_name %>&nbsp;
-  <%= @patient.last_name %> | 
-  <%= @patient.email %>
-
-</p>
-
-<p>
-  <strong>Doctor:</strong>
-  <%= @patient.doctor.first_name %>&nbsp;
-  <%= @patient.doctor.last_name %>
-</p>
+          </div>
+        </div>
+      </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <a href="" data-toggle="modal" data-target="#addEntrada"><span class="glyphicon glyphicon-plus"></span>Agregar Entrada</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h4>Secuencia de Tratamiento</h4>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="2%">#</th>
+                        <th width="25%">Fecha</th>
+                        <th width="50%">Descripcion</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="sec">
+                    <tr id="elem0">
+                        <td>1</td>
+                        <td>1/1/2017</td>
+                        <td>Descripcion 1</td>
+                        <td>
+                            <button class="btn btn-info updSec" data-eq="0">Actualizar</button>
+                            <button class="btn btn-danger delSec" data-eq="0">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr id="elem1">
+                        <td>2</td>
+                        <td>2/2/2017</td>
+                        <td>Descripcion 2</td>
+                        <td>
+                            <button class="btn btn-info updSec" data-eq="1">Actualizar</button>
+                            <button class="btn btn-danger delSec" data-eq="1">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr id="elem2">
+                        <td>3</td>
+                        <td>3/3/2017</td>
+                        <td>Descripcion 3</td>
+                        <td>
+                            <button class="btn btn-info updSec" data-eq="2">Actualizar</button>
+                            <button class="btn btn-danger delSec" data-eq="2">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr id="elem3">
+                        <td>4</td>
+                        <td>4/4/2017</td>
+                        <td>Descripcion 4</td>
+                        <td>
+                            <button class="btn btn-info updSec" data-eq="3">Actualizar</button>
+                            <button class="btn btn-danger delSec" data-eq="3">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr id="elem4">
+                        <td>5</td>
+                        <td>5/5/2017</td>
+                        <td>Descripcion 5</td>
+                        <td>
+                            <button class="btn btn-info updSec" data-eq="4">Actualizar</button>
+                            <button class="btn btn-danger delSec" data-eq="4">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr id="elem5">
+                        <td>6</td>
+                        <td>6/6/2017</td>
+                        <td>Descripcion 6</td>
+                        <td>
+                            <button class="btn btn-info updSec" data-eq="5">Actualizar</button>
+                            <button class="btn btn-danger delSec" data-eq="5">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr id="elem6">
+                        <td>7</td>
+                        <td>7/7/2017</td>
+                        <td>Descripcion 7</td>
+                        <td>
+                            <button class="btn btn-info updSec" data-eq="6">Actualizar</button>
+                            <button class="btn btn-danger delSec" data-eq="6">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr id="elem7">
+                        <td>8</td>
+                        <td>8/8/2017</td>
+                        <td>Descripcion 8</td>
+                        <td>
+                            <button class="btn btn-info updSec" data-eq="7">Actualizar</button>
+                            <button class="btn btn-danger delSec" data-eq="7">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr id="elem8">
+                        <td>9</td>
+                        <td>9/9/2017</td>
+                        <td>Descripcion 9</td>
+                        <td>
+                            <button class="btn btn-info updSec" data-eq="8">Actualizar</button>
+                            <button class="btn btn-danger delSec" data-eq="8">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr id="elem9">
+                        <td>10</td>
+                        <td>10/10/2017</td>
+                        <td>Descripcion 10</td>
+                        <td>
+                            <button class="btn btn-info updSec" data-eq="9">Actualizar</button>
+                            <button class="btn btn-danger delSec" data-eq="9">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr id="elem10">
+                        <td>11</td>
+                        <td>11/11/2017</td>
+                        <td>Descripcion 11</td>
+                        <td>
+                            <button class="btn btn-info updSec" data-eq="10">Actualizar</button>
+                            <button class="btn btn-danger delSec" data-eq="10">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr id="elem11">
+                        <td>12</td>
+                        <td>12/12/2017</td>
+                        <td>Descripcion 12</td>
+                        <td>
+                            <button class="btn btn-info updSec" data-eq="11">Actualizar</button>
+                            <button class="btn btn-danger delSec" data-eq="11">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 <%= link_to 'Edit', edit_docs_patient_path(@patient) %> |
 <%= link_to 'Back', docs_patients_path %>
+
+
+
+<!-- MODALS -->
+
+<div class="modal fade" id="addImg" role="dialog">
+    <div class="modal-dialog">
+        <form class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title center">Agregar Imagen</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputFile">Seleccione el archivo:</label>
+                    <input type="file" id="exampleInputFile" accept="image/*">
+                    <p class="help-block">La imagen debe tener formato .JPG .JPEG .GIF .PNG .SVG</p>
+                </div>
+                <div class="form-group">
+                    <label for="">Descripcion</label>
+                    <textarea cols="30" rows="10" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success" value="Guardar">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="updImg" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title center">Modificar Imagen</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 center">
+                        <img src="" id="img2">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Seleccione el archivo:</label>
+                    <input type="file" id="exampleInputFile" accept="image/*">
+                    <p class="help-block">La imagen debe tener formato .JPG .JPEG .GIF .PNG .SVG</p>
+                </div>
+                <div class="form-group">
+                    <label>Descripcion</label>
+                    <textarea cols="30" rows="10" id="descripcion" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success" value="Guardar">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="descImg" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title center">Descripcion de Imagen</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 center">
+                        <img src="" id="img">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12" id="descripcion">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="col-6 center">
+                    <button class="btn btn-danger" id="btnDelete">Eliminar</button>
+                </div>
+                <div class="col-6 center">
+                    <button class="btn btn-success" id="btnUpd" data-dismiss="modal" data-toggle="modal" href="#updImg">Modificar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" role="dialog" id="addEntrada">
+  <div class="modal-dialog modal-lg" role="document">
+    <form class="modal-content form-horizonta">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title center">Agregar Entrada</h4>
+        </div>
+        <div class="modal-body">
+
+           <div class="form-group">
+                <label class="control-label">Motivo de la Consulta:</label>
+                <!-- <div class="col-sm-12 col-md-8"> -->
+                    <input type="text" class="form-control">
+                <!-- </div> -->
+            </div>
+            <!-- <br class="hidden-xs"><br class="hidden-xs"> -->
+            <div class="checkbox">
+                <label class="col-xs-12 col-sm-6 col-md-6 control-label">
+                <!-- <div class="col-xs-2 col-sm-6 col-md-4"> -->
+                    <input type="checkbox"> <b>Dolor?</b>
+                <!-- </div> -->
+                </label>
+            </div>
+            <div class="checkbox">
+                <label class="col-xs-12 col-sm-6 col-md-6 control-label">
+                <!-- <div class="col-xs-2 col-sm-6 col-md-2"> -->
+                    <input type="checkbox"> <b>Sangramiento de Encias?</b>
+                <!-- </div> -->
+                </label>
+            </div>
+            <br class="hidden-xs"><br class="hidden-xs">
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Control?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control">
+                </div>
+                <label class="col-sm-12 col-md-2 control-label">Restauracion Protesica?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs hidden-md">
+            <div class="form-group">
+                <label class="control-label">Otro, indique cual:</label>
+                <input type="text" class="form-control">   
+            </div>
+            <div class="form-group">
+                <label class="control-label">Enfermedad Actual:</label>
+                <input type="text" class="form-control">   
+            </div>
+            <br class="hidden-xs">
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Aspecto del Paciente?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control">
+                </div>
+                <label class="col-sm-12 col-md-2 control-label">Cara?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs hidden-md">
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Labios y Comisura?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control">
+                </div>
+                <label class="col-sm-12 col-md-2 control-label">Palpacion de Ganglios?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs hidden-md">
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Ganglios?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control">
+                </div>
+                <label class="col-sm-12 col-md-2 control-label">A.T.M?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs hidden-md">
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    <h4>Examen Clinico IntraBucal</h4>
+                    <hr>
+                </div>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Carillos:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control">
+                </div>
+                <label class="col-sm-12 col-md-2 control-label">Mucosa:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+            <br class="hidden-xs"><br class="hidden-xs">
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Encia:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control">
+                </div>
+                <label class="col-sm-12 col-md-2 control-label">Lengua:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+            <br class="hidden-xs"><br class="hidden-xs">
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Paladar:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+    
+
+            <br><br>
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    <h4>Examenes Complementarios</h4>
+                    <hr>
+                </div>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Rx Panoramica:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control">
+                </div>
+                <label class="col-sm-12 col-md-2 control-label">Rx Cordal:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <br class="hidden-xs"><br class="hidden-xs">
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Rx Periapical:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+            <br class="hidden-xs"><br class="hidden-xs">
+            <div class="form-group">
+                <label class="control-label">Observaciones:</label>
+                <input type="text" class="form-control">
+            </div>
+
+            <br class="hidden-xs">
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    <h4>Odontodiagrama</h4>
+                    <hr>
+                </div>
+            </div>
+
+            <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs hidden-md">
+
+            <div class="form-group">
+                <label for="exampleInputFile">Seleccione el archivo:</label>
+                <input type="file" id="exampleInputFile" accept="image/*">
+                <p class="help-block">La imagen debe tener formato .JPG .JPEG .GIF .PNG .SVG</p>
+            </div>
+
+            <br class="hidden-xs">
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    <h4>Diagnostico y Plan de Tratamiento</h4>
+                    <hr>
+                </div>
+            </div>
+            <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs hidden-md">
+            <div class="form-group">
+                <textarea class="form-control" rows="3"></textarea>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Guardar">
+            </div>
+        </div>
+    </form>
+  </div>
+</div>
+
+<!-- FIN DE MODALS -->

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  choice_id: 1
+  choice_question_id: 1
+  history_id: 1
+
+two:
+  choice_id: 1
+  choice_question_id: 1
+  history_id: 1

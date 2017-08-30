@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170708213036) do
+ActiveRecord::Schema.define(version: 20170828132153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,17 @@ ActiveRecord::Schema.define(version: 20170708213036) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.integer  "choice_id"
+    t.integer  "choice_question_id"
+    t.integer  "history_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["choice_id"], name: "index_answers_on_choice_id", using: :btree
+    t.index ["choice_question_id"], name: "index_answers_on_choice_question_id", using: :btree
+    t.index ["history_id"], name: "index_answers_on_history_id", using: :btree
   end
 
   create_table "appointment_schedules", force: :cascade do |t|
@@ -72,12 +83,69 @@ ActiveRecord::Schema.define(version: 20170708213036) do
     t.index ["transaction_type_id"], name: "index_balance_sheet_entry_details_on_transaction_type_id", using: :btree
   end
 
+  create_table "choice_questions", force: :cascade do |t|
+    t.integer  "choice_id"
+    t.integer  "question_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["choice_id"], name: "index_choice_questions_on_choice_id", using: :btree
+    t.index ["question_id"], name: "index_choice_questions_on_question_id", using: :btree
+  end
+
+  create_table "choices", force: :cascade do |t|
+    t.string   "choice_text"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "clinics", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.boolean  "status",      default: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+  end
+
+  create_table "histories", force: :cascade do |t|
+    t.string   "code"
+    t.integer  "patient_id"
+    t.integer  "doctor_id"
+    t.string   "family_history"
+    t.text     "overview"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["code"], name: "index_histories_on_code", unique: true, using: :btree
+  end
+
+  create_table "history_entries", force: :cascade do |t|
+    t.text     "reason_for_the_visit"
+    t.boolean  "pain"
+    t.string   "control"
+    t.boolean  "gingivitis"
+    t.string   "prosthetic_restoration"
+    t.string   "other"
+    t.string   "current_disease"
+    t.string   "appearance"
+    t.string   "face"
+    t.string   "lips_and_commissure"
+    t.string   "nodes"
+    t.string   "temporomandibular_joint"
+    t.string   "ears"
+    t.string   "hyoidea_thyroidea_region"
+    t.string   "cheeks"
+    t.string   "mucosa"
+    t.string   "gum"
+    t.string   "tongue"
+    t.string   "palate"
+    t.string   "rx_panoramic"
+    t.string   "rx_coronal"
+    t.string   "rx_periapical"
+    t.string   "lab"
+    t.string   "the_model"
+    t.string   "blood_pressure"
+    t.text     "observations"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "products", force: :cascade do |t|
@@ -89,6 +157,12 @@ ActiveRecord::Schema.define(version: 20170708213036) do
     t.string   "status"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string   "question_text"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "transaction_types", force: :cascade do |t|
@@ -143,8 +217,13 @@ ActiveRecord::Schema.define(version: 20170708213036) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "answers", "choice_questions"
+  add_foreign_key "answers", "choices"
+  add_foreign_key "answers", "histories"
   add_foreign_key "appointment_schedules", "appointments"
   add_foreign_key "balance_sheet_entries", "clinics"
   add_foreign_key "balance_sheet_entry_details", "balance_sheet_entries"
   add_foreign_key "balance_sheet_entry_details", "transaction_types"
+  add_foreign_key "choice_questions", "choices"
+  add_foreign_key "choice_questions", "questions"
 end

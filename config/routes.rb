@@ -19,6 +19,12 @@ Rails.application.routes.draw do
     # resources :balance_sheet_entries, :path => "cuentas", :as => :cuentas
     
     resources :patients
+    
+    resources :answers
+    resources :choice_questions
+    resources :choices
+    resources :questions
+    resources :histories
   end
 
   get '/no_clinic', to: 'pages#no_clinic'

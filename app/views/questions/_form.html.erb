@@ -1,0 +1,9 @@
+<%= semantic_form_for @question do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :question_text %>
+  <% end %>
+
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :input %>
+  <% end %>
+<% end %>

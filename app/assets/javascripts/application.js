@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require popper
 //= requiere bootstrap
 //= require tether
 //= require bootstrap-sprockets
@@ -49,14 +50,25 @@ $(document).ready(function() {
     }
   });
   
-  $('#addImg').modal('hide');
-  $('#addEntrada').modal('hide');
-  $('#descImg').modal('hide');
-  $('#updImg').modal('hide');
+  // setTimeout(function(){
 
-  $('#addImg').on('hidden.bs.modal', function () {
-    $('#accion').text("Agregar");
-  })
+  $('#addImg').modal({
+    show:false
+  });
+  $('#addEntrada').modal({
+    show:false
+  });
+  $('#descImg').modal({
+    show:false
+  });
+  $('#updImg').modal({
+    show:false
+  });
+  // },1000)
+
+  // $('#addImg').on('hidden.bs.modal', function () {
+  //   $('#accion').text("Agregar");
+  // })
 
   $('#btnSaveUpd').click(function(){
     

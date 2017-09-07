@@ -301,21 +301,21 @@
            <div class="form-group">
                 <label class="control-label">Motivo de la Consulta:</label>
                 <!-- <div class="col-sm-12 col-md-8"> -->
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="history_entry[reason_for_the_visit]">
                 <!-- </div> -->
             </div>
             <!-- <br class="hidden-xs"><br class="hidden-xs"> -->
             <div class="checkbox">
                 <label class="col-xs-12 col-sm-6 col-md-6 control-label">
                 <!-- <div class="col-xs-2 col-sm-6 col-md-4"> -->
-                    <input type="checkbox"> <b>Dolor?</b>
+                    <input type="checkbox" name="history_entry[pain]"> <b>Dolor?</b>
                 <!-- </div> -->
                 </label>
             </div>
             <div class="checkbox">
                 <label class="col-xs-12 col-sm-6 col-md-6 control-label">
                 <!-- <div class="col-xs-2 col-sm-6 col-md-2"> -->
-                    <input type="checkbox"> <b>Sangramiento de Encias?</b>
+                    <input type="checkbox" name="history_entry[gingivitis]"> <b>Sangramiento de Encias?</b>
                 <!-- </div> -->
                 </label>
             </div>
@@ -323,53 +323,42 @@
             <div class="form-group">
                 <label class="col-sm-12 col-md-2 control-label">Control?:</label>
                 <div class="col-sm-12 col-md-4">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="history_entry[control]">
                 </div>
                 <label class="col-sm-12 col-md-2 control-label">Restauracion Protesica?:</label>
                 <div class="col-sm-12 col-md-4">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="history_entry[prosthetic_restoration]">
                 </div>
             </div>
             <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs hidden-md">
             <div class="form-group">
                 <label class="control-label">Otro, indique cual:</label>
-                <input type="text" class="form-control">   
+                <input type="text" class="form-control" name="history_entry[other]">   
             </div>
             <div class="form-group">
                 <label class="control-label">Enfermedad Actual:</label>
-                <input type="text" class="form-control">   
+                <input type="text" class="form-control" name="history_entry[current_disease]">   
             </div>
             <br class="hidden-xs">
             <div class="form-group">
                 <label class="col-sm-12 col-md-2 control-label">Aspecto del Paciente?:</label>
                 <div class="col-sm-12 col-md-4">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="history_entry[appearance]">
                 </div>
                 <label class="col-sm-12 col-md-2 control-label">Cara?:</label>
                 <div class="col-sm-12 col-md-4">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="history_entry[face]">
                 </div>
             </div>
             <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs hidden-md">
             <div class="form-group">
                 <label class="col-sm-12 col-md-2 control-label">Labios y Comisura?:</label>
                 <div class="col-sm-12 col-md-4">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="history_entry[lips_and_commissure]">
                 </div>
-                <label class="col-sm-12 col-md-2 control-label">Palpacion de Ganglios?:</label>
-                <div class="col-sm-12 col-md-4">
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-            <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs hidden-md">
-            <div class="form-group">
                 <label class="col-sm-12 col-md-2 control-label">Ganglios?:</label>
                 <div class="col-sm-12 col-md-4">
-                    <input type="text" class="form-control">
-                </div>
-                <label class="col-sm-12 col-md-2 control-label">A.T.M?:</label>
-                <div class="col-sm-12 col-md-4">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="history_entry[nodes]">
                 </div>
             </div>
             <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs hidden-md">
@@ -383,11 +372,11 @@
             <div class="form-group">
                 <label class="col-sm-12 col-md-2 control-label">Carillos:</label>
                 <div class="col-sm-12 col-md-4">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="history_entry[cheeks]">
                 </div>
                 <label class="col-sm-12 col-md-2 control-label">Mucosa:</label>
                 <div class="col-sm-12 col-md-4">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="history_entry[mucosa]">
                 </div>
             </div>
 
@@ -395,11 +384,11 @@
             <div class="form-group">
                 <label class="col-sm-12 col-md-2 control-label">Encia:</label>
                 <div class="col-sm-12 col-md-4">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="history_entry[gum]">
                 </div>
                 <label class="col-sm-12 col-md-2 control-label">Lengua:</label>
                 <div class="col-sm-12 col-md-4">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="history_entry[tongue]">
                 </div>
             </div>
 
@@ -407,7 +396,7 @@
             <div class="form-group">
                 <label class="col-sm-12 col-md-2 control-label">Paladar:</label>
                 <div class="col-sm-12 col-md-4">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="history_entry[palate]">
                 </div>
             </div>
     
@@ -423,25 +412,25 @@
             <div class="form-group">
                 <label class="col-sm-12 col-md-2 control-label">Rx Panoramica:</label>
                 <div class="col-sm-12 col-md-4">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="history_entry[rx_panoramic]">
                 </div>
                 <label class="col-sm-12 col-md-2 control-label">Rx Cordal:</label>
                 <div class="col-sm-12 col-md-4">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="history_entry[rx_coronal]">
                 </div>
             </div>
             <br class="hidden-xs"><br class="hidden-xs">
             <div class="form-group">
                 <label class="col-sm-12 col-md-2 control-label">Rx Periapical:</label>
                 <div class="col-sm-12 col-md-4">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="history_entry[rx_periapical]">
                 </div>
             </div>
 
             <br class="hidden-xs"><br class="hidden-xs">
             <div class="form-group">
                 <label class="control-label">Observaciones:</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="history_entry[observations]">
             </div>
 
             <br class="hidden-xs">
@@ -456,20 +445,8 @@
 
             <div class="form-group">
                 <label for="exampleInputFile">Seleccione el archivo:</label>
-                <input type="file" id="exampleInputFile" accept="image/*">
+                <input type="file" id="exampleInputFile" accept="image/*" name="history_entry[attachment]">
                 <p class="help-block">La imagen debe tener formato .JPG .JPEG .GIF .PNG .SVG</p>
-            </div>
-
-            <br class="hidden-xs">
-            <div class="form-group ">
-                <div class="col-xs-12">
-                    <h4>Diagnostico y Plan de Tratamiento</h4>
-                    <hr>
-                </div>
-            </div>
-            <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs hidden-md">
-            <div class="form-group">
-                <textarea class="form-control" rows="3"></textarea>
             </div>
 
         </div>

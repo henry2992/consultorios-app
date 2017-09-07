@@ -2,6 +2,10 @@ class Docs::HistoriesController < Docs::DoctorsController
   before_action :set_history, only: [:update]
   before_action :set_patient, only: [:update]
 
+  def new_entry
+    
+  end
+
   def update
     respond_to do |format|
       if @patient.history.update(history_params)
@@ -31,6 +35,10 @@ class Docs::HistoriesController < Docs::DoctorsController
 
     def history_params
       params.require(:history).permit(:code, :patient_id, :doctor_id, :family_history, :overview, :questions => [] )
+    end
+
+    def history_entry_params
+      params.require(:history_entry).permit(:reason_for_the_visit, :pain, :gingivitis, :control, :prosthetic_restoration, :other, :current_disease, :appearance, :face, :lips_and_commissure, :nodes, :cheeks, :mucosa, :gum, :tongue, :palate, :rx_panoramic, :rx_coronal, :rx_periapical, :observations )
     end
 end
 

@@ -50,7 +50,8 @@ gem "bootstrap-will_paginate"
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'validates_timeliness'
-gem 'popper_js', '~> 1.12', '>= 1.12.3'
+
+gem "paperclip", "~> 5.0.0"
 
 source 'http://insecure.rails-assets.org/' do
   gem 'rails-assets-tether', '>= 1.3.3'

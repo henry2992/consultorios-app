@@ -7,5 +7,7 @@ class History < ApplicationRecord
 
   has_many :answers
 
+  has_many :attachments, as: :imageable
+
   validates :doctor_id, :patient_id, :code, presence: true
 end

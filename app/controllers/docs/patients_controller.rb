@@ -8,6 +8,7 @@ class Docs::PatientsController < Docs::DoctorsController
   end
 
   def show
+    @history = @patient.history
   end
 
   def new
@@ -21,6 +22,7 @@ class Docs::PatientsController < Docs::DoctorsController
     @patient = current_user.patients.invite!(patient_params)
     respond_to do |format|
       if @patient
+        @patient.create_history! doctor: @patient.doctor, code: OpenSSL::Random.random_bytes(3).unpack('H*').join.upcase
         format.html { redirect_to docs_patients_path, notice: 'El paciente fue creado exitosamente.' }
       else
         format.html { render :new }

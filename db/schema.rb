@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170828132153) do
+ActiveRecord::Schema.define(version: 20170905145910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -161,8 +161,11 @@ ActiveRecord::Schema.define(version: 20170828132153) do
 
   create_table "questions", force: :cascade do |t|
     t.string   "question_text"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "show_options",  default: true
+    t.integer  "question_id"
+    t.index ["question_id"], name: "index_questions_on_question_id", using: :btree
   end
 
   create_table "transaction_types", force: :cascade do |t|
@@ -226,4 +229,5 @@ ActiveRecord::Schema.define(version: 20170828132153) do
   add_foreign_key "balance_sheet_entry_details", "transaction_types"
   add_foreign_key "choice_questions", "choices"
   add_foreign_key "choice_questions", "questions"
+  add_foreign_key "questions", "questions"
 end

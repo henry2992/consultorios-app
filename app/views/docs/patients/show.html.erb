@@ -1,6 +1,5 @@
-<p id="notice"><%= notice %></p>
-
 <div class="container-fluid" #historia id="historia">
+<% unless @patient.history.blank? %>
     <div class="row">
         <div class="col-sm-12 center">
           <h2>Historia Clinica</h2>
@@ -8,228 +7,127 @@
     </div>
     <div class="row">
       <div class="col-6 col-sm-4 col-md-4 col-lg-3 left ">
-        <b>Fecha:</b> 12-12-2012
+        <b>Fecha:</b> <%= @patient.history.created_at.strftime("%d-%m-%Y") %>
       </div>
       <div class="col-6 col-sm-4 col-md-4 col-lg-3  col-sm-offset-4 col-md-offset-4 col-lg-offset-5  left">
-        <b>Codigo:</b> WRYTW65R
+        <b>Código:</b> <%= @patient.history.code %>
       </div>
     </div>
     <div class="row">
       <div class="col-8 col-sm-8 col-md-8 left">
-        <b>Nombre y Apellido:</b> Junior Jose Moreno Toledo
+        <b>Nombre y Apellido:</b> <%= @patient.full_name.titleize %>
       </div>
       <div class="col-8 col-sm-8 col-md-4 left">
-        <b>Edad:</b> 21
+        <b>Edad:</b> <%= @patient.age %>
       </div>
     </div>
     <div class="row">
         <div class="col-12 col-xs-12 col-sm-4 col-md-4 left">
-            <b>Sexo:</b> Masculino
+            <b>Sexo:</b> <%= @patient.gender.titleize %>
         </div>
         <div class="col-12 col-xs-12 col-sm-4 col-md-4 left">
-            <b>C.I.:</b> V-12.345.678
+            <b>C.I.:</b> <%= @patient.national_id %>
         </div>
         <div class="col-12 col-xs-12 col-sm-4 col-md-4 left">
-            <b>Fecha de Nacimiento:</b> 06-05-1996
+            <b>Fecha de Nacimiento:</b> <%= @patient.dob.strftime("%d-%m-%Y") unless @patient.dob.blank? %>
         </div>
     </div>
     <div class="row">
         <div class="col-12 col-sm-12 left">
-            <b>Lugar de Nacimiento:</b> Instituto medico, Valera Estado Trujillo
+            <b>Lugar de Nacimiento:</b> <%= @patient.pob %>
         </div>
     </div>
     <div class="row">
         <div class="col-12 col-sm-6 col-md-6 left">
-            <b>Telefono Hab:</b> 0271-1234567
+            <b>Teléfono Hab:</b> <%= @patient.phone %>
         </div>
         <div class="col-12 col-sm-6 col-md-6 left">
-            <b>Telefono Cel:</b> 0271-1234567
+            <b>Teléfono Cel:</b> <%= @patient.cellphone %>
         </div>
     </div>
     <div class="row">
         <div class="col-12 col-sm-6 col-md-6 left">
-            <b>Telefono Ofic:</b> 0271-1234567
+            <b>Teléfono Ofic:</b> <%= @patient.office_phone %>
         </div>
         <div class="col-12 col-sm-6 col-md-6 left">
-            <b>Odont. Tratante:</b> Dr Junior Jose Moreno Toledo
+            <b>Odont. Tratante:</b> <%= @patient.doctor.full_name.titleize %>
         </div>
     </div>
-    <div class="row">
-         <div class="col-12 col-md-12 left">
-            <b>Antecedentes Familiares:</b> Antecedente, Antecedente, Antecedente, Antecedente, Antecedente, Antecedente, Antecedente, Antecedente
+    <%= semantic_form_for ([:docs, @history]), :html => { class: "row" } do |f| %>
+    <!-- <form class="row"> -->
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="">Antecedentes Familiares</label>
+                <%= f.input :family_history, label: false, placeholder: "Antecedentes Familiares" %>
+            </div>
         </div>
-    </div>
-    <form class="row">
-        <div class="col-12 col-sm-12">
+        <div class="col-sm-6">
             <table class="table table-bordered">
                 <tr>
                     <td width=""><b>Pregunta</b></td>
                     <td width="2%"><b>Si</b></td>
                     <td width="2%"><b>No</b></td>
+                </tr>
+            <% Question.all.each do |q| %>
+                <% if q.id <= 19 %>
+                <tr>
+                    <td>
+                        <%= "&nbsp;&nbsp;&nbsp;".html_safe if q.question %>
+                        <%= q.question_text %>
+                    </td>
+                    <td>
+                        <% if q.show_options %>
+                            <% selected = Answer.where( choice_question: ChoiceQuestion.where(choice_id: 1, question_id: q.id ).first, choice_id: 1, history: @patient.history).blank? ? false : true %>
+                            <input type="radio" name="history[questions][<%= q.id %>]" value="1" <%= "checked = 'checked'" if selected %>>
+                        <% end %>
+                    </td>
+                    <td>
+                        <% if q.show_options %>
+                            <% selected = Answer.where( choice_question: ChoiceQuestion.where(choice_id: 2, question_id: q.id ).first, choice_id: 2, history: @patient.history).blank? ? false : true %>
+                            <input type="radio" name="history[questions][<%= q.id %>]" value="2" <%= "checked = 'checked'" if selected %>>
+                        <% end %>
+                    </td>
+                </tr>
+                <% end %>
+            <% end %>
+            </table>
+        </div>
+        <div class="col-sm-6">
+            <table class="table table-bordered">
+                <tr>
                     <td width=""><b>Pregunta</b></td>
                     <td width="2%"><b>Si</b></td>
                     <td width="2%"><b>No</b></td>
                 </tr>
+            <% Question.all.each do |q| %>
+                <% if q.id > 19 %>
                 <tr>
-                    <td width="">Esta usted bajo Tratamiento Medico?</td>
-                    <td width="2%"><input type="radio" name="pregunta1" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta1" value="N" checked="checked"></td>
-                    <td width="">Sufre de:</td>
-                    <td width="2%">&nbsp;</td>
-                    <td width="2%">&nbsp;</td>
+                    <td>
+                        <%= "&nbsp;&nbsp;&nbsp;".html_safe if q.question %>
+                        <%= q.question_text %>
+                    </td>
+                    <td>
+                        <% if q.show_options %>
+                            <input type="radio" name="history[questions][<%= q.id %>]" value="<%= Choice.first.id %>">
+                        <% end %>
+                    </td>
+                    <td>
+                        <% if q.show_options %>
+                            <input type="radio" name="history[questions][<%= q.id %>]" value="<%= Choice.last.id %>" checked="checked">
+                        <% end %>
+                    </td>
                 </tr>
-                <tr>
-                    <td width="">Toma actualmente algún medicamento?</td>
-                    <td width="2%"><input type="radio" name="pregunta2" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta2" value="N" checked="checked"></td>
-                    <td width="">&nbsp;&nbsp;&nbsp; - Enfermedades venéreas</td>
-                    <td width="2%"><input type="radio" name="pregunta3" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta3" value="N" checked="checked"></td>
-                </tr>
-                <tr>
-                    <td width="">Le han practicado alguna invervencion quirurgica?</td>
-                    <td width="2%"><input type="radio" name="pregunta4" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta4" value="N" checked="checked"></td>
-                    <td width="">&nbsp;&nbsp;&nbsp; - Problemas del corazon</td>
-                    <td width="2%"><input type="radio" name="pregunta5" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta5" value="N" checked="checked"></td>
-                </tr>
-                <tr>
-                    <td width="">Ha recibido alguna transfusion sanguinea?</td>
-                    <td width="2%"><input type="radio" name="pregunta6" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta6" value="N" checked="checked"></td>
-                    <td width="">&nbsp;&nbsp;&nbsp; - Hepatitis</td>
-                    <td width="2%"><input type="radio" name="pregunta7" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta7" value="N" checked="checked"></td>
-                </tr>
-                <tr>
-                    <td width="">Ha consumido o consume drogas?</td>
-                    <td width="2%"><input type="radio" name="pregunta8" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta8" value="N" checked="checked"></td>
-                    <td width="">&nbsp;&nbsp;&nbsp; - Fiebre Reumatica</td>
-                    <td width="2%"><input type="radio" name="pregunta9" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta9" value="N" checked="checked"></td>
-                </tr>
-                <tr>
-                    <td width="">Ha presentado reaccion alergica a:</td>
-                    <td width="2%">&nbsp;</td>
-                    <td width="2%">&nbsp;</td>
-                    <td width="">&nbsp;&nbsp;&nbsp; - Asma</td>
-                    <td width="2%"><input type="radio" name="pregunta10" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta10" value="N" checked="checked"></td>
-                </tr>
-                <tr>
-                    <td width="">&nbsp;&nbsp;&nbsp; - Penicilina</td>
-                    <td width="2%"><input type="radio" name="pregunta11" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta11" value="N" checked="checked"></td>
-                    <td width="">&nbsp;&nbsp;&nbsp; - Diabetes</td>
-                    <td width="2%"><input type="radio" name="pregunta12" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta12" value="N" checked="checked"></td>
-                </tr>
-                <tr>
-                    <td width="">&nbsp;&nbsp;&nbsp; - Anestesia</td>
-                    <td width="2%"><input type="radio" name="pregunta13" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta13" value="N" checked="checked"></td>
-                    <td width="">&nbsp;&nbsp;&nbsp; - Ulcera gastrica</td>
-                    <td width="2%"><input type="radio" name="pregunta14" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta14" value="N" checked="checked"></td>
-                </tr>
-                <tr>
-                    <td width="">&nbsp;&nbsp;&nbsp; - Aspirina, yodo</td>
-                    <td width="2%"><input type="radio" name="pregunta15" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta15" value="N" checked="checked"></td>
-                    <td width="">&nbsp;&nbsp;&nbsp; - Tiroides</td>
-                    <td width="2%"><input type="radio" name="pregunta16" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta16" value="N" checked="checked"></td>
-                </tr>
-                <tr>
-                    <td width="">&nbsp;&nbsp;&nbsp; - Merthiolate, otros</td>
-                    <td width="2%"><input type="radio" name="pregunta17" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta17" value="N" checked="checked"></td>
-                    <td width="">Ha tenido limitacion al abrir o cerrar la boca?</td>
-                    <td width="2%"><input type="radio" name="pregunta18" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta18" value="N" checked="checked"></td>
-                </tr>
-                <tr>
-                    <td width="">Sufre de temsopm arterial: </td>
-                    <td width="2%"><input type="radio" name="pregunta19" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta19" value="N" checked="checked"></td>
-                    <td width="">Siente Ruidos en la mandibula al abrir o cerrar la boca?</td>
-                    <td width="2%"><input type="radio" name="pregunta20" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta20" value="N" checked="checked"></td>
-                </tr>
-                <tr>
-                    <td width="">&nbsp;&nbsp;&nbsp; - Alta</td>
-                    <td width="2%"><input type="radio" name="pregunta21" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta21" value="N" checked="checked"></td>
-                    <td width="">Sufre de herpes o aftas recurrentes?</td>
-                    <td width="2%"><input type="radio" name="pregunta22" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta22" value="N" checked="checked"></td>
-                </tr>
-                <tr>
-                    <td width="">&nbsp;&nbsp;&nbsp; - Baja</td>
-                    <td width="2%"><input type="radio" name="pregunta23" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta23" value="N" checked="checked"></td>
-                    <td width="">¿Presenta alguno de los siguientes hábitos</td>
-                    <td width="2%">&nbsp;</td>
-                    <td width="2%">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td width="">Sangre excesivamente al cortarse?</td>
-                    <td width="2%"><input type="radio" name="pregunta24" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta24" value="N" checked="checked"></td>
-                    <td width="">&nbsp;&nbsp;&nbsp; - Fuma?</td>
-                    <td width="2%"><input type="radio" name="pregunta25" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta25" value="N" checked="checked"></td>
-                </tr>
-                <tr>
-                    <td width="">&nbsp;&nbsp;&nbsp; - Anemia, leucemia, hemofilia, deficit Vit. K</td>
-                    <td width="2%"><input type="radio" name="pregunta26" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta26" value="N" checked="checked"></td>
-                    <td width="">&nbsp;&nbsp;&nbsp; - Consume alimentos citricos?</td>
-                    <td width="2%"><input type="radio" name="pregunta27" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta27" value="N" checked="checked"></td>
-                </tr>
-                <tr>
-                    <td width="">Es usted V.I.H.+?</td>
-                    <td width="2%"><input type="radio" name="pregunta28" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta28" value="N" checked="checked"></td>
-                    <td width="">Muerde objetos con los dientes?</td>
-                    <td width="2%"><input type="radio" name="pregunta29" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta29" value="N" checked="checked"></td>
-                </tr>
-                <tr>
-                    <td width="">Toma usted algun medicamento retroviral?</td>
-                    <td width="2%"><input type="radio" name="pregunta30" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta30" value="N" checked="checked"></td>
-                    <td width="">&nbsp;&nbsp;&nbsp; - Apretamiento Dentario</td>
-                    <td width="2%"><input type="radio" name="pregunta31" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta31" value="N" checked="checked"></td>
-                </tr>
-                <tr>
-                    <td width="">Esta usted embarazada?</td>
-                    <td width="2%"><input type="radio" name="pregunta32" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta32" value="N" checked="checked"></td>
-                    <td width="">&nbsp;&nbsp;&nbsp; - Respiracion bucal</td>
-                    <td width="2%"><input type="radio" name="pregunta33" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta33" value="N" checked="checked"></td>
-                </tr>
-                <tr>
-                    <td width="">Esta tomndo actualmente pastillas anticonceptivas?</td>
-                    <td width="2%"><input type="radio" name="pregunta34" value="S"></td>
-                    <td width="2%"><input type="radio" name="pregunta34" value="N" checked="checked"></td>
-                    <td width="">&nbsp;</td>
-                    <td width="2%">&nbsp;</td>
-                    <td width="2%">&nbsp;</td>
-                </tr>
+                <% end %>
+            <% end %>
             </table>
         </div>
-        <div class="row">
+        <div class="col-sm-12">
             <div class="form-group">
                 <input type="submit" class="btn btn-success" value="Guardar">
             </div>
         </div>
-    </form>
+    <!-- </form> -->
+    <% end %>
     <div class="row">
         <div class="col-12 tira-images">
             <a href="" data-toggle="modal" data-target="#addImg"><span class="glyphicon glyphicon-plus"></span>Agregar Imagen</a>
@@ -275,6 +173,7 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
+
                 <tbody id="sec">
                     <tr id="elem0">
                         <td>1</td>
@@ -283,105 +182,6 @@
                         <td>
                             <button class="btn btn-info updSec" data-eq="0">Actualizar</button>
                             <button class="btn btn-danger delSec" data-eq="0">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr id="elem1">
-                        <td>2</td>
-                        <td>2/2/2017</td>
-                        <td>Descripcion 2</td>
-                        <td>
-                            <button class="btn btn-info updSec" data-eq="1">Actualizar</button>
-                            <button class="btn btn-danger delSec" data-eq="1">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr id="elem2">
-                        <td>3</td>
-                        <td>3/3/2017</td>
-                        <td>Descripcion 3</td>
-                        <td>
-                            <button class="btn btn-info updSec" data-eq="2">Actualizar</button>
-                            <button class="btn btn-danger delSec" data-eq="2">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr id="elem3">
-                        <td>4</td>
-                        <td>4/4/2017</td>
-                        <td>Descripcion 4</td>
-                        <td>
-                            <button class="btn btn-info updSec" data-eq="3">Actualizar</button>
-                            <button class="btn btn-danger delSec" data-eq="3">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr id="elem4">
-                        <td>5</td>
-                        <td>5/5/2017</td>
-                        <td>Descripcion 5</td>
-                        <td>
-                            <button class="btn btn-info updSec" data-eq="4">Actualizar</button>
-                            <button class="btn btn-danger delSec" data-eq="4">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr id="elem5">
-                        <td>6</td>
-                        <td>6/6/2017</td>
-                        <td>Descripcion 6</td>
-                        <td>
-                            <button class="btn btn-info updSec" data-eq="5">Actualizar</button>
-                            <button class="btn btn-danger delSec" data-eq="5">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr id="elem6">
-                        <td>7</td>
-                        <td>7/7/2017</td>
-                        <td>Descripcion 7</td>
-                        <td>
-                            <button class="btn btn-info updSec" data-eq="6">Actualizar</button>
-                            <button class="btn btn-danger delSec" data-eq="6">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr id="elem7">
-                        <td>8</td>
-                        <td>8/8/2017</td>
-                        <td>Descripcion 8</td>
-                        <td>
-                            <button class="btn btn-info updSec" data-eq="7">Actualizar</button>
-                            <button class="btn btn-danger delSec" data-eq="7">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr id="elem8">
-                        <td>9</td>
-                        <td>9/9/2017</td>
-                        <td>Descripcion 9</td>
-                        <td>
-                            <button class="btn btn-info updSec" data-eq="8">Actualizar</button>
-                            <button class="btn btn-danger delSec" data-eq="8">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr id="elem9">
-                        <td>10</td>
-                        <td>10/10/2017</td>
-                        <td>Descripcion 10</td>
-                        <td>
-                            <button class="btn btn-info updSec" data-eq="9">Actualizar</button>
-                            <button class="btn btn-danger delSec" data-eq="9">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr id="elem10">
-                        <td>11</td>
-                        <td>11/11/2017</td>
-                        <td>Descripcion 11</td>
-                        <td>
-                            <button class="btn btn-info updSec" data-eq="10">Actualizar</button>
-                            <button class="btn btn-danger delSec" data-eq="10">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr id="elem11">
-                        <td>12</td>
-                        <td>12/12/2017</td>
-                        <td>Descripcion 12</td>
-                        <td>
-                            <button class="btn btn-info updSec" data-eq="11">Actualizar</button>
-                            <button class="btn btn-danger delSec" data-eq="11">Eliminar</button>
                         </td>
                     </tr>
                 </tbody>
@@ -678,6 +478,6 @@
         </div>
     </form>
   </div>
+<% end %>
 </div>
-
 <!-- FIN DE MODALS -->

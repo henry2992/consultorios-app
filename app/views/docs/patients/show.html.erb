@@ -108,12 +108,14 @@
                     </td>
                     <td>
                         <% if q.show_options %>
-                            <input type="radio" name="history[questions][<%= q.id %>]" value="<%= Choice.first.id %>">
+                            <% selected = Answer.where( choice_question: ChoiceQuestion.where(choice_id: 1, question_id: q.id ).first, choice_id: 1, history: @patient.history).blank? ? false : true %>
+                            <input type="radio" name="history[questions][<%= q.id %>]" value="1" <%= "checked = 'checked'" if selected %>>
                         <% end %>
                     </td>
                     <td>
                         <% if q.show_options %>
-                            <input type="radio" name="history[questions][<%= q.id %>]" value="<%= Choice.last.id %>" checked="checked">
+                            <% selected = Answer.where( choice_question: ChoiceQuestion.where(choice_id: 2, question_id: q.id ).first, choice_id: 2, history: @patient.history).blank? ? false : true %>
+                            <input type="radio" name="history[questions][<%= q.id %>]" value="2" <%= "checked = 'checked'" if selected %>>
                         <% end %>
                     </td>
                 </tr>

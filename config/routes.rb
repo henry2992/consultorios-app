@@ -25,9 +25,9 @@ Rails.application.routes.draw do
     resources :choices
     resources :questions
     
-    resources :histories do
-      post 'new_history_entry/:id', to: 'histories#new_entry'
-    end
+    resources :histories
+
+    post 'new_history_entry/', to: 'histories#new_entry'
   end
 
   get '/no_clinic', to: 'pages#no_clinic'

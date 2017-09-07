@@ -1,9 +1,14 @@
 class Docs::HistoriesController < Docs::DoctorsController
-  before_action :set_history, only: [:update]
-  before_action :set_patient, only: [:update]
+  before_action :set_history, only: [:update, :new_entry]
+  before_action :set_patient, only: [:update, :new_entry]
 
   def new_entry
-    
+    @history.history_entries.new(history_entry_params)
+    if @history.history_entries.save
+      redirect_to docs_patient_path(@patient), notice: 'La entrada fue creada exitosamente.'
+    else
+      redirect_to docs_patient_path(@patient), notice: { msg: 'Error al crear la entrada la historia', class: "danger"}
+    end
   end
 
   def update

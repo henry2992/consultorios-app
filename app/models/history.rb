@@ -6,6 +6,7 @@ class History < ApplicationRecord
                       foreign_key: :patient_id
 
   has_many :answers
+  has_many :history_entries
 
   has_many :attachments, as: :imageable
 

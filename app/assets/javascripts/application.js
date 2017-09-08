@@ -35,21 +35,25 @@ $(document).ready(function() {
   });
 
 
-  $('.multi-item-carousel .item').each(function(){
-    var next = $(this).next();
-    if (!next.length) {
+  $('#recipeCarousel').carousel({
+    interval: 10000
+  })
+
+  $('.carousel .carousel-item').each(function(){
+      var next = $(this).next();
+      if (!next.length) {
       next = $(this).siblings(':first');
-    }
-    next.children(':first-child').clone().appendTo($(this));
-    
-    if (next.next().length>0) {
+      }
+      next.children(':first-child').clone().appendTo($(this));
+      
+      if (next.next().length>0) {
       next.next().children(':first-child').clone().appendTo($(this));
-    } else {
-      $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
-    }
+      }
+      else {
+        $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+      }
   });
-  
-  // setTimeout(function(){
+
 
   $('#addImg').modal({
     show:false
@@ -69,11 +73,7 @@ $(document).ready(function() {
   $('#updateEntrada').modal({
     show:false
   });
-  // },1000)
-
-  // $('#addImg').on('hidden.bs.modal', function () {
-  //   $('#accion').text("Agregar");
-  // })
+  
 
   $('#btnSaveUpd').click(function(){
     

@@ -9,6 +9,7 @@ class Docs::PatientsController < Docs::DoctorsController
 
   def show
     @history = @patient.history
+    @attachment = @history.attachments.new
   end
 
   def new
@@ -47,6 +48,22 @@ class Docs::PatientsController < Docs::DoctorsController
     end
   end
 
+  def upload_image
+    @attachment = Attachment.create( attachment_params )
+    respond_to do |format|
+      if @attachment
+        h = History.find(attachment_params[:imageable_id])
+        format.html { redirect_to docs_patient_path(h.patient), notice: 'La imagen fue creada exitosamente.' }
+      else
+        format.html { redirect_to docs_patient_path(h.patient), notice: { msg: 'Error al guardar la imagen', class: "danger"} }
+      end
+    end
+  end
+
+  def delete_image
+    
+  end
+
   private
 
     def set_patient
@@ -55,6 +72,10 @@ class Docs::PatientsController < Docs::DoctorsController
 
     def patient_params
       params.require(:patient).permit(:first_name, :last_name, :email, :address, :phone, :national_id, :pob, :dob, :cellphone, :office_phone, :gender )
+    end
+
+    def attachment_params
+      params.require(:attachment).permit(:imageable_id, :imageable_type, :description, :image )
     end
 
     def sort_column

@@ -49,8 +49,6 @@ class Docs::HistoriesController < Docs::DoctorsController
       if @patient.history.update(history_params)
         Answer.where(history: @patient.history).destroy_all.to_json
         params[:history][:questions].each do |a,i|
-          # ChoiceQuestion.where(choice: Choice.find(i.to_i), question: Question.find(a.to_i)).destroy_all
-          # cq = ChoiceQuestion.create! choice: Choice.find(i.to_i), question: Question.find(a.to_i)
           Answer.create! choice_question: ChoiceQuestion.where(choice: i.to_i, question_id: a.to_i).take, history: @patient.history, choice: Choice.find(i.to_i)
         end
         format.html { redirect_to docs_patient_path(@patient), notice: 'La historia fue actualizada exitosamente.' }

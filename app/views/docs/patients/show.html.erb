@@ -192,8 +192,8 @@
                             <a href="" id="entry<%= history.id %>" class="btn-show-entry" data-toggle="modal" data-target="#showEntrada"><%= history.reason_for_the_visit %></a>
                         </td>
                         <td>
-                            <a href="" id="entry-update-<%= history.id %>" class="btn btn-info updSec" data-toggle="modal" data-target="#updateEntrada">Actualizar</a>
-                            <button id="entry-delete-<%= history.id %>" class="btn btn-danger delSec" confirm="¿Estas seguro?" data-eq="<%= history.id %>">Eliminar</button>
+                            <a href="" title="Actualizar" alt="Actualizar" id="entry-update-<%= history.id %>" class="btn btn-info btn-sm updSec" data-toggle="modal" data-target="#updateEntrada"><i class="icon-pencil icons"></i></a>
+                            <button title="Eliminar" alt="Eliminar" id="entry-delete-<%= history.id %>" class="btn btn-danger btn-sm delSec" confirm="¿Estas seguro?" data-eq="<%= history.id %>"><i class="icon-trash icons"></i></button>
                          </td>
                     </tr>
                     <% end %>

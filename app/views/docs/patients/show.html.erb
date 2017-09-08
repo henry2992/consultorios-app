@@ -135,16 +135,20 @@
             <a href="" data-toggle="modal" data-target="#addImg"><span class="glyphicon glyphicon-plus"></span>Agregar Imagen</a>
         </div>
     </div>
-     <div class="row">
+    <% if @patient.history.attachments %>
+    <div class="row">
         <div class="col-md-12">
           <div class="carousel slide multi-item-carousel" id="theCarousel">
             <div class="carousel-inner">
-              <div class="item active ">
+              <% @patient.history.attachments.each_with_index do |a, i| %>
+              <div class="item <%= "active" if i == 0 %> ">
                 <div class="col-xs-4">
-                    <a href="#1" data-toggle="modal" data-target="#descImg" class="imgCarousel" data-id="142" data-eq="0" data-description="descripcion x" ><img src="http://placehold.it/300/f44336/000000" class="img-responsive"></a>
+                    <a href="#<%= a.id %>" data-toggle="modal" data-target="#descImg" class="imgCarousel" data-id="<%= a.id %>" data-eq="0" data-description="<%= a.description %>" >
+                    <%= image_tag a.image.url %>
                     </a>
                 </div>
               </div>
+              <% end %>
             </div>
 
             <a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
@@ -152,7 +156,8 @@
 
           </div>
         </div>
-      </div>
+    </div>
+    <% end %>
     <div class="row">
         <div class="col-xs-12">
             <a href="" data-toggle="modal" data-target="#addEntrada"><span class="glyphicon glyphicon-plus"></span>Agregar Entrada</a>
@@ -198,10 +203,9 @@
 
 
 <!-- MODALS -->
-
 <div class="modal fade" id="addImg" tabindex="-1" role="dialog">
     <div class="modal-dialog">
-        <form class="modal-content">
+        <%= semantic_form_for ([:docs, @attachment]), url: docs_image_path, :html => { class: "modal-content" } do |f| %>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title center">Agregar Imagen</h4>
@@ -209,12 +213,11 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="exampleInputFile">Seleccione el archivo:</label>
-                    <input type="file" id="exampleInputFile" accept="image/*">
+                    <%= f.input :image, as: :file %>
                     <p class="help-block">La imagen debe tener formato .JPG .JPEG .GIF .PNG .SVG</p>
                 </div>
                 <div class="form-group">
-                    <label for="">Descripcion</label>
-                    <textarea cols="30" rows="10" class="form-control"></textarea>
+                    <%= f.input :description, label: "Descripción", :input_html => { rows: 3 } %>
                 </div>
             </div>
             <div class="modal-footer">
@@ -222,7 +225,9 @@
                     <input type="submit" class="btn btn-success" value="Guardar">
                 </div>
             </div>
-        </form>
+            <%= hidden_field :attachment, :imageable_id, :value => @patient.history.id %>
+            <%= hidden_field :attachment, :imageable_type, :value => @patient.history.class.name %>
+        <% end %>
     </div>
 </div>
 
@@ -245,7 +250,7 @@
                     <p class="help-block">La imagen debe tener formato .JPG .JPEG .GIF .PNG .SVG</p>
                 </div>
                 <div class="form-group">
-                    <label>Descripcion</label>
+                    <label>Descripción</label>
                     <textarea cols="30" rows="10" id="descripcion" class="form-control"></textarea>
                 </div>
             </div>

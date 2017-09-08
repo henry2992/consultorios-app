@@ -17,6 +17,7 @@
 !/log/.keep
 !/tmp/.keep
 /public/assets
+/public/system
 /public/assets/*
 
 # Ignore Byebug command history file.

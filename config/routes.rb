@@ -19,6 +19,9 @@ Rails.application.routes.draw do
     # resources :balance_sheet_entries, :path => "cuentas", :as => :cuentas
     
     post '/image', to: 'patients#upload_image'
+    post '/image/:id', to: 'patients#show_image'
+    delete '/image/:id', to: 'patients#delete_image'
+    post '/update_image/:id', to: 'patients#update_image'
     resources :patients
     
     resources :answers

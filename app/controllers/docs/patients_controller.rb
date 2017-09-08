@@ -60,8 +60,28 @@ class Docs::PatientsController < Docs::DoctorsController
     end
   end
 
+  def show_image
+    @attachment = Attachment.find(params['id'])
+
+    if @attachment
+      render json: {url_image: @attachment.image.url(:mini), description: @attachment.description}
+    else
+      render json: "Imagen no encontrada".to_json
+    end
+  end
+
+  def update_image
+    @patient = Patient.find(params['id_patient'])
+
+    if Attachment.find(params['id']).update(attachment_params)
+      redirect_to docs_patient_path(@patient), notice: 'La imagen fue actualizada exitosamente.'
+    else
+      redirect_to docs_patient_path(@patient), notice: { msg: 'Error al actualizar la imagen la historia', class: "danger" }
+    end
+  end
+
   def delete_image
-    
+    render json: Attachment.find(params['id']).destroy
   end
 
   private

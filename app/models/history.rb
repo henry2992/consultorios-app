@@ -8,7 +8,7 @@ class History < ApplicationRecord
   has_many :answers
   has_many :history_entries, dependent: :destroy
 
-  has_many :attachments, as: :imageable
+  has_many :attachments, as: :imageable, dependent: :destroy
 
   validates :doctor_id, :patient_id, :code, presence: true
 end

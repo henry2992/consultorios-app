@@ -81,19 +81,54 @@ $(document).ready(function() {
   });
 
   $('.imgCarousel').click(function(){
-    $('#img').attr("src",$(this).find("img").eq(0).attr("src"));
-    $('#descripcion').text($(this).attr("data-description"));
-    $('#btnDelete').attr('data-id',$(this).attr('data-id'));
-    $('#btnDelete').attr('data-eq',$(this).attr('data-eq'));
+    var id = $(this).attr('data-id');
+    console.log(id);
+
+    var request = $.ajax({
+      url: "/docs/image/" + id,
+      method: "POST",
+      data: { id : id },
+      dataType: "json"
+    });
+     
+    request.done(function( data ) {
+      console.log(data);
+      $('#img').attr("src",data['url_image']);
+      $('#descripcion_img').text(data['description']);
+      $('#btnDelete').attr('data-id',id);
+      $('#btnDelete').attr('data-eq',id);
+      $('#formUpdateImgage').attr('action',"/docs/update_image/"+id);
+      });
+     
+    request.fail(function( jqXHR, textStatus ) {
+      console.log('cosa: ' + jqXHR + ' status: ' + textStatus);
+    });
   });
 
-  $('#descImg #btnDelete').click(function(){
-    window.location.reload();
-    alert("Se supone q despues de eliminar la imagen se debe recargar la pagina...");
+  $('#btnDelete').click(function (obj) {
+    var id = $(this).attr('data-id');
+
+    var request = $.ajax({
+      url: "/docs/image/" + id,
+      method: "DELETE",
+      data: { id : id },
+      dataType: "json"
+    });
+     
+    request.done(function( data ) {
+      console.log(data);
+      $("#elemt-carrusel-" + id).remove();
+      $('#descImg').modal('hide');
+    });
+     
+    request.fail(function( jqXHR, textStatus ) {
+      console.log('cosa: ' + jqXHR + ' status: ' + textStatus);
+    });
   });
+
   $('#descImg #btnUpd').click(function(){
     $('#descImg').modal('hide');
-    $('#addDesc').val($('#descripcion').text());
+    $('#descripcion').val($('#descripcion_img').text());
     $('#img2').attr("src",$('#img').attr("src"));
     $('#updImg').modal('show');
     
@@ -141,10 +176,15 @@ $(document).ready(function() {
       console.log(data);
       $.each(data['history_entry'], function (index, value) {
         if ( $('#update_' + index).length > 0 ) {
-          if ($('#update_' + index).attr('type') == 'checkbox' && value != null ) {
-            $('#update_' + index).attr('checked', 'true');
+          if ($('#update_' + index).attr('type') == 'checkbox' ) {
+            if (value != null && value != '') {
+              $('#update_' + index).prop('checked', true);
+            }else {
+              $('#update_' + index).prop('checked', false);
+            }
+          }else{
+            $('#update_' + index).val(value);
           }
-          $('#update_' + index).val(value);
         }
       });
     });

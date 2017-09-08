@@ -63,6 +63,12 @@ $(document).ready(function() {
   $('#updImg').modal({
     show:false
   });
+  $('#showEntrada').modal({
+    show:false
+  });
+  $('#updateEntrada').modal({
+    show:false
+  });
   // },1000)
 
   // $('#addImg').on('hidden.bs.modal', function () {
@@ -93,12 +99,79 @@ $(document).ready(function() {
     
   });
 
-  $('.delSec').click(function(){
-    $('#elem'+$(this).attr("data-eq")).remove();
+  $('.btn-show-entry').click(function (obj) {
+    var id = $(this).attr('id').replace('entry','');
+
+    var request = $.ajax({
+      url: "/docs/show_history_entry/" + id,
+      method: "POST",
+      data: { id : id },
+      dataType: "json"
+    });
+     
+    request.done(function( data ) {
+      console.log(data);
+      $.each(data['history_entry'], function (index, value) {
+          if ( $('#show_' + index).length > 0 ) {
+            $('#show_' + index).html(value);
+          }
+      });
+
+      $('#show_attachament').attr('src',data['attachment']);
+    });
+     
+    request.fail(function( jqXHR, textStatus ) {
+      console.log('cosa: ' + jqXHR + ' status: ' + textStatus);
+    });
   });
 
-  $('.updSec').click(function(){
-    $('#addEntrada').modal('show');
+  $('.updSec').click(function (obj) {
+    var id = $(this).attr('id').replace('entry-update-','');
+    
+    $('#update_history_entry').val(id);
+
+    var request = $.ajax({
+      url: "/docs/show_history_entry/" + id,
+      method: "POST",
+      data: { id : id },
+      dataType: "json"
+    });
+     
+    request.done(function( data ) {
+      console.log(data);
+      $.each(data['history_entry'], function (index, value) {
+        if ( $('#update_' + index).length > 0 ) {
+          if ($('#update_' + index).attr('type') == 'checkbox' && value != null ) {
+            $('#update_' + index).attr('checked', 'true');
+          }
+          $('#update_' + index).val(value);
+        }
+      });
+    });
+     
+    request.fail(function( jqXHR, textStatus ) {
+      console.log('cosa: ' + jqXHR + ' status: ' + textStatus);
+    });
+  });
+
+   $('.delSec').click(function (obj) {
+    var id = $(this).attr('id').replace('entry-delete-','');
+
+    var request = $.ajax({
+      url: "/docs/history_entry/" + id,
+      method: "DELETE",
+      data: { id : id },
+      dataType: "json"
+    });
+     
+    request.done(function( data ) {
+      console.log(data);
+      $('#elem'+id).remove();
+    });
+     
+    request.fail(function( jqXHR, textStatus ) {
+      console.log('cosa: ' + jqXHR + ' status: ' + textStatus);
+    });
   });
 
 });

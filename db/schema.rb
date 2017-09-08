@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170907161820) do
+ActiveRecord::Schema.define(version: 20170907192540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,6 +159,8 @@ ActiveRecord::Schema.define(version: 20170907161820) do
     t.text     "observations"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "history_id"
+    t.index ["history_id"], name: "index_history_entries_on_history_id", using: :btree
   end
 
   create_table "products", force: :cascade do |t|
@@ -242,5 +244,6 @@ ActiveRecord::Schema.define(version: 20170907161820) do
   add_foreign_key "balance_sheet_entry_details", "transaction_types"
   add_foreign_key "choice_questions", "choices"
   add_foreign_key "choice_questions", "questions"
+  add_foreign_key "history_entries", "histories"
   add_foreign_key "questions", "questions"
 end

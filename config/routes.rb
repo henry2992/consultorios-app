@@ -27,8 +27,12 @@ Rails.application.routes.draw do
     
     resources :histories
 
-    post 'new_history_entry/', to: 'histories#new_entry'
+    post 'new_history_entry/', to: 'histories#create_entry'
+    post 'update_history_entry/:id', to: 'histories#update_entry'
+    post 'show_history_entry/:id', to: 'histories#show_entry'
+    delete 'history_entry/:id', to: 'histories#delete_entry'
   end
+
 
   get '/no_clinic', to: 'pages#no_clinic'
 

@@ -1,14 +1,47 @@
 class Docs::HistoriesController < Docs::DoctorsController
-  before_action :set_history, only: [:update, :new_entry]
-  before_action :set_patient, only: [:update, :new_entry]
+  before_action :set_history, except: [:delete_entry]
+  before_action :set_patient, except: [:delete_entry]
 
-  def new_entry
-    @history.history_entries.new(history_entry_params)
-    if @history.history_entries.save
+  def create_entry
+    @history_entry = @history.history_entries.new(history_entry_params)
+    if @history_entry.save
+      if params['history_entry']['attachment']
+        Attachment.create(image: params['history_entry']['attachment'], imageable: @history_entry)
+      end
       redirect_to docs_patient_path(@patient), notice: 'La entrada fue creada exitosamente.'
     else
       redirect_to docs_patient_path(@patient), notice: { msg: 'Error al crear la entrada la historia', class: "danger"}
     end
+  end
+
+  def show_entry
+      @history_entry = HistoryEntry.find(params['id'])
+      if @history_entry.attachments.count > 0
+        @attachment = @history_entry.attachments.last.image.url(:mini)
+      else
+        @attachment = ''
+      end
+      
+      render json: {history_entry: @history_entry, attachment: @attachment}
+  end
+
+  def update_entry
+    @history_entry = HistoryEntry.find(params['id_history_entry'])
+    if @history_entry.update(history_entry_params)
+      if params['history_entry']['attachment']
+        if @history_entry.attachments.count > 0
+          @history_entry.attachments.last.destroy
+        end
+        Attachment.create(image: params['history_entry']['attachment'], imageable: @history_entry)
+      end
+      redirect_to docs_patient_path(@patient), notice: 'La entrada fue actualizada exitosamente.'
+    else
+      redirect_to docs_patient_path(@patient), notice: { msg: 'Error al actualizar la entrada la historia', class: "danger"}
+    end
+  end
+
+  def delete_entry
+    render json: HistoryEntry.find(params['id']).destroy
   end
 
   def update

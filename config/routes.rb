@@ -18,8 +18,25 @@ Rails.application.routes.draw do
     end
     # resources :balance_sheet_entries, :path => "cuentas", :as => :cuentas
     
+    post '/image', to: 'patients#upload_image'
+    post '/image/:id', to: 'patients#show_image'
+    delete '/image/:id', to: 'patients#delete_image'
+    post '/update_image/:id', to: 'patients#update_image'
     resources :patients
+    
+    resources :answers
+    resources :choice_questions
+    resources :choices
+    resources :questions
+    
+    resources :histories
+
+    post 'new_history_entry/', to: 'histories#create_entry'
+    post 'update_history_entry/:id', to: 'histories#update_entry'
+    post 'show_history_entry/:id', to: 'histories#show_entry'
+    delete 'history_entry/:id', to: 'histories#delete_entry'
   end
+
 
   get '/no_clinic', to: 'pages#no_clinic'
 

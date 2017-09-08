@@ -12,6 +12,10 @@ class Patient < User
   has_many :balance_sheet_entries
   has_many :balance_sheet_entry_details, through: :balance_sheet_entries
 
-  # has_one :history # TODO
+  has_one :history, dependent: :destroy
+
+  def age
+    self.dob.blank? ? Date.today : (Time.now.to_s(:number).to_i - self.dob.to_time.to_s(:number).to_i)/10e9.to_i
+  end
 
 end

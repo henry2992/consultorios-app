@@ -12,7 +12,7 @@
       <tr>
         <td><%= patient.first_name %>&nbsp;<%= patient.last_name %></td>
         <td><%= patient.phone %></td>
-        <td><%= link_to 'Ver', docs_patient_path(patient) %></td>
+        <td><%= link_to 'Historia Clínica', docs_patient_path(patient) %></td>
         <td><%= link_to 'Editar', edit_docs_patient_path(patient) %></td>
         <td><%= link_to 'Eliminar', docs_patient_path(patient), method: :delete, data: { confirm: '¿Estás seguro de eliminar?' } %></td>
       </tr>

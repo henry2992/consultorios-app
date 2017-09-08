@@ -1,28 +1,773 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid" #historia id="historia">
+<% unless @patient.history.blank? %>
+    <div class="row">
+        <div class="col-sm-12 center">
+          <h2>Historia Clinica</h2>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-6 col-sm-4 col-md-4 col-lg-3 left ">
+        <b>Fecha:</b> <%= @patient.history.created_at.strftime("%d-%m-%Y") %>
+      </div>
+      <div class="col-6 col-sm-4 col-md-4 col-lg-3  col-sm-offset-4 col-md-offset-4 col-lg-offset-5  left">
+        <b>Código:</b> <%= @patient.history.code %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8 col-sm-8 col-md-8 left">
+        <b>Nombre y Apellido:</b> <%= @patient.full_name.titleize %>
+      </div>
+      <div class="col-8 col-sm-8 col-md-4 left">
+        <b>Edad:</b> <%= @patient.age %>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-xs-12 col-sm-4 col-md-4 left">
+            <b>Sexo:</b> <%= @patient.gender.titleize %>
+        </div>
+        <div class="col-12 col-xs-12 col-sm-4 col-md-4 left">
+            <b>C.I.:</b> <%= @patient.national_id %>
+        </div>
+        <div class="col-12 col-xs-12 col-sm-4 col-md-4 left">
+            <b>Fecha de Nacimiento:</b> <%= @patient.dob.strftime("%d-%m-%Y") unless @patient.dob.blank? %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-12 left">
+            <b>Lugar de Nacimiento:</b> <%= @patient.pob %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-6 left">
+            <b>Teléfono Hab:</b> <%= @patient.phone %>
+        </div>
+        <div class="col-12 col-sm-6 col-md-6 left">
+            <b>Teléfono Cel:</b> <%= @patient.cellphone %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-6 left">
+            <b>Teléfono Ofic:</b> <%= @patient.office_phone %>
+        </div>
+        <div class="col-12 col-sm-6 col-md-6 left">
+            <b>Odont. Tratante:</b> <%= @patient.doctor.full_name.titleize %>
+        </div>
+    </div>
+    <%= semantic_form_for ([:docs, @history]), :html => { class: "row" } do |f| %>
+    <!-- <form class="row"> -->
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="">Antecedentes Familiares</label>
+                <%= f.input :family_history, label: false, placeholder: "Antecedentes Familiares" %>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <table class="table table-bordered">
+                <tr>
+                    <td width=""><b>Pregunta</b></td>
+                    <td width="2%"><b>Si</b></td>
+                    <td width="2%"><b>No</b></td>
+                </tr>
+            <% Question.all.each do |q| %>
+                <% if q.id <= 19 %>
+                <tr>
+                    <td>
+                        <%= "&nbsp;&nbsp;&nbsp;".html_safe if q.question %>
+                        <%= q.question_text %>
+                    </td>
+                    <td>
+                        <% if q.show_options %>
+                            <% selected = Answer.where( choice_question: ChoiceQuestion.where(choice_id: 1, question_id: q.id ).first, choice_id: 1, history: @patient.history).blank? ? false : true %>
+                            <input type="radio" name="history[questions][<%= q.id %>]" value="1" <%= "checked = 'checked'" if selected %>>
+                        <% end %>
+                    </td>
+                    <td>
+                        <% if q.show_options %>
+                            <% selected = Answer.where( choice_question: ChoiceQuestion.where(choice_id: 2, question_id: q.id ).first, choice_id: 2, history: @patient.history).blank? ? false : true %>
+                            <input type="radio" name="history[questions][<%= q.id %>]" value="2" <%= "checked = 'checked'" if selected %>>
+                        <% end %>
+                    </td>
+                </tr>
+                <% end %>
+            <% end %>
+            </table>
+        </div>
+        <div class="col-sm-6">
+            <table class="table table-bordered">
+                <tr>
+                    <td width=""><b>Pregunta</b></td>
+                    <td width="2%"><b>Si</b></td>
+                    <td width="2%"><b>No</b></td>
+                </tr>
+            <% Question.all.each do |q| %>
+                <% if q.id > 19 %>
+                <tr>
+                    <td>
+                        <%= "&nbsp;&nbsp;&nbsp;".html_safe if q.question %>
+                        <%= q.question_text %>
+                    </td>
+                    <td>
+                        <% if q.show_options %>
+                            <% selected = Answer.where( choice_question: ChoiceQuestion.where(choice_id: 1, question_id: q.id ).first, choice_id: 1, history: @patient.history).blank? ? false : true %>
+                            <input type="radio" name="history[questions][<%= q.id %>]" value="1" <%= "checked = 'checked'" if selected %>>
+                        <% end %>
+                    </td>
+                    <td>
+                        <% if q.show_options %>
+                            <% selected = Answer.where( choice_question: ChoiceQuestion.where(choice_id: 2, question_id: q.id ).first, choice_id: 2, history: @patient.history).blank? ? false : true %>
+                            <input type="radio" name="history[questions][<%= q.id %>]" value="2" <%= "checked = 'checked'" if selected %>>
+                        <% end %>
+                    </td>
+                </tr>
+                <% end %>
+            <% end %>
+            </table>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Guardar">
+            </div>
+        </div>
+    <!-- </form> -->
+    <% end %>
+    <div class="row">
+        <div class="col-12 tira-images">
+            <a href="" data-toggle="modal" data-target="#addImg"><span class="glyphicon glyphicon-plus"></span>Agregar Imagen</a>
+        </div>
+    </div>
+    <% if @patient.history.attachments %>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                    <% @patient.history.attachments.each_with_index do |a, i| %>
+                        <% if a.id %>
+                            <div class="carousel-item <%= "active" if i == 0 %> ">
+                                <%= image_tag a.image.url, { "id":"elemt-carrusel-"+a.id.to_s, "data-toggle":"modal", "data-target":"#descImg", "data-id": a.id, "data-eq":"0", "data-description": a.description, class:"imgCarousel item d-block img-fluid" } %>
+                            </div>
+                        <% end %>
+                    <% end %>
+                </div>
+                <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#recipeCarousel" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <% end %>
+    <div class="row">
+        <div class="col-xs-12">
+            <a href="" data-toggle="modal" data-target="#addEntrada"><span class="glyphicon glyphicon-plus"></span>Agregar Entrada</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h4>Secuencia de Tratamiento</h4>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="2%">#</th>
+                        <th width="25%">Fecha</th>
+                        <th width="50%">Descripcion</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
 
-<p>
-  <strong>Address:</strong>
-  <%= @patient.address %>
-</p>
+                <tbody id="sec">
+                    <% @patient.history.history_entries.each do |history| %>
+                    <tr id="elem<%= history.id %>">
+                        <td>1</td>
+                        <td><%= history.created_at.strftime("%d/%m/%Y") %></td>
+                        <td>
+                            <a href="" id="entry<%= history.id %>" class="btn-show-entry" data-toggle="modal" data-target="#showEntrada"><%= history.reason_for_the_visit %></a>
+                        </td>
+                        <td>
+                            <a href="" title="Actualizar" alt="Actualizar" id="entry-update-<%= history.id %>" class="btn btn-info btn-sm updSec" data-toggle="modal" data-target="#updateEntrada"><i class="icon-pencil icons"></i></a>
+                            <button title="Eliminar" alt="Eliminar" id="entry-delete-<%= history.id %>" class="btn btn-danger btn-sm delSec" confirm="¿Estas seguro?" data-eq="<%= history.id %>"><i class="icon-trash icons"></i></button>
+                         </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @patient.phone %>
-</p>
 
-<p>
-  <strong>User:</strong>
-  <%= @patient.first_name %>&nbsp;
-  <%= @patient.last_name %> | 
-  <%= @patient.email %>
 
-</p>
+<!-- MODALS -->
+<div class="modal fade" id="addImg" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <%= semantic_form_for ([:docs, @attachment]), url: docs_image_path, :html => { class: "modal-content" } do |f| %>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title center">Agregar Imagen</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputFile">Seleccione el archivo:</label>
+                    <%= f.input :image, as: :file %>
+                    <p class="help-block">La imagen debe tener formato .JPG .JPEG .GIF .PNG .SVG</p>
+                </div>
+                <div class="form-group">
+                    <%= f.input :description, label: "Descripción", :input_html => { rows: 3 } %>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success" value="Guardar">
+                </div>
+            </div>
+            <%= hidden_field :attachment, :imageable_id, :value => @patient.history.id %>
+            <%= hidden_field :attachment, :imageable_type, :value => @patient.history.class.name %>
+        <% end %>
+    </div>
+</div>
 
-<p>
-  <strong>Doctor:</strong>
-  <%= @patient.doctor.first_name %>&nbsp;
-  <%= @patient.doctor.last_name %>
-</p>
+<div class="modal fade" id="updImg" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title center">Modificar Imagen</h4>
+            </div>
+            <form id="formUpdateImgage" action="" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id_patient" value="<%= @patient.id %>">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12 center">
+                            <img src="" id="img2">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile">Seleccione el archivo:</label>
+                        <input type="file" id="exampleInputFile" name="attachment[image]" accept="image/*">
+                        <p class="help-block">La imagen debe tener formato .JPG .JPEG .GIF .PNG .SVG</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Descripción</label>
+                        <textarea cols="30"  name="attachment[description]" rows="10" id="descripcion" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success" value="Guardar">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-<%= link_to 'Edit', edit_docs_patient_path(@patient) %> |
-<%= link_to 'Back', docs_patients_path %>
+<div class="modal fade" id="descImg" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title center">Descripcion de Imagen</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 center">
+                        <img src="" id="img">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12" id="descripcion_img">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="col-6 center">
+                    <button class="btn btn-danger" id="btnDelete">Eliminar</button>
+                </div>
+                <div class="col-6 center">
+                    <button class="btn btn-success" id="btnUpd" data-dismiss="modal" data-toggle="modal" href="#updImg">Modificar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="showEntrada" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="text-center">Mostrar Consulta</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <h6>Motivo de la Consulta:</h6>
+                        <p id="show_reason_for_the_visit"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h6>Dolor</h6>
+                        <p id="show_pain"></p>
+                        <h6>Control</h6>
+                        <p id="show_control"></p>
+                    </div>
+                    <div class="col-6">
+                        <h6>Sangramiento de Encias</h6>
+                        <p id="show_gingivitis"></p>
+                        <h6>Restauracion Protesica</h6>
+                        <p id="show_prosthetic_restoration"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h6>Otro</h6>
+                        <p id="show_other"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h6>Enfermedad Actual</h6>
+                        <p id="show_current_disease"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h6>Aspecto del Paciente</h6>
+                        <p id="show_appearance"></p>
+                        <h6>Labios y Comisura</h6>
+                        <p id="show_lips_and_commissure"></p>
+                    </div>
+                    <div class="col-6">
+                        <h6>Cara</h6>
+                        <p id="show_face"></p>
+                        <h6>Ganglios</h6>
+                        <p id="show_nodes"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <h4>Examen Clinico IntraBucal</h4>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h6>Carrilos</h6>
+                        <p id="show_cheeks"></p>
+                        <h6>Encia</h6>
+                        <p id="show_gum"></p>
+                        <h6>Paladar</h6>
+                        <p id="show_palate"></p>
+                    </div>
+                    <div class="col-6">
+                        <h6>Mucosa</h6>
+                        <p id="show_mucosa"></p>
+                        <h6>Lengua</h6>
+                        <p id="show_tongue"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <h4>Examenes Complementarios</h4>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h6>Rx Panoramica</h6>
+                        <p id="show_rx_panoramic"></p>
+                        <h6>Rx Periapical</h6>
+                        <p id="show_rx_periapical"></p>
+                    </div>
+                    <div class="col-6">
+                        <h6>Rx Cordal</h6>
+                        <p id="show_rx_coronal"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h6>Observaciones</h6>
+                        <p id="show_observations"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <h4>Odontodiagrama</h4>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 center" style="margin: auto;">
+                        <img id="show_attachament" src="" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" role="dialog" tabindex="-1" id="addEntrada">
+  <div class="modal-dialog modal-lg" role="document">
+    <form class="modal-content form-horizonta" action="/docs/new_history_entry" enctype="multipart/form-data" method="post">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title center">Agregar Entrada</h4>
+        </div>
+        <div class="modal-body">
+
+            <input type="hidden" name="id" value="<%= @history.id %>">
+
+           <div class="form-group">
+                <label class="control-label">Motivo de la Consulta:</label>
+                <!-- <div class="col-sm-12 col-md-8"> -->
+                    <input type="text" class="form-control" name="history_entry[reason_for_the_visit]">
+                <!-- </div> -->
+            </div>
+            <!-- <br class="hidden-xs"><br class="hidden-xs"> -->
+            <div class="checkbox">
+                <label class="col-xs-12 col-sm-6 col-md-6 control-label">
+                <!-- <div class="col-xs-2 col-sm-6 col-md-4"> -->
+                    <input type="checkbox" value="1" name="history_entry[pain]"> <b>Dolor?</b>
+                <!-- </div> -->
+                </label>
+            </div>
+            <div class="checkbox">
+                <label class="col-xs-12 col-sm-6 col-md-6 control-label">
+                <!-- <div class="col-xs-2 col-sm-6 col-md-2"> -->
+                    <input type="checkbox" value="1" name="history_entry[gingivitis]"> <b>Sangramiento de Encias?</b>
+                <!-- </div> -->
+                </label>
+            </div>
+            <br class="hidden-xs"><br class="hidden-xs">
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Control?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control" name="history_entry[control]">
+                </div>
+                <label class="col-sm-12 col-md-2 control-label">Restauracion Protesica?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control" name="history_entry[prosthetic_restoration]">
+                </div>
+            </div>
+            <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs hidden-md">
+            <div class="form-group">
+                <label class="control-label">Otro, indique cual:</label>
+                <input type="text" class="form-control" name="history_entry[other]">   
+            </div>
+            <div class="form-group">
+                <label class="control-label">Enfermedad Actual:</label>
+                <input type="text" class="form-control" name="history_entry[current_disease]">   
+            </div>
+            <br class="hidden-xs">
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Aspecto del Paciente?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control" name="history_entry[appearance]">
+                </div>
+                <label class="col-sm-12 col-md-2 control-label">Cara?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control" name="history_entry[face]">
+                </div>
+            </div>
+            <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs hidden-md">
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Labios y Comisura?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control" name="history_entry[lips_and_commissure]">
+                </div>
+                <label class="col-sm-12 col-md-2 control-label">Ganglios?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control" name="history_entry[nodes]">
+                </div>
+            </div>
+            <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs hidden-md">
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    <h4>Examen Clinico IntraBucal</h4>
+                    <hr>
+                </div>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Carillos:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control" name="history_entry[cheeks]">
+                </div>
+                <label class="col-sm-12 col-md-2 control-label">Mucosa:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control" name="history_entry[mucosa]">
+                </div>
+            </div>
+
+            <br class="hidden-xs"><br class="hidden-xs">
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Encia:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control" name="history_entry[gum]">
+                </div>
+                <label class="col-sm-12 col-md-2 control-label">Lengua:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control" name="history_entry[tongue]">
+                </div>
+            </div>
+
+            <br class="hidden-xs"><br class="hidden-xs">
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Paladar:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control" name="history_entry[palate]">
+                </div>
+            </div>
+    
+
+            <br><br>
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    <h4>Examenes Complementarios</h4>
+                    <hr>
+                </div>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Rx Panoramica:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control" name="history_entry[rx_panoramic]">
+                </div>
+                <label class="col-sm-12 col-md-2 control-label">Rx Cordal:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control" name="history_entry[rx_coronal]">
+                </div>
+            </div>
+            <br class="hidden-xs"><br class="hidden-xs">
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Rx Periapical:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" class="form-control" name="history_entry[rx_periapical]">
+                </div>
+            </div>
+
+            <br class="hidden-xs"><br class="hidden-xs">
+            <div class="form-group">
+                <label class="control-label">Observaciones:</label>
+                <input type="text" class="form-control" name="history_entry[observations]">
+            </div>
+
+            <br class="hidden-xs">
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    <h4>Odontodiagrama</h4>
+                    <hr>
+                </div>
+            </div>
+
+            <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs hidden-md">
+
+            <div class="form-group">
+                <label for="exampleInputFile">Seleccione el archivo:</label>
+                <input type="file" id="exampleInputFile" accept="image/*" name="history_entry[attachment]">
+                <p class="help-block">La imagen debe tener formato .JPG .JPEG .GIF .PNG .SVG</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Guardar">
+            </div>
+        </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="modal fade" role="dialog" tabindex="-1" id="updateEntrada">
+  <div class="modal-dialog modal-lg" role="document">
+    <form class="modal-content form-horizonta" action="/docs/update_history_entry/<%= @history.id %>" enctype="multipart/form-data" method="post">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title center">Actualizar Entrada</h4>
+        </div>
+        <div class="modal-body">
+
+           <input type="hidden" id="update_history_entry" name="id_history_entry">
+
+           <div class="form-group">
+                <label class="control-label">Motivo de la Consulta:</label>
+                <!-- <div class="col-sm-12 col-md-8"> -->
+                    <input type="text" id="update_reason_for_the_visit" class="form-control" name="history_entry[reason_for_the_visit]">
+                <!-- </div> -->
+            </div>
+            <!-- <br class="hidden-xs"><br class="hidden-xs"> -->
+            <div class="checkbox">
+                <label class="col-xs-12 col-sm-6 col-md-6 control-label">
+                <!-- <div class="col-xs-2 col-sm-6 col-md-4"> -->
+                    <input type="checkbox" id="update_pain" name="history_entry[pain]"> <b>Dolor?</b>
+                <!-- </div> -->
+                </label>
+            </div>
+            <div class="checkbox">
+                <label class="col-xs-12 col-sm-6 col-md-6 control-label">
+                <!-- <div class="col-xs-2 col-sm-6 col-md-2"> -->
+                    <input type="checkbox" id="update_gingivitis" name="history_entry[gingivitis]"> <b>Sangramiento de Encias?</b>
+                <!-- </div> -->
+                </label>
+            </div>
+            <br class="hidden-xs"><br class="hidden-xs">
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Control?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" id="update_control" class="form-control" name="history_entry[control]">
+                </div>
+                <label class="col-sm-12 col-md-2 control-label">Restauracion Protesica?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" id="update_prosthetic_restoration" class="form-control" name="history_entry[prosthetic_restoration]">
+                </div>
+            </div>
+            <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs hidden-md">
+            <div class="form-group">
+                <label class="control-label">Otro, indique cual:</label>
+                <input type="text" id="update_other" class="form-control" name="history_entry[other]">   
+            </div>
+            <div class="form-group">
+                <label class="control-label">Enfermedad Actual:</label>
+                <input type="text" id="update_current_disease" class="form-control" name="history_entry[current_disease]">   
+            </div>
+            <br class="hidden-xs">
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Aspecto del Paciente?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" id="update_appearance" class="form-control" name="history_entry[appearance]">
+                </div>
+                <label class="col-sm-12 col-md-2 control-label">Cara?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" id="update_face" class="form-control" name="history_entry[face]">
+                </div>
+            </div>
+            <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs hidden-md">
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Labios y Comisura?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" id="update_lips_and_commissure" class="form-control" name="history_entry[lips_and_commissure]">
+                </div>
+                <label class="col-sm-12 col-md-2 control-label">Ganglios?:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" id="update_nodes" class="form-control" name="history_entry[nodes]">
+                </div>
+            </div>
+            <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs hidden-md">
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    <h4>Examen Clinico IntraBucal</h4>
+                    <hr>
+                </div>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Carillos:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" id="update_cheeks" class="form-control" name="history_entry[cheeks]">
+                </div>
+                <label class="col-sm-12 col-md-2 control-label">Mucosa:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" id="update_mucosa" class="form-control" name="history_entry[mucosa]">
+                </div>
+            </div>
+
+            <br class="hidden-xs"><br class="hidden-xs">
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Encia:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" id="update_gum" class="form-control" name="history_entry[gum]">
+                </div>
+                <label class="col-sm-12 col-md-2 control-label">Lengua:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" id="update_tongue" class="form-control" name="history_entry[tongue]">
+                </div>
+            </div>
+
+            <br class="hidden-xs"><br class="hidden-xs">
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Paladar:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" id="update_palate" class="form-control" name="history_entry[palate]">
+                </div>
+            </div>
+    
+
+            <br><br>
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    <h4>Examenes Complementarios</h4>
+                    <hr>
+                </div>
+            </div>
+            <br><br>
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Rx Panoramica:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" id="update_rx_panoramic" class="form-control" name="history_entry[rx_panoramic]">
+                </div>
+                <label class="col-sm-12 col-md-2 control-label">Rx Cordal:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" id="update_rx_coronal" class="form-control" name="history_entry[rx_coronal]">
+                </div>
+            </div>
+            <br class="hidden-xs"><br class="hidden-xs">
+            <div class="form-group">
+                <label class="col-sm-12 col-md-2 control-label">Rx Periapical:</label>
+                <div class="col-sm-12 col-md-4">
+                    <input type="text" id="update_rx_periapical" class="form-control" name="history_entry[rx_periapical]">
+                </div>
+            </div>
+
+            <br class="hidden-xs"><br class="hidden-xs">
+            <div class="form-group">
+                <label class="control-label">Observaciones:</label>
+                <input type="text" id="update_observations" class="form-control" name="history_entry[observations]">
+            </div>
+
+            <br class="hidden-xs">
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    <h4>Odontodiagrama</h4>
+                    <hr>
+                </div>
+            </div>
+
+            <br class="hidden-xs"><br class="hidden-xs"><br class="hidden-xs hidden-md">
+
+            <div class="form-group">
+                <label for="exampleInputFile">Seleccione el archivo:</label>
+                <input type="file" id="exampleInputFile" accept="image/*" name="history_entry[attachment]">
+                <p class="help-block">La imagen debe tener formato .JPG .JPEG .GIF .PNG .SVG</p>
+                <div class="row">
+                    <div class="col-6 center" style="margin: auto;">
+                        <img id="update_attachament" src="" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Guardar">
+            </div>
+        </div>
+    </form>
+  </div>
+</div>
+<% end %>
+
+<!-- FIN DE MODALS -->

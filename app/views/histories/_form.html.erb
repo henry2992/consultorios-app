@@ -1,0 +1,13 @@
+<%= semantic_form_for @history do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :code %>
+    <%= f.input :patient_id %>
+    <%= f.input :doctor_id %>
+    <%= f.input :family_history %>
+    <%= f.input :overview %>
+  <% end %>
+
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :input %>
+  <% end %>
+<% end %>

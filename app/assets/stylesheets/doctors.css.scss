@@ -37,7 +37,7 @@ html {
 }
 
 body{
-	background-color: #e4e5e6 !important;
+  background-color: #e4e5e6 !important;
 }
 
 /* General Styles */
@@ -75,8 +75,8 @@ a:hover{
 }
 
 .row-fix {
-	margin-right: 0px !important;
-	margin-left: 0px !important;
+  margin-right: 0px !important;
+  margin-left: 0px !important;
 }
 
 .label {
@@ -96,12 +96,12 @@ a:hover{
 
 
 .app-navbar-brand{
-	width: 100%;
-	text-decoration: none !important;
+  width: 100%;
+  text-decoration: none !important;
 }
 .app-navbar-brand:hover{
-	background-color: transparent;
-	text-decoration: none !important;
+  background-color: transparent;
+  text-decoration: none !important;
 }
 
 .app-navbar-brand span{
@@ -109,25 +109,25 @@ a:hover{
 }
 
 .app-navbar .nav-link {
-	color: #000 !important;
-	text-decoration: none !important;
+  color: #000 !important;
+  text-decoration: none !important;
 }
 
 .app-navbar .nav-link:hover {
-	background-color: transparent;
-	text-decoration: none !important;
+  background-color: transparent;
+  text-decoration: none !important;
 }
 
 /*CUSTOM */
 .app-navbar .app-navbar-brand img {
-	background-color: #24B7DB;
-	border-radius: 50%;
-	width: 35px;
-	height: 35px;
-	padding: 5px;
-	z-index: 20;
-	position: relative;
-	display: inline-block;
+  background-color: #24B7DB;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  padding: 5px;
+  z-index: 20;
+  position: relative;
+  display: inline-block;
 }
 
 .navbar-login {
@@ -137,9 +137,9 @@ a:hover{
 }
 
 .navbar-login a {
-	text-decoration: none !important;
-	margin-top: 10px;
-	line-height: 1;
+  text-decoration: none !important;
+  margin-top: 10px;
+  line-height: 1;
 }
 
 .navbar-login-session {
@@ -159,17 +159,17 @@ a:hover{
 
 
 .app{
-	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-	font-size: 0.875rem;
-	font-weight: normal;
-	line-height: 1.5;
-	color: #263238;
-	background-color: #e4e5e6;
-	-webkit-font-smoothing: antialiased;
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.875rem;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #263238;
+  background-color: #e4e5e6;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .app-header {
@@ -184,88 +184,88 @@ a:hover{
 }
 
 .app-body {
-	display: flex;
-	flex-direction: row;
-	flex-grow: 1;
-	overflow-x: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  overflow-x: hidden;
 }
 
 .app-body .sidebar{
-	flex: 0 0 200px;
-	order: -1;
+  flex: 0 0 200px;
+  order: -1;
 
 }
 
 .sidebar-fixed .sidebar {
-	position: fixed;
-	width: 200px;
-	height: 100%;
+  position: fixed;
+  width: 200px;
+  height: 100%;
 }
 
 .sidebar{
-	padding: 0;
-	color: #fff;
-	background: #263238;
-	overflow: hidden;
-	display: none;
+  padding: 0;
+  color: #fff;
+  background: #263238;
+  overflow: hidden;
+  display: none;
 }
 
 .sidebar-fixed .sidebar .sidebar-nav{
-	height: calc(100vh - 55px);
+  height: calc(100vh - 55px);
 }
 
 .sidebar .sidebar-nav {
-	position: relative;
-	overflow-x: hidden;
-	overflow-y: auto;
-	-ms-overflow-style: -ms-autohiding-scrollbar;
-	width: 200px;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  width: 200px;
 }
 
 
 .sidebar .nav{
-	width: 200px;
-	flex-direction: column !important;
+  width: 200px;
+  flex-direction: column !important;
 }
 
 .nav {
-	display: flex;
-	flex-wrap: wrap;
-	padding-left: 0;
-	margin-bottom: 0;
-	list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
 }
 
 .sidebar .nav .nav-item{
-	position: relative;
-	margin: 0;
-	transition: background .3s ease-in-out;
+  position: relative;
+  margin: 0;
+  transition: background .3s ease-in-out;
 }
 
 
 .sidebar .nav .nav-item .nav-link{
-	display: block;
-	padding: 0.75rem 1rem;
-	color: #fff;
-	text-decoration: none;
-	background: transparent;
+  display: block;
+  padding: 0.75rem 1rem;
+  color: #fff;
+  text-decoration: none;
+  background: transparent;
 }
 
 .main {
-	width: 100%;
+  width: 100%;
 }
 
 .main-wrapper{
-	padding:  30px 15px;
+  padding:  30px 15px;
 }
 
 .main-content{
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	background-color: #fff;
-	border: 1px solid #cfd8dc;
-	padding: 25px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border: 1px solid #cfd8dc;
+  padding: 25px;
 }
 
 .smaller {
@@ -284,9 +284,9 @@ a:hover{
 
 /* Medium size screens  ----------- */
 @media only screen and (min-width : 992px)  {
-		.sidebar{
-		display: block;
-	}
+    .sidebar{
+    display: block;
+  }
 }
 
 /* Desktops and laptops ----------- */
@@ -307,4 +307,36 @@ a:hover{
   .no-print {
     display: none !important;
   }
+}
+
+#historia{
+  line-height: 30px;
+}
+
+
+
+.carousel-inner .carousel-item-right.active,
+.carousel-inner .carousel-item-next {
+  transform: translateX(33.33%);
+}
+
+.carousel-inner .carousel-item-left.active, 
+.carousel-inner .carousel-item-prev {
+  transform: translateX(-33.33%)
+}
+  
+.carousel-inner .carousel-item-right,
+.carousel-inner .carousel-item-left{ 
+  transform: translateX(0);
+}
+
+.imgCarousel {
+  margin: .5em;
+}
+
+img{
+  max-width: 100%;
+}
+#updImg {
+    overflow-y:scroll;
 }

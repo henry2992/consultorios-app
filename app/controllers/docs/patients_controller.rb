@@ -8,6 +8,8 @@ class Docs::PatientsController < Docs::DoctorsController
   end
 
   def show
+    @history = @patient.history
+    @attachment = @history.attachments.new
   end
 
   def new
@@ -21,6 +23,7 @@ class Docs::PatientsController < Docs::DoctorsController
     @patient = current_user.patients.invite!(patient_params)
     respond_to do |format|
       if @patient
+        @patient.create_history! doctor: @patient.doctor, code: OpenSSL::Random.random_bytes(3).unpack('H*').join.upcase
         format.html { redirect_to docs_patients_path, notice: 'El paciente fue creado exitosamente.' }
       else
         format.html { render :new }
@@ -45,6 +48,42 @@ class Docs::PatientsController < Docs::DoctorsController
     end
   end
 
+  def upload_image
+    @attachment = Attachment.create( attachment_params )
+    respond_to do |format|
+      if @attachment
+        h = History.find(attachment_params[:imageable_id])
+        format.html { redirect_to docs_patient_path(h.patient), notice: 'La imagen fue creada exitosamente.' }
+      else
+        format.html { redirect_to docs_patient_path(h.patient), notice: { msg: 'Error al guardar la imagen', class: "danger"} }
+      end
+    end
+  end
+
+  def show_image
+    @attachment = Attachment.find(params['id'])
+
+    if @attachment
+      render json: {url_image: @attachment.image.url(:mini), description: @attachment.description}
+    else
+      render json: "Imagen no encontrada".to_json
+    end
+  end
+
+  def update_image
+    @patient = Patient.find(params['id_patient'])
+
+    if Attachment.find(params['id']).update(attachment_params)
+      redirect_to docs_patient_path(@patient), notice: 'La imagen fue actualizada exitosamente.'
+    else
+      redirect_to docs_patient_path(@patient), notice: { msg: 'Error al actualizar la imagen la historia', class: "danger" }
+    end
+  end
+
+  def delete_image
+    render json: Attachment.find(params['id']).destroy
+  end
+
   private
 
     def set_patient
@@ -53,6 +92,10 @@ class Docs::PatientsController < Docs::DoctorsController
 
     def patient_params
       params.require(:patient).permit(:first_name, :last_name, :email, :address, :phone, :national_id, :pob, :dob, :cellphone, :office_phone, :gender )
+    end
+
+    def attachment_params
+      params.require(:attachment).permit(:imageable_id, :imageable_type, :description, :image )
     end
 
     def sort_column

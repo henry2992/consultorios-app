@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
 //= requiere bootstrap
 //= require tether
 //= require bootstrap-sprockets
@@ -35,21 +36,25 @@ $(document).ready(function() {
   });
 
 
-  $('.multi-item-carousel .item').each(function(){
+$('#recipeCarousel').carousel({
+  interval: 10000
+})
+
+$('.carousel .carousel-item').each(function(){
     var next = $(this).next();
     if (!next.length) {
-      next = $(this).siblings(':first');
+    next = $(this).siblings(':first');
     }
     next.children(':first-child').clone().appendTo($(this));
     
     if (next.next().length>0) {
-      next.next().children(':first-child').clone().appendTo($(this));
-    } else {
+    next.next().children(':first-child').clone().appendTo($(this));
+    }
+    else {
       $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
     }
-  });
-  
-  // setTimeout(function(){
+});
+
 
   $('#addImg').modal({
     show:false
@@ -63,11 +68,6 @@ $(document).ready(function() {
   $('#updImg').modal({
     show:false
   });
-  // },1000)
-
-  // $('#addImg').on('hidden.bs.modal', function () {
-  //   $('#accion').text("Agregar");
-  // })
 
   $('#btnSaveUpd').click(function(){
     
@@ -75,7 +75,7 @@ $(document).ready(function() {
   });
 
   $('.imgCarousel').click(function(){
-    $('#img').attr("src",$(this).find("img").eq(0).attr("src"));
+    $('#img').attr("src",$(this).attr("src"));
     $('#descripcion').text($(this).attr("data-description"));
     $('#btnDelete').attr('data-id',$(this).attr('data-id'));
     $('#btnDelete').attr('data-eq',$(this).attr('data-eq'));

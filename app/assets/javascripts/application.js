@@ -187,6 +187,7 @@ $(document).ready(function() {
           }
         }
       });
+      $('#update_attachament').attr('src',data['attachment']);
     });
      
     request.fail(function( jqXHR, textStatus ) {

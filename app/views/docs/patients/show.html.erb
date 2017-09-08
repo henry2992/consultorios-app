@@ -192,8 +192,8 @@
                             <a href="" id="entry<%= history.id %>" class="btn-show-entry" data-toggle="modal" data-target="#showEntrada"><%= history.reason_for_the_visit %></a>
                         </td>
                         <td>
-                            <a href="" title="Actualizar" alt="Actualizar" id="entry-update-<%= history.id %>" class="btn btn-info btn-sm updSec" data-toggle="modal" data-target="#updateEntrada"><i class="icon-pencil icons"></i></a>
-                            <button title="Eliminar" alt="Eliminar" id="entry-delete-<%= history.id %>" class="btn btn-danger btn-sm delSec" confirm="¿Estas seguro?" data-eq="<%= history.id %>"><i class="icon-trash icons"></i></button>
+                            <a href="" id="entry-update-<%= history.id %>" class="btn btn-info updSec" data-toggle="modal" data-target="#updateEntrada">Actualizar</a>
+                            <button id="entry-delete-<%= history.id %>" class="btn btn-danger delSec" confirm="¿Estas seguro?" data-eq="<%= history.id %>">Eliminar</button>
                          </td>
                     </tr>
                     <% end %>
@@ -289,10 +289,10 @@
             </div>
             <div class="modal-footer">
                 <div class="col-6 center">
-                    <button class="btn btn-danger" id="btnDelete"><i class="icon-trash icons"></i> Eliminar</button>
+                    <button class="btn btn-danger" id="btnDelete">Eliminar</button>
                 </div>
                 <div class="col-6 center">
-                    <button class="btn btn-success" id="btnUpd" data-dismiss="modal" data-toggle="modal" href="#updImg"><i class="icon-pencil icons"></i> Modificar</button>
+                    <button class="btn btn-success" id="btnUpd" data-dismiss="modal" data-toggle="modal" href="#updImg">Modificar</button>
                 </div>
             </div>
         </div>
@@ -598,7 +598,7 @@
     <form class="modal-content form-horizonta" action="/docs/update_history_entry/<%= @history.id %>" enctype="multipart/form-data" method="post">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title center">Actulizar Entrada</h4>
+            <h4 class="modal-title center">Actualizar Entrada</h4>
         </div>
         <div class="modal-body">
 
@@ -753,6 +753,11 @@
                 <label for="exampleInputFile">Seleccione el archivo:</label>
                 <input type="file" id="exampleInputFile" accept="image/*" name="history_entry[attachment]">
                 <p class="help-block">La imagen debe tener formato .JPG .JPEG .GIF .PNG .SVG</p>
+                <div class="row">
+                    <div class="col-6 center" style="margin: auto;">
+                        <img id="update_attachament" src="" alt="">
+                    </div>
+                </div>
             </div>
         </div>
         <div class="modal-footer">
